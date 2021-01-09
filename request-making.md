@@ -355,3 +355,8 @@ pactum.request.setDefaultFollowRedirects(true);
 <a href="#/response-validation" >
   <img src="https://img.shields.io/badge/NEXT-Response%20Validation-blue" alt="Response Validation" align="right" style="display: inline;" />
 </a>
+
+<script>
+  ga('set', 'page', '/request-making.html');
+  ga('send', 'pageview');
+</script>

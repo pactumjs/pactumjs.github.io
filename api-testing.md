@@ -112,3 +112,8 @@ describe('should have a user with name bolt', () => {
 <a href="#/request-making" >
   <img src="https://img.shields.io/badge/NEXT-Request%20Making-blue" alt="Request Making" align="right" style="display: inline;" />
 </a>
+
+<script>
+  ga('set', 'page', '/api-testing.html');
+  ga('send', 'pageview');
+</script>
