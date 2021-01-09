@@ -1,23 +1,22 @@
 # pactum
 
-![Build](https://github.com/ASaiAnudeep/pactum/workflows/Build/badge.svg?branch=master)
+![Build](https://github.com/pactumjs/pactum/workflows/Build/badge.svg?branch=master)
 ![Coverage](https://img.shields.io/codeclimate/coverage/ASaiAnudeep/pactum)
 ![Downloads](https://img.shields.io/npm/dt/pactum)
 ![Size](https://img.shields.io/bundlephobia/minzip/pactum)
 ![Platform](https://img.shields.io/node/v/pactum)
 
-**pactum** is a REST API Testing Tool used to write e2e, integration, contract & component (*or service level*) tests. It comes with a powerful **mock server** which can control the state of external dependencies & combines the implementation of a consumer-driven contract library [Pact](https://docs.pact.io) for JavaScript.
+**pactum** is a REST API Testing Tool used to automate e2e, integration, contract & component (*or service level*) tests. It comes with a powerful **mock server** which can control the state of external dependencies.
 
 ## Features
 
-* Lightweight
-* Clear & Comprehensive Testing Style
-* Works with **cucumber**, **mocha**, **jest**
-* Elegant Data Management
-* Customizable Assertions & Retry Mechanisms
-* Bundles with a **Powerful Mock Server**
-* Ideal for *component*, *contract*, *integration* & *e2e* testing of APIs
-* Reporting
+- 🎈 Lightweight
+- 🚀 Simple & Powerful
+- 🛠️ Compelling Mock Server
+- 💎 Elegant Data Management
+- 🔧 Extendable & Customizable
+- 📚 Clear & Comprehensive Testing Style
+- 🔗 Component, Contract & E2E testing of APIs
 
 ## Experimental
 
@@ -27,24 +26,25 @@
 
 ## Road Map
 
-* More Matchers
-* Visual API Testing
+- Visual API Testing
 
 ## Tutorials
 
-* [Quick Start](quick-start)
-* [API Testing](api-testing)
-* [Integration Testing](integration-testing)
-* [E2E Testing](e2e-testing)
-* [Fuzz Testing](fuzz-testing)
-* [Mock Server](mock-server)
-* [Component Testing](component-testing)
-* [Contract Testing](contract-testing)
-  * [Consumer Testing](consumer-testing)
-  * [Provider Verification](provider-verification)
-* [Data Management](data-management)
-* [Matching](matching)
-* [Reporting](reporting)
+- [Quick Start](quick-start)
+- [API Testing](api-testing)
+  - [Request Making](request-making)
+  - [Response Validation](response-validation)
+- [Integration Testing](integration-testing)
+- [E2E Testing](e2e-testing)
+- [Fuzz Testing](fuzz-testing)
+- [Mock Server](mock-server)
+- [Component Testing](component-testing)
+- [Contract Testing](contract-testing)
+  - [Consumer Testing](consumer-testing)
+  - [Provider Verification](provider-verification)
+- [Data Management](data-management)
+- [Matching](matching)
+- [Reporting](reporting)
 
 ## Notes
 

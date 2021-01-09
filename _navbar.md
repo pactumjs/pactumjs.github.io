@@ -1,7 +1,8 @@
 - **Tutorials**
   - [Quick Start](quick-start.md)
-  - [Test Runners](test-runners.md)
   - [API Testing](api-testing.md)
+  - [Request Making](request-making.md)
+  - [Response Validation](response-validation.md)
   - [Integration Testing](integration-testing.md)
   - [E2E Testing](e2e-testing.md)
   - [Mock Server](mock-server.md)

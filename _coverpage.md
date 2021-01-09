@@ -1,8 +1,8 @@
-# <span style="letter-spacing: 2px;">**PACTUM**</span><span style="font-weight: bold; color: yellow; background-color: black; padding-left: 10px; padding-right: 10px">JS<span> <small style="margin-left: 15px">3.0.2</small>
+# <span style="font-family:Monaco; font-size:3.25rem; letter-spacing: .1666666667em;"><span>PACTUM</span><span style="color: yellow; background-color: black; padding-left: 10px;">JS</span></span>
 
 > Free & Open Source REST API Testing Tool for all levels in a **Test Pyramid**
 
-- 🐦 Lightweight
+- 🎈 Lightweight
 - 🚀 Simple & Powerful
 - 🔧 Extendable & Customizable
 - 📚 Clear & Comprehensive Testing Style
