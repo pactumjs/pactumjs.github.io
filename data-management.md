@@ -270,16 +270,16 @@ before(() => {
 
 Data Functions can ease up your life when working with dynamic values. A Data Function is a custom data handler function that returns some sort of data that can be referenced later.
 
-Use `handler.addDataFunHandler` to add a custom data function handler. To use the data function in the tests or in the template, use `$F{<handler-name>}`.
+Use `handler.addDataFuncHandler` to add a custom data function handler. To use the data function in the tests or in the template, use `$F{<handler-name>}`.
 
 ```javascript
 const pactum = require('pactum');
 const handler = pactum.handler;
 
-handler.addDataFunHandler('GetTimeStamp', () => {
+handler.addDataFuncHandler('GetTimeStamp', () => {
   return Date.now();
 });
-handler.addDataFunHandler('GetAuthToken', () => {
+handler.addDataFuncHandler('GetAuthToken', () => {
   return 'Basic some-token';
 });
 
@@ -295,12 +295,12 @@ await pactum.spec()
 Data functions also accepts custom data as arguments in the form of array. To pass data use comma separated values after handler name `$F{<handler-name>:<arg1>,<arg2>}`.
 
 ```javascript
-handler.addDataFunHandler('GetFormattedDate', (ctx) => {
+handler.addDataFuncHandler('GetFormattedDate', (ctx) => {
   const fmt = ctx.args[0];
   return moment.format(fmt);
 });
 
-handler.addDataFunHandler('GetSum', (ctx) => {
+handler.addDataFuncHandler('GetSum', (ctx) => {
   const a = parseInt(ctx.args[0]);
   const b = parseInt(ctx.args[1]);
   return a + b;
