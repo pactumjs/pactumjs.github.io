@@ -68,7 +68,7 @@ app.listen(4000, () => {});
 Lets look at the component tests.
 
 ```javascript
-it('should buy a product which is in stock', () => {
+it('should buy a product which is in stock', async () => {
   await pactum.spec()
     .post('http://localhost:3000/api/orders')
     .withJson({
@@ -78,7 +78,7 @@ it('should buy a product which is in stock', () => {
     .expectStatus(200);
 });
 
-it('should not buy a product which is out-of-stock', () => {
+it('should not buy a product which is out-of-stock', async () => {
   await pactum.spec()
     .post('http://localhost:3000/api/orders')
     .withJson({
@@ -211,7 +211,7 @@ In real-life scenarios, a single service might be dependent upon *n* number of s
 * Test will fail, if any one of the interaction is not exercised.
 
 ```javascript
-it('should not buy a product which is out-of-stock', () => {
+it('should not buy a product which is out-of-stock', async () => {
   await pactum.spec()
     .useInteraction(/* one interaction details */)
     .useInteraction(/* another interaction details */)
@@ -263,7 +263,7 @@ before(async () => {
   });
 });
 
-it('should buy a product which is in stock', () => {
+it('should buy a product which is in stock', async () => {
   await pactum.spec()
     .useInteraction('get product', { product: 'iPhone', inStock: true })
     .post('/api/orders')
@@ -274,7 +274,7 @@ it('should buy a product which is in stock', () => {
     .expectStatus(200);
 });
 
-it('should not buy a product which is out-of-stock', () => {
+it('should not buy a product which is out-of-stock', async () => {
   await pactum.spec()
     .useInteraction('get product', { product: 'iPhone', inStock: false })
     .post('/api/orders')
@@ -300,7 +300,7 @@ Use `mock.addInteraction` to add a interaction to the server & later use `mock.g
 Lets look at an example
 
 ```javascript
-it('some background process', () => {
+it('some background process', async () => {
   const id = mock.addInteraction('get product');
   await pactum.spec()
     .post('/api/process')
@@ -316,7 +316,7 @@ it('some background process', () => {
 We can also use `wait` method to pause the validation for the background process to complete.
 
 ```javascript
-it('some background process', () => {
+it('some background process', async () => {
   await pactum.spec()
     .useInteraction('get product')
     .post('/api/process')
@@ -369,7 +369,7 @@ before(() => {
   mock.useRemoteServer('http://localhost:4000');
 });
 
-it('should buy a product which is in stock', () => {
+it('should buy a product which is in stock', async () => {
   await pactum.spec()
     .useInteraction('get product', { product: 'iPhone', inStock: true })
     .post('/api/orders')
@@ -380,7 +380,7 @@ it('should buy a product which is in stock', () => {
     .expectStatus(200);
 });
 
-it('should not buy a product which is out-of-stock', () => {
+it('should not buy a product which is out-of-stock', async () => {
   await pactum.spec()
     .useInteraction('get product', { product: 'iPhone', inStock: false })
     .post('/api/orders')
@@ -394,7 +394,7 @@ it('should not buy a product which is out-of-stock', () => {
     });
 });
 
-it('some background process', () => {
+it('some background process', async () => {
   const id = await mock.addInteraction('get product');
   await pactum.spec()
     .post('/api/process')
