@@ -10,13 +10,18 @@
 
 ## Features
 
+- ⏱ Swift
 - 🎈 Lightweight
 - 🚀 Simple & Powerful
-- 🛠️ Compelling Mock Server
+- 📼 Compelling Mock Server
 - 💎 Elegant Data Management
 - 🔧 Extendable & Customizable
 - 📚 Clear & Comprehensive Testing Style
 - 🔗 Component, Contract & E2E testing of APIs
+
+## Under Development
+
+- Contract Testing
 
 ## Experimental
 
@@ -40,8 +45,6 @@
 - [Mock Server](mock-server)
 - [Component Testing](component-testing)
 - [Contract Testing](contract-testing)
-  - [Consumer Testing](consumer-testing)
-  - [Provider Verification](provider-verification)
 - [Data Management](data-management)
 - [Matching](matching)
 - [Reporting](reporting)

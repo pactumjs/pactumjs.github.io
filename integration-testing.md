@@ -10,11 +10,29 @@ When it comes to API Integration Testing, essentially it involves testing how mu
 
 * [API Testing](api-testing)
 
-## Nested Dependent HTTP Calls
+## Dependent HTTP Calls
 
 API testing is naturally asynchronous, which can make tests complex when these tests need to be chained. **Pactum** allows us to return custom data from the response that can be passed to the next tests using [json-query](https://www.npmjs.com/package/json-query) expressions or custom handler functions.
 
 You can pass data between tests by using either `returns` or `stores` methods.
+
+### default
+
+By default, entire response is returned by `await pactum.spec()` or `await pactum.spec().toss()`.
+
+```javascript
+const pactum = require('pactum');
+
+it('should return all posts and first post should have comments', async () => {
+  const response = await pactum.spec()
+    .get('http://jsonplaceholder.typicode.com/posts')
+    .expectStatus(200);
+  const postID = response.json[0].id;
+  await pactum.spec()
+    .get(`http://jsonplaceholder.typicode.com/posts/${postID}/comments`)
+    .expectStatus(200);
+});
+```
 
 ### returns 
 
@@ -256,7 +274,6 @@ it('should get posts', async () => {
 });
 ```
 
-## Next
 
 ----
 

@@ -1,33 +1,150 @@
 # Response Validation
 
-**pactum** allows us to validate the received response. Received response is validated through expectation methods. All expectation methods start with `expect`.
+Once a request is made, the server will send a response back. Validating the response will be the important part in API Testing.
 
-| Method                  | Description                               |
-| ----------------------- | ----------------------------------------- |
-| `expect`                | runs custom expect handler                |
-| `expectStatus`          | check HTTP status                         |
-| `expectHeader`          | check HTTP header key + value             |
-| `expectHeaderContains`  | check HTTP header key + partial value     |
-| `expectBody`            | check exact match of body                 |
-| `expectBodyContains`    | check body contains the value             |
-| `expectJson`            | check exact match of json                 |
-| `expectJsonAt`          | check json using **json-query**           |
-| `expectJsonLike`        | check loose match of json                 |
-| `expectJsonLikeAt`      | check json like using **json-query**      |
-| `expectJsonSchema`      | check json schema                         |
-| `expectJsonSchemaAt`    | check json schema using **json-query**    |
-| `expectJsonMatch`       | check json to match                       |
-| `expectJsonMatchAt`     | check json to match using **json-query**  |
-| `expectJsonSnapshot`    | check json to match with a snapshot       |
-| `expectResponseTime`    | check response time                       |
+```plantuml
+@startuml
+
+Tests <- "API Server": Status Code, Headers & Body
+
+@enduml
+```
+
+Received response is validated through expectation methods. This library provides a rich set of methods to assert the response.
+
+| Method (Chaining)       | Method (Breaking)       | Description                               |
+| ----------------------- | ------------------------| ----------------------------------------- |
+| `expect`                | `_`                     | runs custom expect handler                |
+| `expectStatus`          | `status`                | check HTTP status                         |
+| `expectHeader`          | `header`                | check HTTP header key + value             |
+| `expectHeaderContains`  | `headerContains`        | check HTTP header key + partial value     |
+| `expectBody`            | `body`                  | check exact match of body                 |
+| `expectBodyContains`    | `bodyContains`          | check body contains the value             |
+| `expectJson`            | `json`                  | check exact match of json                 |
+| `expectJsonAt`          | `jsonAt`                | check json using **json-query**           |
+| `expectJsonLike`        | `jsonLike`              | check loose match of json                 |
+| `expectJsonLikeAt`      | `jsonLikeAt`            | check json like using **json-query**      |
+| `expectJsonSchema`      | `jsonSchema`            | check json schema                         |
+| `expectJsonSchemaAt`    | `jsonSchemaAt`          | check json schema using **json-query**    |
+| `expectJsonMatch`       | `jsonMatch`             | check json to match                       |
+| `expectJsonMatchAt`     | `jsonMatchAt`           | check json to match using **json-query**  |
+| `expectJsonSnapshot`    | -                       | check json to match with a snapshot       |
+| `expectResponseTime`    | `responseTimeLessThan`  | check response time                       |
+
+# Expectations Style
+
+Based on chosen [Testing Style](api-testing?id=testing-style), expectations methods are used.
+
+<!-- tabs:start -->
+
+#### ** Chaining **
+
+In this approach, expectations methods are used along with request making methods.
+
+```js
+const pactum = require('pactum');
+
+it('should have a user with name bolt', async () => {
+  await pactum.spec()
+    .get('http://localhost:9393/api/users')
+    .withQueryParams('name', 'bolt')
+    .expectStatus(200)
+    .expectJson({
+      "id": 1,
+      "name": "bolt",
+      "createdAt": "2020-08-19T14:26:44.169Z"
+    })
+    .expectJsonSchema({
+      type: 'object',
+      properties: {
+        id: {
+          type: 'number'
+        }
+      }
+    })
+    .expectResponseTime(100);
+});
+```
+
+#### ** Breaking **
+
+In this approach, request & expectations are made in multiple steps.
+
+!> Regular expectation methods like `expectStatus` or `expectJson` will only work if called before the `toss` method.
+
+```js
+const pactum = require('pactum');
+
+it('should have a user with name bolt', async () => {
+  const spec = pactum.spec(); // don't use await
+  spec.get('http://localhost:9393/api/users');
+  spec.withQueryParams('name', 'bolt');
+  // these expectations will work
+  spec.expectStatus(200);
+  spec.expectJson({
+    "id": 1,
+    "name": "bolt",
+    "createdAt": "2020-08-19T14:26:44.169Z"
+  });
+  spec.expectJsonSchema({
+    type: 'object',
+    properties: {
+      id: {
+        type: 'number'
+      }
+    }
+  });
+  spec.expectResponseTime(100);
+  // 'toss' method will make the request & runs the registered expectations
+  await spec.toss();
+  // these expectations will not work
+  spec.expectHeader('content-type', 'application/json');
+});
+```
+
+To run expectations after calling the `toss` method, we need to use either `spec.response()` or `pactum.expect`.
+
+**pactum.expect**
+
+```js
+const pactum = require('pactum');
+
+it('should have a user with name bolt', async () => {
+  const spec = pactum.spec(); // don't use await
+  spec.get('http://localhost:9393/api/users');
+  spec.withQueryParams('name', 'bolt');
+  // we need the response returned by toss() method
+  const response = await spec.toss();
+  pactum.expect(response).to.have.status(200);
+  pactum.expect(response).to.have.header('connection', 'close');
+});
+```
+
+**spec.response**
+
+```js
+const pactum = require('pactum');
+
+it('should have a user with name bolt', async () => {
+  const spec = pactum.spec(); // don't use await
+  spec.get('http://localhost:9393/api/users');
+  spec.withQueryParams('name', 'bolt');
+  await spec.toss();
+  spec.response().to.have.status(200);
+  spec.response().to.have.header('connection', 'close');
+});
+```
+
+<!-- tabs:end -->
+
+
+# Expectations
 
 ## Status & Headers & Response Time
 
 Expecting Status Code & Headers & response time from the response.
 
-```javascript
-const expect = pactum.expect;
-
+```js
 it('get post with id 1', async () => {
   const response = await pactum.spec()
     .get('https://jsonplaceholder.typicode.com/posts/1')
@@ -36,21 +153,14 @@ it('get post with id 1', async () => {
     .expectHeader('connection', /\w+/)
     .expectHeaderContains('content-type', 'application/json')
     .expectResponseTime(100);
-
-  expect(response).to.have.status(200);
-  expect(response).to.have.header('connection', 'close');
 });
 ```
-
-## JSON
-
-Most REST APIs will return a JSON response. This library has few methods to validate a JSON response in many aspects.
 
 ## expectJson
 
 Performs deep equal.
 
-```javascript
+```js
 it('get post with id 1', async () => {
   const response = await pactum.spec()
     .get('https://jsonplaceholder.typicode.com/posts/1')
@@ -61,9 +171,6 @@ it('get post with id 1', async () => {
       "title": "some title",
       "body": "some body"
     });
-  
-  // Chai Style Assertions
-  // pactum.expect(response).should.have.json({});
 });
 ```
 
@@ -74,9 +181,9 @@ Allows validation of specific part in a JSON. See [json-query](https://www.npmjs
 * Performs deep equal or strict equal.
 * Order of items in an array does matter.
 
-```javascript
+```js
 it('get people', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .get('https://some-api/people')
     .expectStatus(200)
     .expectJson({
@@ -100,9 +207,9 @@ Performs partial deep equal.
 * Allows Assert Handlers.
 * Order of items in an array doesn't matter.
 
-```javascript
+```js
 it('posts should have a item with title -"some title"', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .get('https://jsonplaceholder.typicode.com/posts')
     .expectStatus(200)
     .expectJsonLike([
@@ -111,10 +218,6 @@ it('posts should have a item with title -"some title"', async () => {
         "title": "some title"
       }
     ]);
-  
-  // Chai Style Assertions
-  // pactum.expect(response).should.have.jsonLike();
-  // spec.response().should.have.jsonLike();
 });
 ```
 
@@ -128,7 +231,7 @@ Assert Expressions helps to run custom JavaScript code on a JSON that performs u
 
 !> String containing **$V** will be automatically treated as a Assert Expression.
 
-```javascript
+```js
 it('get users', async () => {
   await pactum.spec()
     .get('/api/users')
@@ -145,7 +248,7 @@ it('get users', async () => {
 
 You are also allowed to change the default value `$V` to some other string based on your usage. *Be cautious that all the strings containing the new value will be treated as assert expressions and pactum will try to evaluate it as a javascript code*.
 
-```javascript
+```js
 pactum.settings.setAssertExpressionStrategy({ includes: '$' });
 
 it('get users', async () => {
@@ -174,7 +277,7 @@ Handlers is a powerful concept in pactum that helps to reuse different things. T
 * First param will be the name of the assert handler which will be used in `expectJsonLike` to refer it.
 * Second param will be a function that accepts a context object as an argument. Context object will have `data` property that will represent the current value in JSON. It also includes optional `args` property that includes custom arguments. 
 
-```javascript
+```js
 pactum.handler.addAssertHandler('number', (ctx) => {
   return typeof ctx.data === 'number';
 });
@@ -193,7 +296,7 @@ it('get users', async () => {
 
 Custom arguments can be passed to the handler function by using comma separated values after `:`.
 
-```javascript
+```js
 pactum.handler.addAssertHandler('type', (ctx) => {
   return typeof ctx.data === ctx.args[0];
 });
@@ -212,7 +315,7 @@ it('get users', async () => {
 
 You are also allowed to change the default value `#` to some other string based on your usage. *Be cautious that all the strings starting with the new value will be treated as assert handlers*.
 
-```javascript
+```js
 pactum.settings.setAssertHandlerStrategy({ starts: '#' });
 
 it('get users', async () => {
@@ -237,9 +340,9 @@ Allows validation of specific part in a JSON. See [json-query](https://www.npmjs
 * Allows Assert Handlers.
 * Order of items in an array doesn't matter.
 
-```javascript
+```js
 it('get people', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .get('https://some-api/people')
     .expectStatus(200)
     .expectJson({
@@ -258,9 +361,9 @@ it('get people', async () => {
 
 Allows validation of the schema of a JSON. See [json-schema](https://json-schema.org/learn/) for more usage details.
 
-```javascript
+```js
 it('get people', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .get('https://some-api/people')
     .expectStatus(200)
     .expectJson({
@@ -285,9 +388,9 @@ it('get people', async () => {
 
 Allows validation of the schema of a JSON at a specific place. See [json-schema](https://json-schema.org/learn/) for more usage details.
 
-```javascript
+```js
 it('get people', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .get('https://some-api/people')
     .expectStatus(200)
     .expectJson({
@@ -307,11 +410,11 @@ it('get people', async () => {
 
 Allows validation of JSON with a set of matchers. See [Matching](matching) for more usage details.
 
-```javascript
+```js
 const { like } = require('pactum-matchers');
 
 it('get people', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .get('https://some-api/people')
     .expectStatus(200)
     .expectJsonMatch({
@@ -325,11 +428,11 @@ it('get people', async () => {
 
 Allows validation of specific part in a JSON with a set of matchers. See [Matching](matching) for more usage details. See [json-query](https://www.npmjs.com/package/json-query) for more usage details.
 
-```javascript
+```js
 const { like } = require('pactum-matchers');
 
 it('get people', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .get('https://some-api/people')
     .expectStatus(200)
     .expectJsonMatchAt('people[0]', {
@@ -386,7 +489,7 @@ When there is an intentional change in the API response, our snapshot test fails
 const { like } = require('pactum-matchers');
 
 it('get user mark', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .name('GET_User_Mark')
     .get('https://some-api/user/{username}')
     .withPathParams('username', 'Mark')
@@ -408,19 +511,16 @@ You can also add custom expect handlers to this library for making much more com
 
 You can simply pass a function as a parameter to `expect` & then write your logic that performs assertions. A *context* object is passed to the handler function which contains *req* (request) & *res* (response) objects.
 
-```javascript
-const chai = require('chai');
-const expect = chai.expect;
-
+```js
+const expect = require('chai').expect;
 const pactum = require('pactum');
-const _expect = pactum.expect;
 
 it('post should have a item with title -"some title"', async () => {
-  const response = await pactum.spec()
+  await pactum.spec()
     .get('https://jsonplaceholder.typicode.com/posts/5')
     .expect((ctx) => {
       const res = ctx.res;
-      _expect(res).to.have.status(200);
+      pactum.expect(res).to.have.status(200);
       expect(res.json.title).equals('some title');
     });
 });
@@ -430,22 +530,18 @@ it('post should have a item with title -"some title"', async () => {
 
 There might be a use case where you wanted to perform the same set of assertions. For such scenarios, you can add custom expect handlers that can be used at different places. A *context* object is passed to the handler function which contains *req* (request) & *res* (response) objects & *data* (custom data).
 
-```javascript
-const chai = require('chai');
-const expect = chai.expect;
-
+```js
+const expect = require('chai').expect;
 const pactum = require('pactum');
-const _expect = pactum.expect;
-const handler = pactum.handler;
 
 before(() => {
-  handler.addExpectHandler('user details', (ctx) => {
+  pactum.handler.addExpectHandler('user details', (ctx) => {
     const res = ctx.res;
     const user = res.json;
     expect(user).deep.equals({ id: 1 });
-    _expect(res).to.have.status(200);
-    _expect(res).to.have.responseTimeLessThan(500);
-    _expect(res).to.have.jsonSchema({ /* some schema */ });
+    pactum.expect(res).to.have.status(200);
+    pactum.expect(res).to.have.responseTimeLessThan(500);
+    pactum.expect(res).to.have.jsonSchema({ /* some schema */ });
   });
 });
 
@@ -453,9 +549,8 @@ it('should have a post with id 5', async () => {
   const response = await pactum.spec()
     .get('https://jsonplaceholder.typicode.com/posts/5')
     .expect('user details');
-  
-  // Chai Style Assertions
-  // pactum.expect(response).should.have._('user details');
+
+  pactum.expect(response).should.have._('user details');
 });
 
 it('should have a post with id 5', async () => {
@@ -467,7 +562,7 @@ it('should have a post with id 5', async () => {
 
 You are also allowed to pass custom data to common expect handlers.
 
-```javascript
+```js
 before(() => {
   handler.addExpectHandler('to have user details', (ctx) => {
     const res = ctx.res;

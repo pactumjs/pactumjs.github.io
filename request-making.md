@@ -1,5 +1,24 @@
 # Request Making
 
+In general, the first step in API testing is to make a request to the server. There are different methods available that allows us to make a request.
+
+- `pactum.spec()` - General API Testing
+- `pactum.flow()` - Component & Contract API Testing
+- `pactum.fuzz()` - Fuzz Testing
+- `pactum.e2e()` - e2e Testing
+
+`pactum.spec()` forms the base for all the above methods. So we will learn about `spec` method first and later about the rest of them.
+
+```plantuml
+@startuml
+
+Tests -> "API Server": GET /api/users
+Tests -> "API Server": POST /api/users { "name": "snow" } 
+Tests -> "API Server": DELETE /api/users/1
+
+@enduml
+```
+
 ## spec
 
 `pactum.spec()` will return an instance of *spec* which can be used to build the request and expectations.
@@ -67,16 +86,16 @@ it('DELETE /user', async () => {
 });
 ```
 
-It is a general practice in API Testing, where we set the base url to a constant value.
+In general, we set the base url to a constant value during API Testing. See [Request Settings](request-making?id=request-settings) to learn more about default configuration.
 
 <!-- tabs:start -->
 
 ## ** base.test.js **
 
 ```javascript
-const pactum = require('pactum');
-const request = pactum.request;
+const { request } = require('pactum');
 
+// global hook
 before(() => {
   request.setBaseUrl('http://localhost:3000');
 });
@@ -87,7 +106,7 @@ before(() => {
 ```javascript
 const pactum = require('pactum');
 
-it('should have a post with id 5', async () => {
+it('get projects', async () => {
   // request will be sent to http://localhost:3000/api/projects
   await pactum.spec()
     .get('/api/projects');
@@ -98,10 +117,10 @@ it('should have a post with id 5', async () => {
 
 ## Path Params
 
-Use `withPathParams` to pass path parameters to the request. We can either pass key & value or object as an argument.
+Use `withPathParams` to pass path parameters to the request. We can either pass key-value pair or object as an argument. The given path params are replaced in the request path that are represented inside flower braces - `/some/api/{<key>}/path`.
 
 ```javascript
-it('get random male user from India', async () => {
+it('get a repository', async () => {
   await pactum.spec()
     .get('/api/project/{project}/repo/{repo}')
     .withPathParams('project', 'project-name')
@@ -110,14 +129,16 @@ it('get random male user from India', async () => {
     })
     .expectStatus(200);
 });
+
+//  The above would result in a url like - /api/project/project-name/repo/repo-name
 ```
 
 ## Query Params
 
-Use `withQueryParams` to pass query parameters to the request. We can either pass key & value or object as an argument.
+Use `withQueryParams` to pass query parameters to the request. We can either pass key-value pair or object as an argument.
 
 ```javascript
-it('get random male user from India', async () => {
+it('get random male user from India with age 17', async () => {
   await pactum.spec()
     .get('https://randomuser.me/api')
     .withQueryParams('gender', 'male')
@@ -127,11 +148,13 @@ it('get random male user from India', async () => {
     })
     .expectStatus(200);
 });
+
+//  The above would result in a url like - https://randomuser.me/api?gender=male&country=IND&age=17
 ```
 
 ## Headers
 
-Use `withHeaders` to pass headers to the request. We can either pass key & value or object as an argument.
+Use `withHeaders` to pass headers to the request. We can either pass key-value pair or object as an argument.
 
 ```javascript
 it('get all comments', async () => {
@@ -145,29 +168,29 @@ it('get all comments', async () => {
 });
 ```
 
-It is a general practice in API Testing, where we set the default headers.
+In general, we set default headers to all the requests that are sent during API Testing. For example, authorization headers.
 
 <!-- tabs:start -->
 
-## ** base.test.js **
+#### ** base.test.js **
 
 ```javascript
-const pactum = require('pactum');
-const request = pactum.request;
+const { request } = require('pactum');
 
+// global hook
 before(() => {
   request.setBaseUrl('http://localhost:3000');
   request.setDefaultHeaders('Authorization', 'Basic xxxxx');
 });
 ```
 
-## ** projects.test.js **
+#### ** projects.test.js **
 
 ```javascript
 const pactum = require('pactum');
 
-it('should have a post with id 5', async () => {
-  // request will be sent to http://localhost:3000/api/projects
+it('get projects', async () => {
+  // request will be sent with authorization header.
   await pactum.spec()
     .get('/api/projects');
 });
@@ -314,7 +337,7 @@ before(() => {
   request.setBaseUrl('http://localhost:3000');
 });
 
-it('should have a post with id 5', async () => {
+it('get projects', async () => {
   // request will be sent to http://localhost:3000/api/projects
   await pactum.spec()
     .get('/api/projects');

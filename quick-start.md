@@ -1,12 +1,26 @@
 # Quick Start
 
-To get started we need to have NodeJS (>=8) installed in our system.
+To get started we need to have NodeJS (>=10) installed in our system. <a href="https://nodejs.org/en/download/" target="_blank">Download NodeJS</a>.
+
+Before getting started, we need to have a basic understanding of NodeJS & any test framework in it.
+
+- [Learn NodeJS](https://www.youtube.com/watch?v=TlB_eWDSMt4)
+- [Learn mocha](https://www.youtube.com/watch?v=MLTRHc5dk6s)
 
 ## Installation
 
-**pactum** is available as a npm package to download. Add it as a dependency to a new project or existing project.
+**pactum** is a NodeJS project & available as an npm package. Add it as a dependency to a project.
 
-### New Project
+<!-- tabs:start -->
+
+#### ** Basic **
+
+```shell
+# install pactum
+npm install pactum
+```
+
+#### ** New Project **
 
 ```shell
 # create new folder
@@ -20,7 +34,7 @@ npm init -y
 npm install --save-dev pactum
 ```
 
-### Existing Project
+#### ** Existing Project **
 
 ```shell
 # move to project folder
@@ -29,6 +43,8 @@ cd <existing-project-folder>
 # install pactum as a dev dependency
 npm install --save-dev pactum
 ```
+
+<!-- tabs:end -->
 
 ## Running Testing
 
@@ -68,15 +84,15 @@ mocha test.js
 
 ## Mock Server
 
-**pactum** can also be used as a standalone mock server or a service virtualization tool to generate pact files for contract testing.
+**pactum** can also be used as a standalone mock server or a service virtualization tool to mock external dependencies.
 
 <!-- tabs:start -->
 
 #### ** server.js **
 
 ```js
-const mock = require('pactum').mock;
-mock.start(3000);
+const { mock } = require('pactum');   // import mock
+mock.start(3000);                     // start mock server on port 3000
 ```
 
 <!-- tabs:end -->
