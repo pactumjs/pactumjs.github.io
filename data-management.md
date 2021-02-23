@@ -60,7 +60,7 @@ before(() => {
 
 #### ** users.spec.js **
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('adds a new user', async () => {
@@ -87,7 +87,7 @@ it('adds a new user', async () => {
 
 The exact resource is not going to be used across every test. Every test might need specific values. This library supports the overriding of specific values & extending the data template. This allows tests to be customized as much as you'd like when using templates.
 
-```javascript
+```js
 it('should not add a user with negative age', async () => {
   await pactum.spec()
     .post('/api/users')
@@ -209,7 +209,7 @@ A Data Map is a collection of data that can be referenced in data templates or t
 
 Use `stash.addDataMap` to add a data map. To use the map in the tests or in the template, use `$M{<json-query>}` as the value.
 
-```javascript
+```js
 const pactum = require('pactum');
 const stash = pactum.stash;
 
@@ -247,7 +247,7 @@ before(() => {
 
 !> It's perfectly legal to refer other data maps from a data map. *Be cautious not to create circular dependencies*
 
-```javascript
+```js
 const pactum = require('pactum');
 const stash = pactum.stash;
 
@@ -272,7 +272,7 @@ Data Functions can ease up your life when working with dynamic values. A Data Fu
 
 Use `handler.addDataFuncHandler` to add a custom data function handler. To use the data function in the tests or in the template, use `$F{<handler-name>}`.
 
-```javascript
+```js
 const pactum = require('pactum');
 const handler = pactum.handler;
 
@@ -294,7 +294,7 @@ await pactum.spec()
 
 Data functions also accepts custom data as arguments in the form of array. To pass data use comma separated values after handler name `$F{<handler-name>:<arg1>,<arg2>}`.
 
-```javascript
+```js
 handler.addDataFuncHandler('GetFormattedDate', (ctx) => {
   const fmt = ctx.args[0];
   return moment.format(fmt);
@@ -335,7 +335,7 @@ You can load *Data Templates* & *Data Maps* directly from file system using `loa
   - Army.map.json
 ```
 
-```javascript
+```js
 stash.loadData(); // by default it looks for a directory `./data`
 // or
 stash.loadData('/path/to/data/folder');

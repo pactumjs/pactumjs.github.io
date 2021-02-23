@@ -23,7 +23,7 @@ To make things simple, let's assume order-service has a single order with id `1`
 
 #### Order Service Code
 
-```javascript
+```js
 const fetch = require('node-fetch');
 const express = require('express');
 const app = express();
@@ -69,7 +69,7 @@ Requesting order details will result in the following response
 
 A general component test for order service might look like:
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('should fetch order details', async () => {
@@ -116,7 +116,7 @@ Pactum allows you to add this interaction to the mock server before running a co
 
 You can add a Pact Interaction by
 
-```javascript
+```js
 const pactum = require('pactum');
 
 pactum.addPactInteraction({
@@ -148,7 +148,7 @@ Now, while running order service you need to update order-service to talk with p
 
 A consumer test might look like
 
-```javascript
+```js
 const pactum = require('pactum');
 
 before(async () => {
@@ -209,7 +209,7 @@ A real application/service might be much more complex with a lot of moving parts
 
 If anyone of the interaction is not exercised, the test will fail. At the end of the test case, all these interactions will be removed from the mock server.
 
-```javascript
+```js
 await pactum
   .addPactInteraction(`GET_PRODUCT_DETAILS_WITH_ID_1`)
   .addPactInteraction(`POST_AUDIT_DETAILS`)
@@ -231,7 +231,7 @@ await pactum
 
 The final step of consumer testing is to publish the contracts (pact files) to a shared location like pact-broker.
 
-```javascript
+```js
 await pactum.consumer.publish({
   pactFilesOrDirs: ['./pacts/'],
   pactBroker: 'http://localhost:9292',
@@ -250,7 +250,7 @@ Sets the port of the mock server to start. The default port of the server is `93
 
 *This function should be called before starting the server.*
 
-```javascript
+```js
 pactum.mock.setDefaultPort(3333);
 ```
 
@@ -259,7 +259,7 @@ Type: `Function`<br>
 
 Starts the mock server on the default/custom port.
 
-```javascript
+```js
 pactum.mock.start();
 ```
 
@@ -268,7 +268,7 @@ Type: `Function`<br>
 
 Stops the mock server.
 
-```javascript
+```js
 pactum.mock.stop();
 ```
 
@@ -279,7 +279,7 @@ Type: `Function`<br>
 
 sets the name of the consumer
 
-```javascript
+```js
 pactum.consumer.setConsumerName('order-service');
 ```
 
@@ -288,7 +288,7 @@ Type: `Function`<br>
 
 saves all the contracts(pact files) in the specified directory
 
-```javascript
+```js
 pactum.consumer.save();
 ```
 
@@ -299,7 +299,7 @@ sets directory for saving pact files
 
 *This should be called before save()*
 
-```javascript
+```js
 pactum.consumer.setPactFilesDirectory('/path/for/saving/pact-files');
 ```
 
@@ -310,7 +310,7 @@ publish pact files to pact broker
 
 *This should be called after save()*
 
-```javascript
+```js
 pactum.consumer.publish({
   pactFilesOrDirs: ['./pacts/'],
   pactBroker: 'http://pact-broker',

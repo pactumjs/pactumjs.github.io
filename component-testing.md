@@ -112,9 +112,6 @@ This looks simple & easy to test. But as the functionality of the application gr
 
 Instead of maintaining a separate mock server, pactum comes with it. Interactions can be added to the mock server before the execution of a test case through `useInteraction` method. Once the interactions are added, you can build your request & expectations on top of it.
 
-* Interactions added through `useInteraction` method are auto removed from the mock server.
-* If interactions added through `useInteraction` method are not exercised, *pactum* will immediately fail the test case.
-
 ## Workflow
 
 1. "Test" will add required Interactions to the Mock Server
@@ -144,6 +141,9 @@ For the next test case, the mock server will be empty. This gives us an unique o
 ```
 
 ## Simple Component Tests
+
+* Interactions added through `useInteraction` method are auto removed from the mock server.
+* If interactions added through `useInteraction` method are not exercised, *pactum* will immediately fail the test case.
 
 <!-- tabs:start -->
 
@@ -223,15 +223,19 @@ it('should not buy a product which is out-of-stock', async () => {
 
 <!-- tabs:end -->
 
-Interaction can also contain expectations.
+## Interactions with Expectations
+
+There are cases you want a particular interaction should not be exercised or you want a particular interaction to be called multiple times.
+
+We can add expectations using `expects` property.
 
 ```js
-it('should not get health', async () => {
+it('should not get product details', async () => {
   await pactum.spec()
     .useInteraction({
       request: {
         method: 'GET',
-        path: '/api/health'
+        path: '/api/product'
       },
       response: {
         status: 200
@@ -241,14 +245,14 @@ it('should not get health', async () => {
         callCount: 0
       }
     })
-    .post('/api/orders')
+    .get('/api/orders/123-invalid')
     .expectStatus(400);
 });
 ```
 
 ## Multiple Interactions
 
-In real-life scenarios, a single service might be dependent upon *n* number of services. You can use `useInteraction` method multiple times to add multiple interactions.
+In real-life scenarios, a single service might be dependent upon *"n"* number of services. You can use `useInteraction` method multiple times to add multiple interactions.
 
 * All the interactions are auto removed.
 * Test will fail, if any one of the interaction is not exercised.
@@ -270,11 +274,13 @@ it('should not buy a product which is out-of-stock', async () => {
 });
 ```
 
-## Mock Interaction Handlers
+## Interaction Handlers
 
-There are high chances that you wanted to use the same interaction in multiple occasions. To reuse interactions, you can create separate *js* files to hold interactions & import them in your spec file. This is one way to solve the issue. But there is a better way through *mock handlers*.
+There are high chances that you wanted to use the same interaction in multiple occasions. To reuse interactions, you can create separate *js* files to hold interactions & import them in your spec file. This is one way to solve the issue. But there is a better way through *interaction handlers*.
 
-Mock handlers help us to reuse interactions across tests. Use `handler.addInteractionHandler` function to temporarily store an interaction & later use it in test cases.
+Learn more about interaction handlers [here](mock-server?id=handlers)
+
+Interaction handlers help us to reuse interactions across tests. Use `handler.addInteractionHandler` function to temporarily store an interaction & later use it in test cases.
 
 It accepts two arguments
 
@@ -283,28 +289,54 @@ It accepts two arguments
 
 While using a mock handler, you can pass custom data into it to change the behavior of the interaction. Look at the below example where we use the same interaction in both scenarios.
 
-```js
-const handler = pactum.handler;
+<!-- tabs:start -->
 
-before(async () => {
-  handler.addInteractionHandler('get product', (ctx) => {
-    return {
-      request: {
-        method: 'GET',
-        path: '/api/inventory',
-        queryParams: {
-          product: ctx.data.product
-        }
-      },
-      response: {
-        status: 200,
-        body: {
-          "InStock": ctx.data.inStock
-        }
+#### ** handlers.js **
+
+```js
+const { addInteractionHandler } = require('pactum').handler;
+
+addInteractionHandler('get product', (ctx) => {
+  return {
+    request: {
+      method: 'GET',
+      path: '/api/inventory',
+      queryParams: {
+        product: ctx.data.product
       }
-    }    
-  });
+    },
+    response: {
+      status: 200,
+      body: {
+        "InStock": ctx.data.inStock
+      }
+    }
+  }    
 });
+```
+
+#### ** base.spec.js **
+
+```js
+const { mock } = require('pactum');
+
+// load handlers
+require('./handlers');
+
+// global hooks
+before(async () => {
+  await mock.start(4000);
+});
+
+after(async () => {
+  await mock.stop();
+});
+```
+
+#### ** orders.spec.js **
+
+```js
+const pactum = require('pactum');
 
 it('should buy a product which is in stock', async () => {
   await pactum.spec()
@@ -332,6 +364,8 @@ it('should not buy a product which is out-of-stock', async () => {
 });
 ```
 
+<!-- tabs:end -->
+
 ## Non CRUD Endpoints
 
 Not all endpoints will perform CRUD operations. Some endpoints will perform some long running operations in the background even though it sends a response immediately. It becomes difficult to test how it interacts with other services in the background.
@@ -349,6 +383,7 @@ it('some background process', async () => {
     .post('/api/process')
     .expectStatus(202);
   // wait for the process to complete
+  await pactum.sleep(3000);
   const interaction = mock.getInteraction(id);
   expect(interaction.exercised).equals(true);
   expect(interaction.callCount).equals(1);
@@ -356,7 +391,7 @@ it('some background process', async () => {
 });
 ```
 
-We can also use `wait` method to pause the validation for the background process to complete.
+Alternatively, use `wait` method to pause the validation for the background process to complete.
 
 ```js
 it('some background process', async () => {
@@ -365,6 +400,7 @@ it('some background process', async () => {
     .post('/api/process')
     .expectStatus(202)
     .wait(1000);
+    // it waits for 1s after receiving the response
 });
 ```
 

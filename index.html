@@ -48,9 +48,23 @@
           'matching',
           'reporting',
           'fuzz-testing',
-          'e2e-testing'
+          'e2e-testing',
+          'contract-testing'
         ]
-      }
+      },
+      plugins: [
+        function (hook) {
+          hook.afterEach(function (html) {
+            var path = window.location.hash.replace('#', '');
+            var footer = [
+              '<script>',
+              `ga('set', 'page', '${path}');`,
+              `ga('send', 'pageview');`
+            ].join('');
+            return html + footer;
+          });
+        }
+      ]
     }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>

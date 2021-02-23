@@ -63,7 +63,7 @@ Create a JS file & copy the below code
 
 #### ** test.js **
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('should be a teapot', async () => {

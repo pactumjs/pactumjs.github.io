@@ -23,7 +23,7 @@ Tests -> "API Server": DELETE /api/users/1
 
 `pactum.spec()` will return an instance of *spec* which can be used to build the request and expectations.
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('<test-name>', async () => {
@@ -57,7 +57,7 @@ To pass additional parameters to the request, we can chain or use the following 
 
 The request method indicates the method to be performed on the resource identified by the given Request-URI.
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('GET /user', async () => {
@@ -92,7 +92,7 @@ In general, we set the base url to a constant value during API Testing. See [Req
 
 ## ** base.test.js **
 
-```javascript
+```js
 const { request } = require('pactum');
 
 // global hook
@@ -103,7 +103,7 @@ before(() => {
 
 ## ** projects.test.js **
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('get projects', async () => {
@@ -119,7 +119,7 @@ it('get projects', async () => {
 
 Use `withPathParams` to pass path parameters to the request. We can either pass key-value pair or object as an argument. The given path params are replaced in the request path that are represented inside flower braces - `/some/api/{<key>}/path`.
 
-```javascript
+```js
 it('get a repository', async () => {
   await pactum.spec()
     .get('/api/project/{project}/repo/{repo}')
@@ -137,7 +137,7 @@ it('get a repository', async () => {
 
 Use `withQueryParams` to pass query parameters to the request. We can either pass key-value pair or object as an argument.
 
-```javascript
+```js
 it('get random male user from India with age 17', async () => {
   await pactum.spec()
     .get('https://randomuser.me/api')
@@ -156,7 +156,7 @@ it('get random male user from India with age 17', async () => {
 
 Use `withHeaders` to pass headers to the request. We can either pass key-value pair or object as an argument.
 
-```javascript
+```js
 it('get all comments', async () => {
   await pactum.spec()
     .get('https://jsonplaceholder.typicode.com/comments')
@@ -174,7 +174,7 @@ In general, we set default headers to all the requests that are sent during API 
 
 #### ** base.test.js **
 
-```javascript
+```js
 const { request } = require('pactum');
 
 // global hook
@@ -186,7 +186,7 @@ before(() => {
 
 #### ** projects.test.js **
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('get projects', async () => {
@@ -202,7 +202,7 @@ it('get projects', async () => {
 
 Use `withBody` or `withJson` methods to pass the body to the request.
 
-```javascript
+```js
 it('post body', async () => {
   await pactum.spec()
     .post('https://jsonplaceholder.typicode.com/posts')
@@ -211,7 +211,7 @@ it('post body', async () => {
 });
 ```
 
-```javascript
+```js
 it('post json object', async () => {
   await pactum.spec()
     .post('https://jsonplaceholder.typicode.com/posts')
@@ -233,7 +233,7 @@ Use `withForm` or `withMultiPartFormData` to pass form data to the request.
 * Under the hood, pactum uses `phin.form`
 * `content-type` header will be auto updated to `application/x-www-form-urlencoded`
 
-```javascript 
+```js 
 it('post with form', async () => {
   await pactum.spec()
     .post('https://httpbin.org/forms/posts')
@@ -251,7 +251,7 @@ it('post with form', async () => {
 * Under the hood it uses [form-data](https://www.npmjs.com/package/form-data)
 * `content-type` header will be auto updated to `multipart/form-data`
 
-```javascript
+```js
 it('post with multipart form data', async () => {
   await pactum.spec()
     .post('https://httpbin.org/forms/posts')
@@ -262,7 +262,7 @@ it('post with multipart form data', async () => {
 
 We can also directly use the form-data object.
 
-```javascript
+```js
 const form = new pactum.request.FormData();
 form.append(/* form data */);
 
@@ -278,7 +278,7 @@ it('post with multipart form data', async () => {
 
 Use `withGraphQLQuery` or `withGraphQLVariables` to pass GraphQL data to the request. *Works for only POST requests.*
 
-```javascript
+```js
 it('post graphql query & variables', async () => {
   await pactum.spec()
     .post('https://jsonplaceholder.typicode.com/posts')
@@ -306,7 +306,7 @@ it('post graphql query & variables', async () => {
 By default, pactum's request will timeout after 3000 ms. To increase the timeout for the current request use the `withRequestTimeout` method. **Make Sure To Increase The Test Runners Timeout As Well**
 
 
-```javascript
+```js
 it('some action that will take more time to complete', async () => {
   // increase mocha timeout here
   await pactum.spec()
@@ -329,7 +329,7 @@ This library also offers us to set default options for all the requests that are
 
 Sets the base URL for all the HTTP requests.
 
-```javascript
+```js
 const pactum = require('pactum');
 const request = pactum.request;
 
@@ -349,7 +349,7 @@ it('get projects', async () => {
 Sets the default timeout for all the HTTP requests.
 The default value is **3000 ms**
 
-```javascript
+```js
 pactum.request.setDefaultTimeout(5000);
 ```
 
@@ -357,7 +357,7 @@ pactum.request.setDefaultTimeout(5000);
 
 Sets default headers for all the HTTP requests.
 
-```javascript
+```js
 pactum.request.setDefaultHeaders('Authorization', 'Basic xxxxx');
 pactum.request.setDefaultHeaders({ 'content-type': 'application/json'});
 ```
@@ -366,7 +366,7 @@ pactum.request.setDefaultHeaders({ 'content-type': 'application/json'});
 
 Sets default follow redirect option for HTTP requests.
 
-```javascript
+```js
 pactum.request.setDefaultFollowRedirects(true);
 ```
 
@@ -378,8 +378,3 @@ pactum.request.setDefaultFollowRedirects(true);
 <a href="#/response-validation" >
   <img src="https://img.shields.io/badge/NEXT-Response%20Validation-blue" alt="Response Validation" align="right" style="display: inline;" />
 </a>
-
-<script>
-  ga('set', 'page', '/request-making.html');
-  ga('send', 'pageview');
-</script>

@@ -41,7 +41,7 @@ Type matching for primitive data types - *string*/*number*/*boolean*
 
 #### Type Matching single property in a JSON
 
-```javascript
+```js
 const { like } = require('pactum').matchers;
 
 // matches if it is a JSON object
@@ -74,7 +74,7 @@ const exp3 = {
 
 #### Type Matching whole JSON
 
-```javascript
+```js
 const { like } = require('pactum').matchers;
 
 // matches if it is a JSON object
@@ -100,7 +100,7 @@ const exp2 = {
 
 #### Type Matching Nested Objects in JSON
 
-```javascript
+```js
 const { like } = require('pactum').matchers;
 
 // matches if it is a JSON object
@@ -139,7 +139,7 @@ const exp2 = {
 
 To match nested objects with type, we need apply `like()` explicitly to nested objects
 
-```javascript
+```js
 const { like } = require('pactum').matchers;
 
 // matches if it is a JSON object
@@ -189,7 +189,7 @@ const exp3 = {
 
 *eachLike* is similar to *like* but applies to arrays.
 
-```javascript
+```js
 const { eachLike } = require('pactum-matchers');
 
 // matches if it is an array 
@@ -256,7 +256,7 @@ What you need is a way to say "I expect something matching this regular expressi
 
 ### regex
 
-```javascript
+```js
 const { regex } = require('pactum-matchers');
 const actual = {
   name: 'Jon'

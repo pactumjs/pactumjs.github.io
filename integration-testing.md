@@ -20,7 +20,7 @@ You can pass data between tests by using either `returns` or `stores` methods.
 
 By default, entire response is returned by `await pactum.spec()` or `await pactum.spec().toss()`.
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('should return all posts and first post should have comments', async () => {
@@ -42,7 +42,7 @@ Use `returns` method to return custom response from the received response JSON.
 
 `returns` method accepts a json-query expression as the first argument.
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('should return all posts and first post should have comments', async () => {
@@ -58,7 +58,7 @@ it('should return all posts and first post should have comments', async () => {
 
 Use multiple `returns` to return an array of custom responses from the received JSON.
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('first & second posts should have comments', async () => {
@@ -80,7 +80,7 @@ it('first & second posts should have comments', async () => {
 
 We can also use a custom handler function to return data. A *context* object is passed to the handler function which contains *req* (request) & *res* (response) objects. 
 
-```javascript
+```js
 const pactum = require('pactum');
 
 it('should return all posts and first post should have comments', async () => {
@@ -187,7 +187,7 @@ Lets say the response is
 
 To later refer the stored value, you need to use `$S{<name>}` or `$S{<name><json-query>}` as a place holder in the requests.
 
-```javascript
+```js
 // It will make a GET request to http://jsonplaceholder.typicode.com/posts/1
 await pactum.spec()
   .get('http://jsonplaceholder.typicode.com/posts/$S{FirstPost.id}')
@@ -234,7 +234,7 @@ Use `retry` to specify your retry strategy. It accepts options object as an argu
 
 We can use a custom handler function to return a boolean. A *context* object is passed to the handler function which contains *req* (request) & *res* (response) objects. 
 
-```javascript
+```js
 await pactum.spec()
   .get('/some/async/operation')
   .retry({
@@ -249,7 +249,7 @@ await pactum.spec()
 
 We can also use a custom common handler function to return data & use it at different places.
 
-```javascript
+```js
 const pactum = require('pactum');
 const handler = pactum.handler;
 

@@ -595,8 +595,3 @@ it('should have a post with id 5', async () => {
 <a href="#/integration-testing" >
   <img src="https://img.shields.io/badge/NEXT-Integration%20Testing-blue" alt="Integration Testing" align="right" style="display: inline;" />
 </a>
-
-<script>
-  ga('set', 'page', '/response-validation.html');
-  ga('send', 'pageview');
-</script>
