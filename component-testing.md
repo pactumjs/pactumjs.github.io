@@ -6,9 +6,22 @@ These tests are all about testing the functionality of individual service. Durin
 
 It involves testing a service in isolation by 
 
-* starting a mock server locally
-* starting the service under test locally by updating the configuration of it to point the mock server for all external calls.
-* if the service is dependent on a database, start it & connect it to your service.
+- If required, running a mock server locally
+- If required, running a database locally
+- Start the "Service Under Test" by updating the configuration to use local mock server & database.
+
+> [Docker](https://www.docker.com) is great place to test your applications in isolation 
+
+```plantuml
+@startuml
+
+Tests -> "Service Under Test": Send Request
+"Service Under Test" <-> "Mock Server": Request/Response
+"Service Under Test" <-> "Database": Read/Write
+"Service Under Test" -> Tests: Validate Response
+
+@enduml
+```
 
 ## Pre Requisite
 
@@ -18,17 +31,16 @@ It involves testing a service in isolation by
 
 ## Example
 
-To better understand component testing, consider an e-commerce application that has multiple micro-services that power it.
+To better understand the concept of component testing, consider an e-commerce application that has multiple micro-services like **login-service**, **payment-service**, **order-service**, **inventory-service** and many more. All these micro-services are developed, deployed & operated independently by different teams.
 
-Assume it has a **order-service** that manages orders. When a user places an order, it will internally communicates with the **inventory-service** to check if the product is available or not. 
+Lets focus on **order-service** which is responsible for managing orders. When a user places an order, **order-service** will receive the order request & process it. During the processing of order it will internally communicates with the **inventory-service** to check if the product is available or not. 
 
-We can write two simple functional tests for *order-service*
+We can write two simple functional tests for **order-service**
 
-* Buy a product which is in-stock
-* Buy a product which is out-of-stock
+- Buy a product which is in-stock
+- Buy a product which is out-of-stock
 
-
-*order-service* has an API endpoint `/api/orders` that accepts a POST request with the following JSON with product details for placing an order.
+Consider **order-service** is running on port `3000` locally & it has an API endpoint `/api/orders` that accepts a POST request with the following JSON with product details for placing an order.
 
 ```json
 {
@@ -45,13 +57,13 @@ We can write two simple functional tests for *order-service*
 }
 ```
 
-When user places an order, *order-service* will make a GET request to `/api/inventory?product=iPhone`. Based on the response from the *inventory-service*, it will accept or reject an order.
+When user places an order, **order-service** will make a GET request to `/api/inventory?product=iPhone`. Based on the response from the **inventory-service**, it will accept or reject an order.
 
 Assume we have a mock server that returns a successful response for product - *iPhone* & unsuccessful response for product - *Galaxy*.
 
-If the mock server is written in **express** the internal code for mock server will look like
+If the mock server is written in **express**, the internal code for mock server will look something like this
 
-```javascript
+```js
 const app = require('express')();
 
 app.get('/api/inventory', (req, res) => {
@@ -67,7 +79,7 @@ app.listen(4000, () => {});
 
 Lets look at the component tests.
 
-```javascript
+```js
 it('should buy a product which is in stock', async () => {
   await pactum.spec()
     .post('http://localhost:3000/api/orders')
@@ -92,9 +104,9 @@ it('should not buy a product which is out-of-stock', async () => {
 });
 ```
 
-This looks simple & easy to test. But as the functionality of the application grows, the dependency of the *order-service* on other services will increase. To test different scenarios, it becomes difficult to control the behavior of mock server.
+This looks simple & easy to test. But as the functionality of the application grows, the dependency of the **order-service** on other services will increase. To test different scenarios, it becomes difficult to control the behavior of mock server.
 
-## Simple Component Tests
+# Component Testing Pattern
 
 **pactum** makes component testing easy & fun as it allows us to control the behavior of the mock server for each & every test case. It works on top of [API Testing](api-testing) & [Mock Server](mock-server). If you haven't read about them, use the above links to learn more about them.
 
@@ -103,6 +115,36 @@ Instead of maintaining a separate mock server, pactum comes with it. Interaction
 * Interactions added through `useInteraction` method are auto removed from the mock server.
 * If interactions added through `useInteraction` method are not exercised, *pactum* will immediately fail the test case.
 
+## Workflow
+
+1. "Test" will add required Interactions to the Mock Server
+2. "Test" will send Request To "Service Under Test"
+3. "Service Under Test" will make a request to "Mock Server"
+4. If the received request matches with the interaction, specified response will be returned by "Mock Server".
+5. "Service Under Test" will do whatever it needs to do & send a response back to the tests.
+6. "Test" will remove the interaction from the mock serve.
+7. "Test" will check if the interactions are exercised or not.
+8. "Test" will validate the response.
+
+For the next test case, the mock server will be empty. This gives us an unique opportunity to test the service by controlling the external dependencies for each & every test case.
+
+```plantuml
+@startuml
+
+"Pactum Tests" -> "Pactum Mock Server": Add Interactions
+"Pactum Tests" -> "Service Under Test": Send Request
+"Service Under Test" <-> "Pactum Mock Server": Request/Response
+"Service Under Test" <-> "Database": Read/Write
+"Service Under Test" -> "Pactum Tests": Send Response
+"Pactum Tests" -> "Pactum Mock Server": Remove Interactions
+"Pactum Mock Server" -> "Pactum Tests": Validate Interactions
+"Service Under Test" -> "Pactum Tests": Validate Response
+
+@enduml
+```
+
+## Simple Component Tests
+
 <!-- tabs:start -->
 
 #### ** base.spec.js **
@@ -110,6 +152,7 @@ Instead of maintaining a separate mock server, pactum comes with it. Interaction
 ```js
 const { mock } = require('pactum');
 
+// global hooks
 before(async () => {
   await mock.start(4000);
 });
@@ -210,7 +253,7 @@ In real-life scenarios, a single service might be dependent upon *n* number of s
 * All the interactions are auto removed.
 * Test will fail, if any one of the interaction is not exercised.
 
-```javascript
+```js
 it('should not buy a product which is out-of-stock', async () => {
   await pactum.spec()
     .useInteraction(/* one interaction details */)
@@ -240,7 +283,7 @@ It accepts two arguments
 
 While using a mock handler, you can pass custom data into it to change the behavior of the interaction. Look at the below example where we use the same interaction in both scenarios.
 
-```javascript
+```js
 const handler = pactum.handler;
 
 before(async () => {
@@ -299,7 +342,7 @@ Use `mock.addInteraction` to add a interaction to the server & later use `mock.g
 
 Lets look at an example
 
-```javascript
+```js
 it('some background process', async () => {
   const id = mock.addInteraction('get product');
   await pactum.spec()
@@ -315,7 +358,7 @@ it('some background process', async () => {
 
 We can also use `wait` method to pause the validation for the background process to complete.
 
-```javascript
+```js
 it('some background process', async () => {
   await pactum.spec()
     .useInteraction('get product')
@@ -331,7 +374,7 @@ For some reasons, you want the mock server to be independent of component tests 
 
 Let's look at the below example, where we start the mock server independent of component tests.
 
-```javascript
+```js
 // server.js
 const pactum = require('pactum');
 const mock = pactum.mock;
@@ -360,7 +403,7 @@ mock.start(4000);
 
 Everything works as usual when adding interactions through `useInteraction` method. But methods from *mock* will return promises. 
 
-```javascript
+```js
 // test.js
 const pactum = require('pactum');
 const mock = pactum.mock;
