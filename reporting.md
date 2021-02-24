@@ -1,6 +1,6 @@
 # Reporting
 
-For the tests we run through pactum can also generate reports. By default, pactum comes with zero reporters. We need to manually add & enable required reporters.
+Tests we run through pactum can also generate reports. By default, pactum comes with no reporters. We need to manually add & enable required reporters.
 
 ## Adding a Reporter
 
@@ -35,6 +35,7 @@ after(() => {
 * [pactum-json-reporter](https://www.npmjs.com/package/pactum-json-reporter)
 * [pactum-swagger-coverage](https://www.npmjs.com/package/pactum-swagger-coverage)
 * [pactum-influxdb-reporter](https://www.npmjs.com/package/pactum-influxdb-reporter)
+* [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin)
 
 ?> More reporters are on the way
 

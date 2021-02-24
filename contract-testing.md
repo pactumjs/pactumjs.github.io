@@ -1,10 +1,20 @@
 # Contract Testing
 
-In a world of micro-services architecture, there will be numerous micro-services that are developed, deployed & operated by different teams. One way to make sure all these moving parts work together is through having slow, brittle & expensive e2e or integration tests. But there is an another way to test the integrations between micro-services using contract tests which are fast, easy & cheap. 
+Contract testing is a methodology for ensuring that two separate systems (such as two microservices) are compatible with one other. It captures the interactions that are exchanged between each service, storing them in a contract, which can then be used to verify that both parties adhere to it.
+
+```plantuml
+@startuml
+
+"Consumer" <-> "Provider": Interactions (Request & Response)
+
+@enduml
+```
+
+<!-- In a world of micro-services architecture, there will be numerous micro-services that are developed, deployed & operated by different teams. One way to make sure all these moving parts work together is through having slow, brittle & expensive e2e or integration tests. But there is an another way to test the integrations between micro-services using contract tests which are fast, easy & cheap. 
 
 Contract Testing is a technique for testing interactions between applications (often called as services) that communicate with each other, to ensure the messages they send or receive conform to a shared understanding that is documented in a **contract**.
 
-Contract Testing gives a way for services to enter into an agreement on how they are going to communicate with each other. Once the agreement is in place it provides a way to modify the agreement but before the change takes effect, the services need to sign off on the new contract.
+Contract Testing gives a way for services to enter into an agreement on how they are going to communicate with each other. Once the agreement is in place it provides a way to modify the agreement but before the change takes effect, the services need to sign off on the new contract. -->
 
 Learn more about contract testing at [pact.io](https://docs.pact.io)
 
@@ -16,9 +26,9 @@ Learn more about contract testing at [pact.io](https://docs.pact.io)
 
 * **Provider** - An application (often called a service) that provides functionality or data for other applications to use, often via an API.
 
-* **Contract** - A contract is a documented form of shared understanding between a consumer & a provider. Pact creates this document in the form of a **JSON** file.
+<!-- * **Contract** - A contract is a documented form of shared understanding between a consumer & a provider. Pact creates this document in the form of a **JSON** file.
 
-* **Pact** - A contract between a consumer and provider is called a pact. Each pact is a collection of interactions.
+* **Pact** - A contract between a consumer and provider is called a pact. Each pact is a collection of interactions. -->
 
 * **Interaction** - An individual message that combines a request sent by the consumer & minimal expected response replied by the provider.
 
@@ -26,18 +36,35 @@ Learn more about contract testing at [pact.io](https://docs.pact.io)
 
 ## Workflow
 
-Contract testing with pactum follows an easy pattern that will convert our existing *unit tests* or *component tests* into *contract tests*.
+Different tools follow different patterns for contract testing. Pact and Spring Cloud Contracts are examples of **Consumer-Driven Contract Testing** pattern.
 
-Contract Testing has two steps
+Pactum follows a different approach for contract testing. Pactum is a mix of **consumer-driven** & **provider-driven** contract testing. It converts all our existing *unit tests* or *component tests* that are written using this library into *contract tests*.
+
+Contract Testing with pactum has two steps
 
 1. Publish Actual Behavior (*By Provider*)
 2. Publish Assumed Behavior (*From Consumer*)
 
 Once we publish the actual & assumed behavior to **PactumJS Flow Server**, pactum will compare this behaviors and produce compatibility results.
 
+```plantuml
+@startuml
+
+"Consumer" -> "PactumJS Flow Server": Publish Actual Behavior (Flows)
+"Provider" -> "PactumJS Flow Server": Publish Assumed Behavior (Interactions)
+
+@enduml
+```
+
+Flows & Interactions are published to PactumJS Flow Server using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin). Learn more about reporters [here](reporting)
+
 ### Actual Behavior
 
-Actual behavior is recorded during component tests that are executed in providers pipeline. Each actual behavior is recorded as a **flow**. All these flows are published to **PactumJS Flow Server** using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin)
+Actual behavior is recorded during component tests that are executed in providers pipeline. Each actual behavior is recorded as a **flow**. All these flows are published to **PactumJS Flow Server** using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin).
+
+- Convert an existing component test to contract test, use `pactum.flow()` in the place of `pactum.spec()`.
+- Provide a unique name for each flow.
+- Add pactum-flow-plugin reporter.
 
 <!-- tabs:start -->
 
@@ -62,12 +89,13 @@ it('get a product in-stock from inventory-service', async () => {
 ```js
 const { reporter } = require('pactum');
 
+// global before
 before(async () => {
   addFlowReporter();
 });
 
 function addFlowReporter() {
-  pf.config.url = 'http://localhost:3000';
+  pf.config.url = 'http://localhost:3000'; // pactum flow server url
   pf.config.projectId = 'team2_inventory-service';
   pf.config.projectName = '[TEAM2] Inventory-Service';
   pf.config.version = '1.0.18';
@@ -75,6 +103,7 @@ function addFlowReporter() {
   reporter.add(pf.reporter);
 }
 
+// global after
 after(async () => {
   await reporter.end();
 });
@@ -84,7 +113,11 @@ after(async () => {
 
 ### Assumed Behavior
 
-Assumed behavior is recorded during unit tests or component tests that are executed in consumers pipeline. Each assumed behavior is recorded as an **interaction**. All these interactions are published to **PactumJS Flow Server** using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin)
+Assumed behavior is recorded during unit tests or component tests that are executed in consumers pipeline. Each assumed behavior is recorded as an **interaction**. All these interactions are published to **PactumJS Flow Server** using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin).
+
+- Use interactions in your component tests or unit tests.
+- Specify the provider id & flow name in the interactions.
+- Add pactum-flow-plugin reporter.
 
 <!-- tabs:start -->
 
@@ -102,46 +135,51 @@ it('post an orders to order-service', async () => {
 });
 ```
 
+#### ** handlers.js **
+
+```js
+const { addInteractionHandler } = require('pactum').handler;
+
+addInteractionHandler('get a product in-stock from inventory-service', () => {
+  return {
+    provider: 'team2_inventory-service', // same as above project
+    flow: 'get a product in-stock', // same as above flow
+    request: {
+      method: 'GET',
+      path: '/api/inventory',
+      queryParams: {
+        product: 'iPhone'
+      }
+    },
+    response: {
+      status: 200,
+      body: {
+        "InStock": true
+      }
+    }
+  }    
+});
+```
+
 #### ** base.spec.js **
 
 ```js
-const { reporter, handler } = require('pactum');
+const { reporter } = require('pactum');
+
+require('./handlers'); // load handlers
 
 before(async () => {
   addFlowReporter();
-  addInteractions();
   await mock.start(4000);
 });
 
 function addFlowReporter() {
-  pf.config.url = 'http://localhost:3000';
+  pf.config.url = 'http://localhost:3000'; // pactum flow server url
   pf.config.projectId = 'team_order-service';
   pf.config.projectName = '[TEAM] Order-Service';
-  pf.config.version = '1.0.18';
+  pf.config.version = '2.1.16';
   pf.config.token = 'YWRtaW46YWRtaW4=';
   reporter.add(pf.reporter);
-}
-
-function addInteractions() {
-  handler.addInteractionHandler('get a product in-stock from inventory-service', () => {
-    return {
-      provider: 'team2_inventory-service',
-      flow: 'get a product in-stock',
-      request: {
-        method: 'GET',
-        path: '/api/inventory',
-        queryParams: {
-          product: 'iPhone'
-        }
-      },
-      response: {
-        status: 200,
-        body: {
-          "InStock": true
-        }
-      }
-    }    
-  });
 }
 
 after(async () => {
