@@ -219,7 +219,7 @@ await pactum.spec()
 
 Not all APIs perform simple CRUD operations. Some operations take time & for such scenarios **pactum** allows us to add custom retry handlers that will wait for specific conditions to happen before attempting to make assertions on the response. (*Make sure to update test runners default timeout*) 
 
-Use `retry` to specify your retry strategy. It accepts options object as an argument. If the strategy function returns true, it will perform the request again.
+Use `retry` to specify your retry strategy. It accepts options object as an argument. If the strategy function returns `false`, it will perform the request again.
 
 ### retryOptions
 
@@ -240,7 +240,7 @@ await pactum.spec()
   .retry({
     count: 2,
     delay: 2000,
-    strategy: ({res}) => { return res.statusCode === 202 }
+    strategy: ({res}) => { return res.statusCode === 200 }
   })
   .expectStatus(200);
 ```
@@ -257,9 +257,9 @@ before(() => {
   handler.addRetryHandler('on 404', (ctx) => {
     const res = ctx.res;
     if (res.statusCode === 404) {
-      return true;
+      return false;
     } else {
-      return false
+      return true;
     }
   });
 });

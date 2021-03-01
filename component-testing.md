@@ -391,6 +391,8 @@ it('some background process', async () => {
 });
 ```
 
+### Static Wait
+
 Alternatively, use `wait` method to pause the validation for the background process to complete.
 
 ```js
@@ -401,6 +403,24 @@ it('some background process', async () => {
     .expectStatus(202)
     .wait(1000);
     // it waits for 1s after receiving the response
+});
+```
+
+### Dynamic Wait
+
+`wait` method also accepts a `spec` instance with a retry mechanism to dynamically wait for something.
+
+```js
+it('some background process', async () => {
+  // don't use 'await' statement
+  const specWait = pactum.spec()
+    .get('/api/status')
+    .retry({ strategy: ({res}) => res.json.status === 'completed' });
+  await pactum.spec()
+    .useInteraction('get product')
+    .post('/api/process')
+    .expectStatus(202)
+    .wait(specWait);
 });
 ```
 

@@ -12,7 +12,7 @@ npm install --save-dev pactum-json-reporter
 
 We can add *n* number of reporters to the pactum tests. Use `pactum.reporter.add` method to add reporters at the beginning of your execution. Run `pactum.reporter.end` method at the end of your test execution.
 
-!> As pactum is not tightly coupled with any of the test runners, it is required to run the `reporter.end()` function at the end of your test execution to let pactum generate the reports. 
+!> As pactum is not tightly coupled with any of the test runners, it is required to run the `reporter.end()` function at the end of your test execution to let pactum generate the reports.
 
 ```js
 const pjr = require('pactum-json-reporter');
@@ -29,6 +29,61 @@ after(() => {
   return reporter.end();
 });
 ```
+
+### Reporting for BDD
+
+The reporting structure for [Breaking](api-testing?id=testing-style) testing style differs as the `spec` runs in multiple steps. To have a proper reporting, we need to run additional methods.
+
+- Run `settings.setReporterAutoRun(false)` before test execution.
+- Run `spec.end()` after each test case.
+- Use `spec.response()` for assertions.
+
+<!-- tabs:start -->
+
+### ** base.spec.js **
+
+```js
+const { settings } = require('pactum');
+
+// global hook
+before(() => {
+  settings.setReporterAutoRun(false);
+});
+```
+
+### ** user.spec.js **
+
+```js
+const pactum = require('pactum');
+
+describe('should have a user with name bolt', () => {
+
+  before(() => {
+    this.spec = pactum.spec();
+  });
+
+  it('given a user is requested', () => {
+    this.spec.get('http://localhost:9393/api/users');
+  });
+
+  it('should return a response', async () => {
+    await this.spec.toss();
+  });
+
+  it('should return a status 200', () => {
+    this.spec.response().to.have.status(200);
+  });
+
+  after(() => {
+    this.spec.end();
+  });
+
+});
+```
+
+<!-- tabs:end -->
+
+
 
 ## Available Reporters
 

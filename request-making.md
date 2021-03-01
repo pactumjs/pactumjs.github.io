@@ -333,9 +333,7 @@ Sets the base URL for all the HTTP requests.
 const pactum = require('pactum');
 const request = pactum.request;
 
-before(() => {
-  request.setBaseUrl('http://localhost:3000');
-});
+request.setBaseUrl('http://localhost:3000');
 
 it('get projects', async () => {
   // request will be sent to http://localhost:3000/api/projects
@@ -369,6 +367,72 @@ Sets default follow redirect option for HTTP requests.
 ```js
 pactum.request.setDefaultFollowRedirects(true);
 ```
+
+# Spec Handlers
+
+Handlers is a powerful concept in **pactum**. It helps us to reuse different features in this library like expectations, assertions, retry mechanisms, specs and many more.
+
+Spec handlers helps us to reuse similar kind of request making & response validation across different test cases.
+
+To define a common spec, use `handler.addSpecHandler` function.
+
+The function accepts two arguments
+
+- handler name - a string to refer the spec later in the test cases
+- callback function - receives a context object containing spec & optional custom data properties.
+
+<!-- tabs:start -->
+
+## ** spec.handlers.js **
+
+```js
+const { addSpecHandler } = require('pactum').handler;
+
+addSpecHandler('get user', (ctx) => {
+  const { spec, data } = ctx;
+  const { userId, status } = data;
+  spec.get('/api/users');
+  spec.withHeaders('Authorization', 'Basic abc');
+  spec.withQueryParams('id', userId);
+  spec.expectStatus(status);
+});
+```
+
+## ** base.test.js **
+
+```js
+const { request } = require('pactum');
+
+// load handlers
+require('./spec.handlers');
+
+// global hook
+before(() => {
+  request.setBaseUrl('http://localhost:3000');
+});
+```
+
+## ** users.test.js **
+
+```js
+const pactum = require('pactum');
+
+it('get valid user', async () => {
+  await pactum.spec('get user', { userId: 10, status: 200 })
+    .expectJson({ id: 10 });
+});
+
+it('get invalid user', async () => {
+  // alternatively we can call spec handler using `use` method
+  await pactum.spec()
+    .use('get user', { userId: 9999, status: 400 })
+    .expectJson({ error: 'user not found' });
+});
+```
+
+<!-- tabs:end -->
+
+- We are allowed to use request making methods & expectations while using spec handlers.
 
 ----
 

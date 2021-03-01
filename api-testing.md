@@ -79,7 +79,12 @@ Once the request is built, perform the request by calling `.toss()` method and w
 
 **Assertions should be made after the request is performed & resolved**.
 
-Assertions should be made by either using `pactum.expect` or `spec.response()`.
+Assertions should be made by either using 
+
+- `pactum.expect` - Doesn't keep a track of test case status. *(Not Recommended)*
+- `spec.response()` - prints request & response in terminal if the test case fails & keeps a track of the test case status. *(Recommended)*
+
+Reporting with this testing style differs. Learn more about it at [reporting](reporting)
 
 ```js
 const pactum = require('pactum');
