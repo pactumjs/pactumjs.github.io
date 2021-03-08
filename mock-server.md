@@ -81,32 +81,36 @@ Request Matching:
 
 #### Interaction Options
 
-| Property                  | Description                     |
-| ------------------------  | ------------------------------  |
-| id                        | id of the interaction           |
-| strict                    | enable/disable strict matching  |
-| provider                  | name of the provider            |
-| flow                      | name of the flow                |
-| request                   | request details                 |
-| request.method            | HTTP method                     |
-| request.path              | api path                        |
-| request.pathParams        | api path params                 |
-| request.headers           | request headers                 |
-| request.queryParams       | query parameters                |
-| request.body              | request body                    |
-| request.graphQL           | graphQL details                 |
-| request.graphQL.query     | graphQL query                   |
-| request.graphQL.variables | graphQL variables               |
-| response                  | response details                |
-| response.status           | response status code            |
-| response.headers          | response headers                |
-| response.body             | response body                   |
-| response.fixedDelay       | delays the response by ms       |
-| response.randomDelay      | random delay details            |
-| response.randomDelay.min  | delay the response by min ms    |
-| response.randomDelay.max  | delay the response by max ms    |
-| response.onCall           | response on consecutive calls   |
-| response(req, res)        | response with custom function   |
+| Property                  | Description                                 |
+| ------------------------  | ------------------------------------------  |
+| id                        | id of the interaction                       |
+| strict                    | enable/disable strict matching              |
+| provider                  | name of the provider                        |
+| flow                      | name of the flow                            |
+| request                   | request details                             |
+| request.method            | HTTP method                                 |
+| request.path              | api path                                    |
+| request.pathParams        | api path params                             |
+| request.headers           | request headers                             |
+| request.queryParams       | query parameters                            |
+| request.body              | request body                                |
+| request.graphQL           | graphQL details                             |
+| request.graphQL.query     | graphQL query                               |
+| request.graphQL.variables | graphQL variables                           |
+| response                  | response details                            |
+| response.status           | response status code                        |
+| response.headers          | response headers                            |
+| response.body             | response body                               |
+| response.fixedDelay       | delays the response by ms                   |
+| response.randomDelay      | random delay details                        |
+| response.randomDelay.min  | delay the response by min ms                |
+| response.randomDelay.max  | delay the response by max ms                |
+| response.onCall           | response on consecutive calls               |
+| response(req, res)        | response with custom function               |
+| expects                   | expectations are used in component testing  |
+| expects.exercised         | check exercised (default: `true`)           |
+| expects.callCount         | check call count (default: `> 0`)           |
+| stores                    | stores data from the request                |
 
 #### Basic Interaction
 
@@ -385,6 +389,45 @@ mock.addInteraction({
   }
 })
 ```
+
+#### Stateful Behavior
+
+Stateful Behavior feature can save us a lot of time when implementing integration test scenarios where we need to send a dynamic response based on the received request. Interactions leverage the features from [Data Management](data-management) to support stateful behavior.
+
+Use `stores` property to capture parts of the request & use it in the response.
+
+For example, consider the mock server receives multiple requests for different projects. Every time we need to pass the received project-id to the response body.
+
+```js
+const { mock } = require('pactum');
+const { like } = require('pactum-matchers');
+
+mock.addInteraction({
+  request: {
+    method: 'GET',
+    path: '/api/projects/{id}',
+    pathParams: {
+      id: like('random-id')
+    }
+  },
+  stores: {
+    ProjectId: 'req.pathParams.id'
+  },
+  response: {
+    status: 200,
+    body: {
+      id: '$S{ProjectId}'
+    }
+  }
+});
+```
+
+For capturing other parts of the request,
+
+- `req.pathParams` - Request Path Params
+- `req.queryParams` - Request Query Params
+- `req.headers` - Request Headers
+- `req.body` - Request Body
 
 ### Handlers
 

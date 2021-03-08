@@ -12,24 +12,26 @@ Tests <- "API Server": Status Code, Headers & Body
 
 Received response is validated through expectation methods. This library provides a rich set of methods to assert the response.
 
-| Method (Chaining)       | Method (Breaking)       | Description                               |
-| ----------------------- | ------------------------| ----------------------------------------- |
-| `expect`                | `_`                     | runs custom expect handler                |
-| `expectStatus`          | `status`                | check HTTP status                         |
-| `expectHeader`          | `header`                | check HTTP header key + value             |
-| `expectHeaderContains`  | `headerContains`        | check HTTP header key + partial value     |
-| `expectBody`            | `body`                  | check exact match of body                 |
-| `expectBodyContains`    | `bodyContains`          | check body contains the value             |
-| `expectJson`            | `json`                  | check exact match of json                 |
-| `expectJsonAt`          | `jsonAt`                | check json using **json-query**           |
-| `expectJsonLike`        | `jsonLike`              | check loose match of json                 |
-| `expectJsonLikeAt`      | `jsonLikeAt`            | check json like using **json-query**      |
-| `expectJsonSchema`      | `jsonSchema`            | check json schema                         |
-| `expectJsonSchemaAt`    | `jsonSchemaAt`          | check json schema using **json-query**    |
-| `expectJsonMatch`       | `jsonMatch`             | check json to match                       |
-| `expectJsonMatchAt`     | `jsonMatchAt`           | check json to match using **json-query**  |
-| `expectJsonSnapshot`    | -                       | check json to match with a snapshot       |
-| `expectResponseTime`    | `responseTimeLessThan`  | check response time                       |
+| Method (Chaining)         | Method (Breaking)       | Description                                 |
+| ------------------------  | ----------------------- | ------------------------------------------- |
+| `expect`                  | `_`                     | runs custom expect handler                  |
+| `expectStatus`            | `status`                | check HTTP status                           |
+| `expectHeader`            | `header`                | check HTTP header key + value               |
+| `expectHeaderContains`    | `headerContains`        | check HTTP header key + partial value       |
+| `expectBody`              | `body`                  | check exact match of body                   |
+| `expectBodyContains`      | `bodyContains`          | check body contains the value               |
+| `expectJson`              | `json`                  | check exact match of json                   |
+| `expectJsonAt`            | `jsonAt`                | check json using **json-query**             |
+| `expectJsonLike`          | `jsonLike`              | check loose match of json                   |
+| `expectJsonLikeAt`        | `jsonLikeAt`            | check json like using **json-query**        |
+| `expectJsonSchema`        | `jsonSchema`            | check json schema                           |
+| `expectJsonSchemaAt`      | `jsonSchemaAt`          | check json schema using **json-query**      |
+| `expectJsonMatch`         | `jsonMatch`             | check json to match                         |
+| `expectJsonMatchAt`       | `jsonMatchAt`           | check json to match using **json-query**    |
+| `expectJsonMatchStrict`   | `jsonMatchStrict`       | check json to strictly match                |
+| `expectJsonMatchStrictAt` | `jsonMatchStrictAt`     | check json to strictly match at given path  |
+| `expectJsonSnapshot`      | -                       | check json to match with a snapshot         |
+| `expectResponseTime`      | `responseTimeLessThan`  | check response time                         |
 
 # Expectations Style
 
@@ -505,7 +507,7 @@ To change file location of snapshots, use `settings.setSnapshotDirectoryPath` me
 
 ## Custom Validations
 
-You can also add custom expect handlers to this library for making much more complicated assertions that are ideal to your requirement. You can bring your own assertion library or take advantage of popular libraries like [chai](https://www.npmjs.com/package/chai).
+By default, this library provides a rich set of assertion methods that mainly focuses on JSON content. We can also add custom expect handlers for making much more complicated assertions on different data types. You can bring your own assertion library or take advantage of popular libraries like [chai](https://www.npmjs.com/package/chai).
 
 ## AdHoc
 
@@ -520,8 +522,7 @@ it('post should have a item with title -"some title"', async () => {
     .get('https://jsonplaceholder.typicode.com/posts/5')
     .expect((ctx) => {
       const res = ctx.res;
-      pactum.expect(res).to.have.status(200);
-      expect(res.json.title).equals('some title');
+      // run your custom assertions
     });
 });
 ```
@@ -530,62 +531,82 @@ it('post should have a item with title -"some title"', async () => {
 
 There might be a use case where you wanted to perform the same set of assertions. For such scenarios, you can add custom expect handlers that can be used at different places. A *context* object is passed to the handler function which contains *req* (request) & *res* (response) objects & *data* (custom data).
 
+<!-- tabs:start -->
+
+#### ** expect.handlers.js **
+
 ```js
-const expect = require('chai').expect;
-const pactum = require('pactum');
+const { addExpectHandler } = require('pactum').handler;
+const { expect } = require('chai');
 
-before(() => {
-  pactum.handler.addExpectHandler('user details', (ctx) => {
-    const res = ctx.res;
-    const user = res.json;
-    expect(user).deep.equals({ id: 1 });
-    pactum.expect(res).to.have.status(200);
-    pactum.expect(res).to.have.responseTimeLessThan(500);
-    pactum.expect(res).to.have.jsonSchema({ /* some schema */ });
-  });
-});
-
-it('should have a post with id 5', async () => {
-  const response = await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/posts/5')
-    .expect('user details');
-
-  pactum.expect(response).should.have._('user details');
-});
-
-it('should have a post with id 5', async () => {
-  const response = await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/posts/6')
-    .expect('to have user details');
+addExpectHandler('user details', (ctx) => {
+  const res = ctx.res;
+  const user = res.json;
+  expect(user).deep.equals({ id: 1 });
 });
 ```
+
+#### ** base.spec.js **
+
+```js
+//  load handlers
+require('./expect.handlers');
+```
+
+#### ** user.spec.js **
+
+```js
+const pactum = require('pactum');
+
+it('should have user', async () => {
+  const response = await pactum.spec()
+    .get('/api/users/5')
+    .expect('user details');
+
+  // bdd style
+  pactum.expect(response).should.have._('user details');
+});
+```
+
+<!-- tabs:end -->
 
 You are also allowed to pass custom data to common expect handlers.
 
+<!-- tabs:start -->
+
+#### ** expect.handlers.js **
+
 ```js
-before(() => {
-  handler.addExpectHandler('to have user details', (ctx) => {
-    const res = ctx.res;
-    const req = ctx.req;
-    const data = ctx.data;
-    /*
-     Add custom logic to perform based on req (request) & data (custom data passed)
-     */
-  });
-});
+const { addExpectHandler } = require('pactum').handler;
 
-it('should have a post with id 5', async () => {
-  const response = await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/posts/5')
-    .expect('to have user details', 5); // data = 5
-});
-
-it('should have a post with id 5', async () => {
-  const response = await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/posts/6')
-    .expect('to have user details', { id: 6 }); // data = { id: 6 }
+addExpectHandler('user details', (ctx) => {
+  const res = ctx.res;
+  const req = ctx.req;
+  const data = ctx.data;
+  // add custom assertions
 });
 ```
+
+#### ** base.spec.js **
+
+```js
+//  load handlers
+require('./expect.handlers');
+```
+
+#### ** user.spec.js **
+
+```js
+const pactum = require('pactum');
+
+it('should have user', async () => {
+  const response = await pactum.spec()
+    .get('/api/users/5')
+    .expect('user details', 5);
+});
+```
+
+<!-- tabs:end -->
 
 ----
 

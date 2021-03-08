@@ -19,6 +19,22 @@
 - 📚 Clear & Comprehensive Testing Style
 - 🔗 Component, Contract & E2E testing of APIs
 
+## Tutorials
+
+- [Quick Start](quick-start) - *Installation & Setup*
+- [API Testing](api-testing) - *Testing Styles*
+  - [Request Making](request-making)
+  - [Response Validation](response-validation)
+- [Integration Testing](integration-testing) - *Retry Mechanism & Passing Data b/w tests*
+- [E2E Testing](e2e-testing) - *Initialization & Cleanup*
+- [Fuzz Testing](fuzz-testing) - *Fuzz Buzz*
+- [Mock Server](mock-server) - *Interactions* 
+- [Component Testing](component-testing) - *Testing CRUD & Non-CRUD operations in isolation* 
+- [Contract Testing](contract-testing) - *Compatibility*
+- [Data Management](data-management) - *Data Templates, Maps, Functions & Stores*
+- [Matching](matching) - *Request & Response Matchers*
+- [Reporting](reporting) - *JSON, InfluxDB, Swagger*
+
 ## Under Development
 
 - Contract Testing
@@ -32,22 +48,6 @@
 ## Road Map
 
 - Visual API Testing
-
-## Tutorials
-
-- [Quick Start](quick-start)
-- [API Testing](api-testing)
-  - [Request Making](request-making)
-  - [Response Validation](response-validation)
-- [Integration Testing](integration-testing)
-- [E2E Testing](e2e-testing)
-- [Fuzz Testing](fuzz-testing)
-- [Mock Server](mock-server)
-- [Component Testing](component-testing)
-- [Contract Testing](contract-testing)
-- [Data Management](data-management)
-- [Matching](matching)
-- [Reporting](reporting)
 
 ## Notes
 
