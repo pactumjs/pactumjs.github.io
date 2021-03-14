@@ -1,6 +1,6 @@
 # API Testing
 
-API Testing in general can greatly improve the efficiency of our testing strategy helping us to deliver software faster than ever. It has many aspects but generally consists of making a request & validating the response.
+API Testing in general can improve the efficiency of our testing strategy, helping us to deliver software faster than ever. It has many aspects but generally consists of making a request & validating the response.
 
 ```plantuml
 @startuml
@@ -16,11 +16,11 @@ Tests -> "API Server": Send Request
 - [Request Making](request-making)
 - [Response Validation](response-validation)
 
-Depending upon lot of factors, API testing requires a lot of ingredients to test the functionality of an application. This library provides all the necessary ingredients that help us to write better API automation tests in an easy, fast & fun way.
+Depending upon a lot of factors, API testing requires different ingredients to test the functionality of an application. This library provides all the necessary ingredients to write better API automation tests in an easy, fast & fun way.
 
 ## Test Runners
 
-!> As said earlier in the [Quick Start](quick-start) guide, **pactum** is not a test runner. It needs to be used alongside with a test runner like **mocha**, **jest**, **jasmine** or **cucumber**.
+!> As said earlier in the [Quick Start](quick-start) guide, **pactum** is not a test runner. It needs to be used alongside a test runner like **mocha**, **jest**, **jasmine** or **cucumber**.
 
 We can integrate **pactum** with any of the test runners that support *promises* like [mocha](https://www.npmjs.com/package/mocha), [jest](https://www.npmjs.com/package/jest), [jasmine](https://www.npmjs.com/package/jasmine), [ava](https://www.npmjs.com/package/ava), [uvu](https://www.npmjs.com/package/uvu), [tap](https://www.npmjs.com/package/tap) or [cucumber](https://www.npmjs.com/package/@cucumber). Or build your own if your heart desires, **pactum** should work out of the box.
 
@@ -32,7 +32,7 @@ The whole documentation will be using **mocha** as the test runner. **Cucumber**
 
 Tests in **pactum** are clear and comprehensive. It uses numerous descriptive methods to build your requests and expectations.
 
-Tests can be written in two styles
+Write tests in two styles
 
 * Chaining the request & expectations
 * Breaking the request & expectations (BDD Style)
@@ -81,7 +81,7 @@ Once the request is built, perform the request by calling `.toss()` method and w
 
 Assertions should be made by either using 
 
-- `pactum.expect` - Doesn't keep a track of test case status. *(Not Recommended)*
+- `pactum.expect` - Doesn't keep a track of the test case status. *(Not Recommended)*
 - `spec.response()` - prints request & response in terminal if the test case fails & keeps a track of the test case status. *(Recommended)*
 
 Reporting with this testing style differs. Learn more about it at [reporting](reporting)

@@ -200,7 +200,7 @@ it('get projects', async () => {
 
 ## Body
 
-Use `withBody` or `withJson` methods to pass the body to the request.
+Use `withBody` or `withJson` *(preferred)* methods to pass the body to the request.
 
 ```js
 it('post body', async () => {
@@ -224,11 +224,56 @@ it('post json object', async () => {
 });
 ```
 
+## File Uploads
+
+Use `withFile` method to upload a file. Under the hood, it uses [form-data](https://www.npmjs.com/package/form-data).
+
+### Basic File Upload
+
+```js
+it('post a file', async () => {
+  await pactum.spec()
+    .post('https://httpbin.org/forms/posts')
+    .withFile('./path/to/the/file')
+    .expectStatus(201);
+});
+
+// => (new FormData()).append('file', file-buffer, { filename });
+```
+
+### File Upload with custom options
+
+```js
+it('post a file with custom options', async () => {
+  await pactum.spec()
+    .post('https://httpbin.org/forms/posts')
+    .withFile('./path/to/the/file', { contentType: 'image/png' })
+    .expectStatus(201);
+});
+
+// => (new FormData()).append('file', file-buffer, { filename, contentType });
+```
+
+### File Upload with custom key & options
+
+```js
+it('post a file with custom key & options', async () => {
+  await pactum.spec()
+    .post('https://httpbin.org/forms/posts')
+    .withFile('file-image', './path/to/the/file', { contentType: 'image/png' })
+    .expectStatus(201);
+});
+
+// => (new FormData()).append('file-image', file-buffer, { filename, contentType });
+```
+
+For more advanced usage, see [withMultiPartFormData](#withMultiPartFormData)
+
 ## Form Data
 
 Use `withForm` or `withMultiPartFormData` to pass form data to the request.
 
-## withForm
+### withForm
 
 * Under the hood, pactum uses `phin.form`
 * `content-type` header will be auto updated to `application/x-www-form-urlencoded`
@@ -246,7 +291,7 @@ it('post with form', async () => {
 });
 ```
 
-## withMultiPartFormData
+### withMultiPartFormData
 
 * Under the hood it uses [form-data](https://www.npmjs.com/package/form-data)
 * `content-type` header will be auto updated to `multipart/form-data`
