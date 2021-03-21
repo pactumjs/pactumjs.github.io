@@ -8,7 +8,10 @@ When it comes to API Integration Testing, essentially it involves testing how mu
 
 ## Pre Requisite
 
-* [API Testing](api-testing)
+- [API Testing](api-testing)
+  - [Request Making](request-making)
+  - [Response Validation](response-validation)
+
 
 ## Dependent HTTP Calls
 
@@ -51,7 +54,8 @@ it('should return all posts and first post should have comments', async () => {
     .expectStatus(200)
     .returns('[0].id');
   await pactum.spec()
-    .get(`http://jsonplaceholder.typicode.com/posts/${postID}/comments`)
+    .get('http://jsonplaceholder.typicode.com/posts/{id}/comments')
+    .withPathParams('id', postID)
     .expectStatus(200);
 });
 ```
@@ -101,18 +105,17 @@ We can also use a custom common handler function to return data & use it across 
 * *Fist Argument*: Name of the handler function used to refer it later in specs.
 * *Second Argument*: A function that receives context object with request & response details. The returned value will be the output of `await pactum.spec()`. The function should be synchronous.
 
-While using the common handlers, the name should be prefixed with `#`. It can be customized using `pactum.settings.setCaptureHandlerStrategy()`.
+While using the common handlers, the name should be prefixed with `#`. It can be customized using `settings.setCaptureHandlerStrategy()`.
 
 <!-- tabs:start -->
 
 #### ** base.spec.js **
 
 ```js
-const pactum = require('pactum');
-const handler = pactum.handler;
+const { addCaptureHandler } = require('pactum').handler;
 
 before(() => {
-  handler.addCaptureHandler('first post id', (ctx) => {
+  addCaptureHandler('first post id', (ctx) => {
     const res = ctx.res;
     return res.json[0].id;
   });
@@ -139,81 +142,89 @@ it('should return all posts and first post should have comments', async () => {
 
 ### stores
 
-Use `stores` method to save response data under *data management* which can be referenced later in specs. This method accepts two arguments.
+Use `stores` method to save response data under [Data Management](data-management) which can be referenced later in specs. This method accepts two arguments.
 
 * *FirstArgument*: Name used to refer it later in specs.
 * *SecondArgument*: **json-query** that will fetch custom response data or it can be a capture handler.
 
-```js
-handler.addCaptureHandler('GetSecondPost', (ctx) => {
-  return ctx.res.json[1];
-});
-
-await pactum.spec()
-  .get('http://jsonplaceholder.typicode.com/posts')
-  .stores('FirstPost', '[0]')
-  .stores('SecondPost', '#GetSecondPost')
-  .stores('AllPosts', '.');
-
-/*
-
-Lets say the response is
-  [
-    {
-      id: 1,
-      user: 'jon'
-    },
-    {
-      id: 2,
-      user: 'snow'
-    }
-  ]
-
-  FirstPost - will contain the first item in the response JSON
-    {
-      id: 1,
-      user: 'jon'
-    }
-
-  SecondPost - will contain the second item in the response JSON
-    {
-      id: 2,
-      user: 'snow'
-    }
-  
-  AllPosts - will have the entire JSON response.
-*/
-```
-
 To later refer the stored value, you need to use `$S{<name>}` or `$S{<name><json-query>}` as a place holder in the requests.
 
-```js
-// It will make a GET request to http://jsonplaceholder.typicode.com/posts/1
-await pactum.spec()
-  .get('http://jsonplaceholder.typicode.com/posts/$S{FirstPost.id}')
-  .withJson({
-    id: '$S{FirstPost.id}'
-    title: 'new title'
-  });
-});
+#### json-query
 
-/* 
-  It will make a POST request to http://jsonplaceholder.typicode.com/posts
-  with body 
-  {
-    data: {
-      id: 2,
-      user: 'snow'
-    }     
-  }
-*/
-await pactum.spec()
-  .post('http://jsonplaceholder.typicode.com/posts')
-  .withJson({
-    data: '$S{SecondPost}'
+```js
+const pactum = require('pactum');
+
+it('should return all posts and first post should have comments', async () => {
+  await pactum.spec()
+    .get('http://jsonplaceholder.typicode.com/posts')
+    .expectStatus(200)
+    .stores('FirstPostId', '[0].id');
+  await pactum.spec()
+    .get(`http://jsonplaceholder.typicode.com/posts/{id}/comments`)
+    .withPathParams('id', '$S{FirstPostId}')
+    .expectStatus(200);
+});
+```
+
+We can also store complex parts of the response & later use them using `json-query`
+
+```js
+const pactum = require('pactum');
+
+it('should return all posts and first post should have comments', async () => {
+  await pactum.spec()
+    .get('http://jsonplaceholder.typicode.com/posts')
+    .expectStatus(200)
+    .stores('FirstPost', '[0]'); // store entire first item from the response array
+  await pactum.spec()
+    .get(`http://jsonplaceholder.typicode.com/posts/{id}/comments`)
+    .withPathParams('id', '$S{FirstPost.id}') // access parts of the stored response
+    .expectStatus(200);
+});
+```
+
+#### Common Handler
+
+We can also use a custom common handler function to return data & use it across tests. It accepts two arguments.
+
+* *Fist Argument*: Name of the handler function used to refer it later in specs.
+* *Second Argument*: A function that receives context object with request & response details. The returned value will be the output of `await pactum.spec()`. The function should be synchronous.
+
+While using the common handlers, the name should be prefixed with `#`. It can be customized using `settings.setCaptureHandlerStrategy()`.
+
+<!-- tabs:start -->
+
+#### ** base.spec.js **
+
+```js
+const { addCaptureHandler } = require('pactum').handler;
+
+before(() => {
+  addCaptureHandler('GetFirstPostId', (ctx) => {
+    const res = ctx.res;
+    return res.json[0].id;
   });
 });
 ```
+
+#### ** other.spec.js **
+
+```js
+const pactum = require('pactum');
+
+it('should return all posts and first post should have comments', async () => {
+  const postID = await pactum.spec()
+    .get('http://jsonplaceholder.typicode.com/posts')
+    .expectStatus(200)
+    .stores('FirstPostId', '#GetFirstPostId');
+  await pactum.spec()
+    .get(`http://jsonplaceholder.typicode.com/posts/{id}/comments`)
+    .withPathParams('id', '$S{FirstPostId}')
+    .expectStatus(200);
+});
+```
+
+<!-- tabs:end -->
 
 ## Retry Mechanism
 

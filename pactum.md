@@ -1,4 +1,11 @@
-# pactum
+<p align="center"><a href="https://pactumjs.github.io"><img src="https://raw.githubusercontent.com/pactumjs/pactum/v3/assets/logo.png" alt="PactumJS Logo" height="100"/></a>
+</p>
+<div align="center">
+ <h3>REST API Testing Tool for all levels in a Test Pyramid</h3>
+</div>
+<hr />
+
+<div align="center">
 
 ![Build](https://github.com/pactumjs/pactum/workflows/Build/badge.svg?branch=master)
 ![Coverage](https://img.shields.io/codeclimate/coverage/ASaiAnudeep/pactum)
@@ -6,7 +13,10 @@
 ![Size](https://img.shields.io/bundlephobia/minzip/pactum)
 ![Platform](https://img.shields.io/node/v/pactum)
 
-**pactum** is a REST API Testing Tool used to automate e2e, integration, contract & component (*or service level*) tests. It comes with a powerful **mock server** which can control the state of external dependencies.
+![Demo](_media/demo.gif)
+</div>
+
+**PactumJS** is a REST API Testing Tool used to automate e2e, integration, contract & component (*or service level*) tests. It comes with a powerful **mock server** which can control the state of external dependencies.
 
 ## Features
 
@@ -35,6 +45,16 @@
 - [Matching](matching) - *Request & Response Matchers*
 - [Reporting](reporting) - *JSON, InfluxDB, Swagger*
 
+## Need Help
+
+We use Github [Discussions](https://github.com/pactumjs/pactum/discussions) to receive feedback, discuss ideas & answer questions.
+
+## Support
+
+Like this project! Star it on Github. Your support means a lot to us.
+
+<a href="https://github.com/pactumjs/pactum/stargazers"><img src="https://img.shields.io/github/stars/pactumjs/pactum?style=social" style="margin-left:0;box-shadow:none;border-radius:0;height:24px"></a>
+
 ## Under Development
 
 - Contract Testing
@@ -51,7 +71,18 @@
 
 ## Notes
 
-Inspired from [frisby](https://docs.frisbyjs.com/) testing style & [pact](https://docs.pact.io) interactions.
+- Inspired from [frisby](https://docs.frisbyjs.com/) & [pact](https://docs.pact.io).
+
+## Contributors
+
+If you've ever wanted to contribute to open source, and a great cause, now is your chance!
+
+See the [contributing docs](https://github.com/pactumjs/pactum/blob/master/CONTRIBUTING.md) for more information
+
+<a href="https://github.com/pactumjs/pactum/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=pactumjs/pactum" />
+</a>
+<br />
 
 ----
 
