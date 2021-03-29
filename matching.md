@@ -42,7 +42,7 @@ Type matching for primitive data types - *string*/*number*/*boolean*
 #### Type Matching single property in a JSON
 
 ```js
-const { like } = require('pactum').matchers;
+const { like } = require('pactum-matchers');
 
 // matches if it is a JSON object
 // & it has 'id' & 'name' properties 
@@ -75,7 +75,7 @@ const exp3 = {
 #### Type Matching whole JSON
 
 ```js
-const { like } = require('pactum').matchers;
+const { like } = require('pactum-matchers');
 
 // matches if it is a JSON object
 // & it has 'id' & 'name' properties 
@@ -101,7 +101,7 @@ const exp2 = {
 #### Type Matching Nested Objects in JSON
 
 ```js
-const { like } = require('pactum').matchers;
+const { like } = require('pactum-matchers');
 
 // matches if it is a JSON object
 // & it has quantity, active & item properties 
@@ -140,7 +140,7 @@ const exp2 = {
 To match nested objects with type, we need apply `like()` explicitly to nested objects
 
 ```js
-const { like } = require('pactum').matchers;
+const { like } = require('pactum-matchers');
 
 // matches if it is a JSON object
 // & it has quantity, active & item properties 
