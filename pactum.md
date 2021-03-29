@@ -20,7 +20,7 @@
 
 ## Features
 
-- ⏱ Swift
+- ⚡ Swift
 - 🎈 Lightweight
 - 🚀 Simple & Powerful
 - 📼 Compelling Mock Server

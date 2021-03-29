@@ -1,6 +1,6 @@
 # Request Making
 
-In general, the first step in API testing is to make a request to the server. There are different methods available that allows us to make a request.
+In general, the first step in API testing is to make a request to the server. There are different methods available in **PactumJS** that allows us to make a request.
 
 - `pactum.spec()` - General API Testing
 - `pactum.flow()` - Component & Contract API Testing
@@ -43,6 +43,7 @@ To pass additional parameters to the request, we can chain or use the following 
 | `withJson`                | request json object                       |
 | `withGraphQLQuery`        | graphQL query                             |
 | `withGraphQLVariables`    | graphQL variables                         |
+| `withFile`                | file path                                 |
 | `withForm`                | object to send as form data               |
 | `withMultiPartFormData`   | object to send as multi part form data    |
 | `withRequestTimeout`      | sets request timeout                      |
