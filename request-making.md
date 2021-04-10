@@ -36,6 +36,9 @@ To pass additional parameters to the request, we can chain or use the following 
 
 | Method                    | Description                               |
 | ------------------------- | ----------------------------------------- |
+| `withMethod`              | request method                            |
+| `withPath`                | request path                              |
+| `withQueryParams`         | request query parameters                  |
 | `withPathParams`          | request path parameters                   |
 | `withQueryParams`         | request query parameters                  |
 | `withHeaders`             | request headers                           |

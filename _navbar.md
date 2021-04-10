@@ -12,3 +12,7 @@
   - [Matching](matching.md)
   - [Reporting](reporting.md)
   - [Fuzz Testing](fuzz-testing.md)
+
+- **API**
+  - [Handlers](handlers.md)
+  - [Settings](settings.md)
