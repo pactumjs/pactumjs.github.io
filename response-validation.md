@@ -524,6 +524,7 @@ it('get projects', async () => {
   // request will be sent to http://localhost:3000/api/projects
   await pactum.spec()
     .get('/api/projects');
+    // default expectations are applied
 });
 ```
 
