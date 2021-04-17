@@ -505,6 +505,46 @@ it('get user mark', async () => {
 
 To change file location of snapshots, use `settings.setSnapshotDirectoryPath` method.
 
+# Response Settings
+
+This library also offers us to set default expectations for all the responses received.
+
+## setDefaultExpectHeaders
+
+Sets the expected headers from all the HTTP responses.
+
+```js
+const pactum = require('pactum');
+const { request, response } = pactum;
+
+request.setBaseUrl('http://localhost:3000');
+response.setDefaultExpectHeaders({ 'content-type': 'application/json'});
+
+it('get projects', async () => {
+  // request will be sent to http://localhost:3000/api/projects
+  await pactum.spec()
+    .get('/api/projects');
+    // default expectations are applied
+});
+```
+
+## setDefaultExpectResponseTime
+
+Sets the default expected response time (in ms) for all the HTTP responses.
+
+```js
+pactum.response.setDefaultExpectResponseTime(500);
+```
+
+## setDefaultExpectStatus
+
+Sets default expected HTTP status from HTTP responses.
+
+```js
+pactum.response.setDefaultExpectStatus(201);
+```
+
+
 ## Custom Validations
 
 By default, this library provides a rich set of assertion methods that mainly focuses on JSON content. We can also add custom expect handlers for making much more complicated assertions on different data types. You can bring your own assertion library or take advantage of popular libraries like [chai](https://www.npmjs.com/package/chai).
