@@ -2,7 +2,7 @@
 
 > Free & Open Source REST API Testing Tool for all levels in a [Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
 
-- ⏱ Swift
+- ⚡ Swift
 - 🎈 Lightweight
 - 🚀 Simple & Powerful
 - 🔧 Extendable & Customizable

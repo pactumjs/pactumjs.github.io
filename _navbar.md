@@ -14,5 +14,11 @@
   - [Fuzz Testing](fuzz-testing.md)
 
 - **API**
-  - [Handlers](handlers.md)
-  - [Settings](settings.md)
+  - [Expect](api-expect.md)
+  - [Handlers](api-handlers.md)
+  - [Mock](api-mock.md)
+  - [Reporter](api-reporter.md)
+  - [Request](api-request.md)
+  - [Response](api-response.md)
+  - [Settings](api-settings.md)
+  - [Stash](api-stash.md)
