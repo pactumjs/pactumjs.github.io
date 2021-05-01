@@ -32,6 +32,7 @@ Received response is validated through expectation methods. This library provide
 | `expectJsonMatchStrictAt` | `jsonMatchStrictAt`     | check json to strictly match at given path  |
 | `expectJsonSnapshot`      | -                       | check json to match with a snapshot         |
 | `expectResponseTime`      | `responseTimeLessThan`  | check response time                         |
+| `expectError`             | `error`                 | check network errors                        |
 
 # Expectations Style
 
@@ -504,6 +505,21 @@ it('get user mark', async () => {
 ```
 
 To change file location of snapshots, use `settings.setSnapshotDirectoryPath` method.
+
+## expectError
+
+Expect network errors.
+
+```js
+// expect any error
+await pactum.spec().get(healthUrl).expectError();
+
+// expect ECONNREFUSED error
+await pactum.spec().get(healthUrl).expectError('ECONNREFUSED');
+
+// expect error object
+await pactum.spec().get(healthUrl).expectError({ code: 'ECONNREFUSED' });
+```
 
 # Response Settings
 

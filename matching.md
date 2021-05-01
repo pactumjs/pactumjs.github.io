@@ -10,30 +10,38 @@ In real world applications, sometimes it is hard to match an expected request/re
   * [eachLike](#eachLike)
 * [Regex Matching](#regex-matching)
   * [regex](#regex)
+* [Misc](#misc)
+  * [oneOf](#oneof)
+  * [expression](#expression)
+  * [string](#string)
+  * [email](#email)
 
 ## Supported Matchers
 
 It supports following matchers
 
-* `like` - matches with the type
-* `eachLike` - matches all the elements in the array with the specified type
-* `regex` - matches with the regular expression
-* `includes` - checks if actual value includes a specified value in it
-* `oneOf` - checks if actual value is one of the expected value
-* `expression` - checks if actual value is satisfies the expected expression
+- `like` - matches with the type
+- `eachLike` - matches all the elements in the array with the specified type
+- `regex` - matches with the regular expression
+- `includes` - checks if actual value includes a specified value in it
+- `oneOf` - checks if actual value is one of the expected value
+- `expression` - checks if actual value satisfies the expected expression
+- `string` - checks for non empty string
+- `email` - checks for email pattern
+- `uuid` - checks for uuid pattern
 
 Matchers are applied on JSON
   
-* during response validation - [expectJsonMatch](api-testing#expectJsonMatch)
-* during request matching for interactions in [Mock Server](mock-server)
-* during request and response matching for [Contract Testing](contract-testing)
+- during response validation - [expectJsonMatch](api-testing#expectJsonMatch)
+- during request matching for interactions in [Mock Server](mock-server)
+- during request and response matching for [Contract Testing](contract-testing)
 
 ## Type Matching
 
 Often, you will not care what the exact value is at a particular path is, you just care that a value is present and that it is of the expected type.
 
-* `like`
-* `eachLike`
+- `like`
+- `eachLike`
 
 ### like
 
@@ -258,6 +266,7 @@ What you need is a way to say "I expect something matching this regular expressi
 
 ```js
 const { regex } = require('pactum-matchers');
+
 const actual = {
   name: 'Jon'
   birthDate: regex(/\d{2}\/\d{2}\/\d{4}/)
@@ -273,5 +282,120 @@ const exp1 = {
 const exp1 = {
   name: 'Jon',
   birthDate: '2/2/2020'
+}
+```
+
+## Misc
+
+### oneOf
+
+Checks if actual value is one of the expected value.
+
+- `oneOf` method accepts array as an argument. Actual value should be equal to one of the value in the given array.
+
+```js
+const { oneOf } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  gender: oneOf(['M', 'F'])
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  gender: 'M'
+}
+
+// actual === exp2 -> False
+const exp1 = {
+  name: 'Jon',
+  gender: 'Male'
+}
+```
+
+### expression
+
+Checks if actual value satisfies the expected expression.
+
+- `expression` method accepts two arguments.
+- First argument represents the value that satisfies the expression. *This is used in interactions response & required for contract testing.*
+- Second argument represents the expression.
+  - Expression should contain `$V` to represent current value.
+  - Expression should be a valid JavaScript code.
+  - Expression should return a `boolean`.
+
+```js
+const { expression } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  age: expression(10, '$V > 0')
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  age: 3  // evaluated expression =>  3 > 0  => true
+}
+
+// actual === exp2 -> False
+const exp1 = {
+  name: 'Jon',
+  age: 0  // evaluated expression =>  0 > 0  => false
+}
+```
+
+### string
+
+Checks if actual value is a non empty string.
+
+- `string` method accepts optional string value. *This is used in interactions response & required for contract testing.*
+
+```js
+const { string } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  gender: string()
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  gender: 'M'
+}
+
+// actual === exp2 -> False
+const exp1 = {
+  name: 'Jon',
+  gender: 'Male'
+}
+```
+
+### email
+
+Checks if actual value follows email pattern.
+
+- `email` method accepts optional string value. *This is used in interactions response & required for contract testing.*
+
+```js
+const { string } = require('pactum-matchers');
+
+const email = {
+  name: 'Jon'
+  mail: email()
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  mail: 'some@one.com'
+}
+
+// actual === exp2 -> False
+const exp1 = {
+  name: 'Jon',
+  mail: 'some'
 }
 ```
