@@ -228,11 +228,55 @@ it('should return all posts and first post should have comments', async () => {
 
 ## Retry Mechanism
 
-Not all APIs perform simple CRUD operations. Some operations take time & for such scenarios **pactum** allows us to add custom retry handlers that will wait for specific conditions to happen before attempting to make assertions on the response. (*Make sure to update test runners default timeout*) 
+**PactumJS** has a built-in support for re-trying requests until the test passes or certain conditions has been met. The default setting for the max retry-attempts is **1** with a poll interval of **1000 milliseconds** (1 second). These settings can be overridden from `pactum.settings`.
+
+!> Make sure to update test runners default timeout
+
+### Retry on Expectation Failures
+
+By default, `retry()` method will retry the request if the expectations fail.
+
+```js
+// retry if status code is not 200
+await pactum.spec()
+  .get('/api/some/async/operation')
+  .expectStatus(200)
+  .retry();
+```
+
+Retry with custom max attempts. 
+
+```js
+// retry thrice if status code is not 200 or response body doesn't satisfy the given expectation
+await pactum.spec()
+  .get('/api/some/async/operation')
+  .expectStatus(200)
+  .expectJson({
+    status: 'completed'
+  })
+  .retry(3);
+```
+
+Retry with custom max attempts & delay. 
+
+```js
+// retry thrice if status code is not 200 or response body doesn't satisfy the given expectations
+await pactum.spec()
+  .get('/api/some/async/operation')
+  .expectStatus(200)
+  .expectJson({
+    status: 'completed'
+  })
+  .retry(3, 3000);
+```
+
+### Retry with custom strategies
+
+**PactumJS** allows us to add custom retry handlers that will wait for specific conditions to happen before attempting to make assertions on the response. (*Make sure to update test runners default timeout*) 
 
 Use `retry` to specify your retry strategy. It accepts options object as an argument. If the strategy function returns `false`, it will perform the request again.
 
-### retryOptions
+#### retryOptions
 
 | Property  | Type       | Description                                |
 | --------- | ---------- | ------------------------------------------ |
@@ -241,7 +285,7 @@ Use `retry` to specify your retry strategy. It accepts options object as an argu
 | strategy  | `function` | retry strategy function - returns boolean  |
 | strategy  | `string`   | retry strategy handler name                | 
 
-### AdHoc Handler
+#### AdHoc Handler
 
 We can use a custom handler function to return a boolean. A *context* object is passed to the handler function which contains *req* (request) & *res* (response) objects. 
 
@@ -256,7 +300,7 @@ await pactum.spec()
   .expectStatus(200);
 ```
 
-### Common Handler
+#### Common Handler
 
 We can also use a custom common handler function to return data & use it at different places.
 

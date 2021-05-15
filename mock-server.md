@@ -439,8 +439,8 @@ Interaction handlers help us to reuse same kind of interactions with or without 
 
 The function accepts two arguments
 
-* handler name - a string to refer the interaction later
-* callback function - it should return a interaction or reference to other interaction
+- handler name - a string to refer the interaction later
+- callback function - it should return a interaction/interactions or reference to other interaction/interactions
 
 #### Simple Interaction Handler
 

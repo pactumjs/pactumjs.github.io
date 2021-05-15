@@ -38,7 +38,6 @@ To pass additional parameters to the request, we can chain or use the following 
 | ------------------------- | ----------------------------------------- |
 | `withMethod`              | request method                            |
 | `withPath`                | request path                              |
-| `withQueryParams`         | request query parameters                  |
 | `withPathParams`          | request path parameters                   |
 | `withQueryParams`         | request query parameters                  |
 | `withHeaders`             | request headers                           |
@@ -54,6 +53,8 @@ To pass additional parameters to the request, we can chain or use the following 
 | `withAuth`                | basic auth details                        |
 | `withFollowRedirects`     | sets follow redirect boolean property     |
 | `inspect`                 | prints request & response details         |
+| `retry`                   | retry on failures                         |
+| `wait`                    | wait for non CRUD operations              |
 | `__setLogLevel`           | sets log level for troubleshooting        |
 | `toss` (optional)         | runs the spec & returns a promise         |
 
@@ -325,7 +326,7 @@ it('post with multipart form data', async () => {
 
 ## GraphQL
 
-Use `withGraphQLQuery` or `withGraphQLVariables` to pass GraphQL data to the request. *Works for only POST requests.*
+Use `withGraphQLQuery` or `withGraphQLVariables` to pass GraphQL data to the request.
 
 ```js
 it('post graphql query & variables', async () => {

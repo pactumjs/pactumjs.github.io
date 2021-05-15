@@ -13,3 +13,5 @@ Customize PactumJS behavior.
 | `setCaptureHandlerStrategy`   | set custom capture handler strategy   |
 | `setSnapshotDirectoryPath`    | set custom snapshot directory path    |
 | `setReporterAutoRun`          | enable/disable reporter auto run      |
+| `setDefaultRetryCount`        | set default retry count               |
+| `setDefaultRetryDelay`        | set default retry delay               |
