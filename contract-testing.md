@@ -58,13 +58,23 @@ Once we publish the actual & assumed behavior to **PactumJS Flow Server**, pactu
 
 Flows & Interactions are published to PactumJS Flow Server using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin). Learn more about reporters [here](reporting)
 
+## Pactum Flow Server
+
+Before starting with contract testing, we need setup the **pactumjs-flow-server** to store the assumed & actual behavior. Find official Dockerized **pactumjs-flow-server** at https://hub.docker.com/r/asaianudeep/pactumjs. Follow the instructions to set it up.
+
+Open your browser & navigate to [http://localhost:8080](http://localhost:8080). You should be able to find the below page.
+
+![Home Page](_media/flow-server-home.png)
+
 ### Actual Behavior
 
-Actual behavior is recorded during component tests that are executed in providers pipeline. Each actual behavior is recorded as a **flow**. All these flows are published to **PactumJS Flow Server** using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin).
+Actual behavior is recorded during component tests that are executed in providers pipeline. Each actual behavior is recorded as a **flow**. All these flows are published to **pactumjs-flow-server** using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin).
 
 - Convert an existing component test to contract test, use `pactum.flow()` in the place of `pactum.spec()`.
 - Provide a unique name for each flow.
 - Add pactum-flow-plugin reporter.
+
+Tests for **inventory-service**.
 
 <!-- tabs:start -->
 
@@ -75,7 +85,7 @@ const pactum = require('pactum');
 
 it('get a product in-stock from inventory-service', async () => {
   await pactum.flow('get a product in-stock')
-    .get('/api/orders')
+    .get('/api/inventory-service/products')
     .withQueryParams('product', 'iPhone')
     .expectJson({
       "InStock": true
@@ -88,20 +98,21 @@ it('get a product in-stock from inventory-service', async () => {
 
 ```js
 const { reporter } = require('pactum');
-
-// global before
-before(async () => {
-  addFlowReporter();
-});
+const pf = require('pactum-flow-plugin');
 
 function addFlowReporter() {
-  pf.config.url = 'http://localhost:3000'; // pactum flow server url
+  pf.config.url = 'http://localhost:8080'; // pactum flow server url
   pf.config.projectId = 'team2_inventory-service';
   pf.config.projectName = '[TEAM2] Inventory-Service';
   pf.config.version = '1.0.18';
   pf.config.token = 'YWRtaW46YWRtaW4=';
   reporter.add(pf.reporter);
 }
+
+// global before
+before(async () => {
+  addFlowReporter();
+});
 
 // global after
 after(async () => {
@@ -111,6 +122,14 @@ after(async () => {
 
 <!-- tabs:end -->
 
+Once you run the tests, actual behavior is published to **pactumjs-flow-server**. Click on `PROJECTS` to see the newly added project.
+
+![Projects Page](_media/flow-server-projects-page-1.png)
+
+Click on the project to see more details about it.
+
+![Inventory Project Page](_media/flow-server-inventory-project-page.png)
+
 ### Assumed Behavior
 
 Assumed behavior is recorded during unit tests or component tests that are executed in consumers pipeline. Each assumed behavior is recorded as an **interaction**. All these interactions are published to **PactumJS Flow Server** using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin).
@@ -118,6 +137,8 @@ Assumed behavior is recorded during unit tests or component tests that are execu
 - Use interactions in your component tests or unit tests.
 - Specify the provider id & flow name in the interactions.
 - Add pactum-flow-plugin reporter.
+
+Tests for **order-service** which depends upon **inventory-service** to accept orders.
 
 <!-- tabs:start -->
 
@@ -129,8 +150,11 @@ const pactum = require('pactum');
 it('post an orders to order-service', async () => {
   await pactum.flow('post an order')
     .useInteraction('get a product in-stock from inventory-service')
-    .post('/api/orders')
-    .withJson({})
+    .post('/api/order-service/orders')
+    .withJson({
+      'product': 'iPhone',
+      'quantity': 1
+    })
     .expectStatus(200);
 });
 ```
@@ -146,7 +170,7 @@ addInteractionHandler('get a product in-stock from inventory-service', () => {
     flow: 'get a product in-stock', // same as above flow
     request: {
       method: 'GET',
-      path: '/api/inventory',
+      path: '/api/inventory-service/products',
       queryParams: {
         product: 'iPhone'
       }
@@ -165,22 +189,23 @@ addInteractionHandler('get a product in-stock from inventory-service', () => {
 
 ```js
 const { reporter } = require('pactum');
+const pf = require('pactum-flow-plugin');
 
 require('./handlers'); // load handlers
+
+function addFlowReporter() {
+  pf.config.url = 'http://localhost:8080'; // pactum flow server url
+  pf.config.projectId = 'team1_order-service';
+  pf.config.projectName = '[TEAM1] Order-Service';
+  pf.config.version = '2.1.16';
+  pf.config.token = 'YWRtaW46YWRtaW4=';
+  reporter.add(pf.reporter);
+}
 
 before(async () => {
   addFlowReporter();
   await mock.start(4000);
 });
-
-function addFlowReporter() {
-  pf.config.url = 'http://localhost:3000'; // pactum flow server url
-  pf.config.projectId = 'team_order-service';
-  pf.config.projectName = '[TEAM] Order-Service';
-  pf.config.version = '2.1.16';
-  pf.config.token = 'YWRtaW46YWRtaW4=';
-  reporter.add(pf.reporter);
-}
 
 after(async () => {
   await mock.stop();
@@ -190,6 +215,22 @@ after(async () => {
 
 <!-- tabs:end -->
 
-## Pactum Flow Server
+Once you run the tests, assumed behavior is published to **pactumjs-flow-server**. Click on the project to see more details about it.
 
-Find official Dockerized Pactum Flow Server at https://hub.docker.com/r/asaianudeep/pactumjs
+![Order Project Page](_media/flow-server-order-project-page.png)
+
+Click on the interactions to compare actual behavior & assumed behavior.
+
+![Order Project Page](_media/flow-server-compare-interaction-page.png)
+
+
+## API
+
+To access the backend API (swagger page), navigate to [http://localhost:8080/api/flow/v1/](http://localhost:8080/api/flow/v1/). It has APIs for managing
+
+- Projects
+- Environments
+- Quality Gates
+- Compatibility Results
+
+!> Contract Testing is still in experimental phase.
