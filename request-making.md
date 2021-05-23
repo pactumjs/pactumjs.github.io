@@ -207,6 +207,8 @@ it('get projects', async () => {
 
 Use `withBody` or `withJson` *(preferred)* methods to pass the body to the request.
 
+### withBody
+
 ```js
 it('post body', async () => {
   await pactum.spec()
@@ -215,6 +217,8 @@ it('post body', async () => {
     .expectStatus(201);
 });
 ```
+
+### withJson
 
 ```js
 it('post json object', async () => {
@@ -225,6 +229,17 @@ it('post json object', async () => {
       body: 'bar',
       userId: 1
     })
+    .expectStatus(201);
+});
+```
+
+`withJson` method also accepts file paths to load JSON file directly. 
+
+```js
+it('post json object', async () => {
+  await pactum.spec()
+    .post('https://jsonplaceholder.typicode.com/posts')
+    .withJson('/path/to/file.json')
     .expectStatus(201);
 });
 ```

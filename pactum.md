@@ -1,11 +1,12 @@
-<p align="center"><a href="https://pactumjs.github.io"><img src="https://raw.githubusercontent.com/pactumjs/pactum/v3/assets/logo.png" alt="PactumJS Logo" height="100"/></a>
-</p>
-<div align="center">
- <h3>REST API Testing Tool for all levels in a Test Pyramid</h3>
-</div>
-<hr />
+<span align="center">
 
-<div align="center">
+![logo](_media/logo-icon-small.svg)
+
+# **PactumJS**
+
+![----------](https://raw.githubusercontent.com/pactumjs/pactum/master/assets/rainbow.png)
+
+<h3>REST API Testing Tool for all levels in a Test Pyramid</h3>
 
 ![Build](https://github.com/pactumjs/pactum/workflows/Build/badge.svg?branch=master)
 ![Coverage](https://img.shields.io/codeclimate/coverage/ASaiAnudeep/pactum)
@@ -14,11 +15,14 @@
 ![Platform](https://img.shields.io/node/v/pactum)
 
 ![Demo](_media/demo.gif)
-</div>
 
-**PactumJS** is a REST API Testing Tool used to automate e2e, integration, contract & component (*or service level*) tests. It comes with a powerful **mock server** which can control the state of external dependencies.
+</span>
 
-## Features
+<table>
+<tr>
+<td>
+
+**PactumJS** is a REST API Testing library used to automate e2e, integration, contract & component (*or service level*) tests for APIs. It comes with a powerful **mock server** which can control the state of external dependencies.
 
 - ⚡ Swift
 - 🎈 Lightweight
@@ -29,6 +33,11 @@
 - 📚 Clear & Comprehensive Testing Style
 - 🔗 Component, Contract & E2E testing of APIs
 
+</td>
+</tr>
+</table>
+
+
 ## Tutorials
 
 - [Quick Start](quick-start) - *Installation & Setup*
@@ -37,10 +46,10 @@
   - [Response Validation](response-validation)
 - [Integration Testing](integration-testing) - *Retry Mechanism & Passing Data b/w tests*
 - [E2E Testing](e2e-testing) - *Initialization & Cleanup*
-- [Fuzz Testing](fuzz-testing) - *Fuzz Buzz*
-- [Mock Server](mock-server) - *Interactions* 
+- [Fuzz Testing](fuzz-testing) - *Fuzzing*
+- [Mock Server](mock-server) - *Interactions*  
 - [Component Testing](component-testing) - *Testing CRUD & Non-CRUD operations in isolation* 
-- [Contract Testing](contract-testing) - *Compatibility*
+- [Contract Testing](contract-testing) - *Compatibility b/w consumers & providers*
 - [Data Management](data-management) - *Data Templates, Maps, Functions & Stores*
 - [Matching](matching) - *Request & Response Matchers*
 - [Reporting](reporting) - *JSON, InfluxDB, Swagger*
