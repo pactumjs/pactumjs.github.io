@@ -18,6 +18,8 @@ Received response is validated through expectation methods. This library provide
 | `expectStatus`            | `status`                | check HTTP status                           |
 | `expectHeader`            | `header`                | check HTTP header key + value               |
 | `expectHeaderContains`    | `headerContains`        | check HTTP header key + partial value       |
+| `expectCookies`           | `cookies`               | check exact match of cookies                |
+| `expectCookiesLike`       | `cookiesLike`           | check partial match of cookies              |
 | `expectBody`              | `body`                  | check exact match of body                   |
 | `expectBodyContains`      | `bodyContains`          | check body contains the value               |
 | `expectJson`              | `json`                  | check exact match of json                   |
@@ -319,14 +321,14 @@ it('get users', async () => {
 You are also allowed to change the default value `#` to some other string based on your usage. *Be cautious that all the strings starting with the new value will be treated as assert handlers*.
 
 ```js
-pactum.settings.setAssertHandlerStrategy({ starts: '#' });
+pactum.settings.setAssertHandlerStrategy({ starts: '##' });
 
 it('get users', async () => {
   await pactum.spec()
     .get('/api/users')
     .expectJsonLike([
       {
-        id: '#handlerName:arg1,arg2',
+        id: '##handlerName:arg1,arg2',
         name: 'jon'
       }
     ]);

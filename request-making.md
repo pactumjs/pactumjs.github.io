@@ -41,6 +41,7 @@ To pass additional parameters to the request, we can chain or use the following 
 | `withPathParams`          | request path parameters                   |
 | `withQueryParams`         | request query parameters                  |
 | `withHeaders`             | request headers                           |
+| `withCookies`             | request cookies                           |
 | `withBody`                | request body                              |
 | `withJson`                | request json object                       |
 | `withGraphQLQuery`        | graphQL query                             |
@@ -55,7 +56,7 @@ To pass additional parameters to the request, we can chain or use the following 
 | `inspect`                 | prints request & response details         |
 | `retry`                   | retry on failures                         |
 | `wait`                    | wait for non CRUD operations              |
-| `__setLogLevel`           | sets log level for troubleshooting        |
+| `useLogLevel`             | sets log level for troubleshooting        |
 | `toss` (optional)         | runs the spec & returns a promise         |
 
 ## Request Method
@@ -168,6 +169,54 @@ it('get all comments', async () => {
     .withHeaders('Authorization', 'Basic abc')
     .withHeaders({
       'Content-Type': 'application/json'
+    })
+    .expectStatus(200);
+});
+```
+
+In general, we set default headers to all the requests that are sent during API Testing. For example, authorization headers.
+
+<!-- tabs:start -->
+
+#### ** base.test.js **
+
+```js
+const { request } = require('pactum');
+
+// global hook
+before(() => {
+  request.setBaseUrl('http://localhost:3000');
+  request.setDefaultHeaders('Authorization', 'Basic xxxxx');
+});
+```
+
+#### ** projects.test.js **
+
+```js
+const pactum = require('pactum');
+
+it('get projects', async () => {
+  // request will be sent with authorization header.
+  await pactum.spec()
+    .get('/api/projects');
+});
+```
+
+<!-- tabs:end -->
+
+## Cookies
+
+Use `withCookies` to pass cookies to the request. We can either pass raw string, key-value pair or object as an argument. PactumJS uses [lightcookie](https://www.npmjs.com/package/lightcookie) internally.
+
+```js
+it('get all comments', async () => {
+  await pactum.spec()
+    .get('https://jsonplaceholder.typicode.com/comments')
+    .withCookies('name=foo')
+    .withCookies('age', '23')
+    .withCookies({
+      boo: 'oo',
+      http: null 
     })
     .expectStatus(200);
 });
