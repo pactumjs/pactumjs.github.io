@@ -23,14 +23,55 @@ Tests -> "API Server": DELETE /api/users/1
 
 `pactum.spec()` will return an instance of *spec* which can be used to build the request and expectations.
 
+<!-- tabs:start -->
+
+### ** Mocha **
+
 ```js
 const pactum = require('pactum');
 
-it('<test-name>', async () => {
+it('get 200 status from http-bin', async () => {
   await pactum.spec()
-    .get('http://httpbin.org/status/200');
+    .get('http://httpbin.org/status/200')
+    .expectStatus(200);
 });
 ```
+
+### ** Cucumber **
+
+```gherkin
+Scenario: Check Status
+  Given I make a GET request to "http://httpbin.org/status/200"
+  When I receive a response
+  Then response should have a status 200
+```
+
+```js
+const pactum = require('pactum');
+const { Given, When, Then, Before, After } = require('@cucumber/cucumber');
+
+let spec = pactum.spec();
+
+Before(() => {
+  spec = pactum.spec();
+});
+
+Given(/^I make a (.*) request to (.*)$/, function (method, endpoint) {
+  spec.withMethod(method);
+  spec.withPath(endpoint);
+});
+
+When('I receive a response', async function () {
+  await spec.toss();
+});
+
+Then('I expect response should have a status {int}', function (code) {
+  spec.response().should.have.status(code);
+});
+```
+
+<!-- tabs:end -->
+
 
 To pass additional parameters to the request, we can chain or use the following methods individually to build our request.
 
@@ -64,39 +105,18 @@ To pass additional parameters to the request, we can chain or use the following 
 The request method indicates the method to be performed on the resource identified by the given Request-URI.
 
 ```js
-const pactum = require('pactum');
-
-it('GET /user', async () => {
-  await pactum.spec()
-    .get('http://domain.com/user');
-});
-
-it('POST /user', async () => {
-  await pactum.spec()
-    .post('http://domain.com/user');
-});
-
-it('PUT /user', async () => {
-  await pactum.spec()
-    .put('http://domain.com/user');
-});
-
-it('PATCH /user', async () => {
-  await pactum.spec()
-    .patch('http://domain.com/user');
-});
-
-it('DELETE /user', async () => {
-  await pactum.spec()
-    .delete('http://domain.com/user');
-});
+await pactum.spec().get('http://domain.com/user');
+await pactum.spec().post('http://domain.com/user');
+await pactum.spec().put('http://domain.com/user');
+await pactum.spec().patch('http://domain.com/user');
+await pactum.spec().delete('http://domain.com/user');
 ```
 
 In general, we set the base url to a constant value during API Testing. See [Request Settings](request-making?id=request-settings) to learn more about default configuration.
 
 <!-- tabs:start -->
 
-## ** base.test.js **
+### ** base.test.js **
 
 ```js
 const { request } = require('pactum');
@@ -107,7 +127,7 @@ before(() => {
 });
 ```
 
-## ** projects.test.js **
+### ** projects.test.js **
 
 ```js
 const pactum = require('pactum');
@@ -121,20 +141,29 @@ it('get projects', async () => {
 
 <!-- tabs:end -->
 
+## Non CRUD Methods
+
+Apart from the built-in request methods available in pactum, we can also pass custom HTTP methods and paths using `withMethod` and `withPath` functions.
+
+```js
+await pactum.spec()
+  .withMethod('GET')
+  .withPath('http://httpbin.org/status/200')
+  .expectStatus(200);
+```
+
 ## Path Params
 
 Use `withPathParams` to pass path parameters to the request. We can either pass key-value pair or object as an argument. The given path params are replaced in the request path that are represented inside flower braces - `/some/api/{<key>}/path`.
 
 ```js
-it('get a repository', async () => {
-  await pactum.spec()
-    .get('/api/project/{project}/repo/{repo}')
-    .withPathParams('project', 'project-name')
-    .withPathParams({
-      'repo': 'repo-name'
-    })
-    .expectStatus(200);
-});
+await pactum.spec()
+  .get('/api/project/{project}/repo/{repo}')  // dynamic url
+  .withPathParams('project', 'project-name')  // key-value pair
+  .withPathParams({
+    'repo': 'repo-name'                       // object
+  })
+  .expectStatus(200);
 
 //  The above would result in a url like - /api/project/project-name/repo/repo-name
 ```
@@ -144,16 +173,14 @@ it('get a repository', async () => {
 Use `withQueryParams` to pass query parameters to the request. We can either pass key-value pair or object as an argument.
 
 ```js
-it('get random male user from India with age 17', async () => {
-  await pactum.spec()
-    .get('https://randomuser.me/api')
-    .withQueryParams('gender', 'male')
-    .withQueryParams({
-      'country': 'IND',
-      'age': 17
-    })
-    .expectStatus(200);
-});
+await pactum.spec()
+  .get('https://randomuser.me/api')
+  .withQueryParams('gender', 'male')    // key-value pair
+  .withQueryParams({
+    'country': 'IND',                   // object
+    'age': 17
+  })
+  .expectStatus(200);
 
 //  The above would result in a url like - https://randomuser.me/api?gender=male&country=IND&age=17
 ```
@@ -163,15 +190,13 @@ it('get random male user from India with age 17', async () => {
 Use `withHeaders` to pass headers to the request. We can either pass key-value pair or object as an argument.
 
 ```js
-it('get all comments', async () => {
-  await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/comments')
-    .withHeaders('Authorization', 'Basic abc')
-    .withHeaders({
-      'Content-Type': 'application/json'
-    })
-    .expectStatus(200);
-});
+await pactum.spec()
+  .get('https://jsonplaceholder.typicode.com/comments')
+  .withHeaders('Authorization', 'Basic abc')
+  .withHeaders({
+    'Content-Type': 'application/json'
+  })
+  .expectStatus(200);
 ```
 
 In general, we set default headers to all the requests that are sent during API Testing. For example, authorization headers.
@@ -209,17 +234,15 @@ it('get projects', async () => {
 Use `withCookies` to pass cookies to the request. We can either pass raw string, key-value pair or object as an argument. PactumJS uses [lightcookie](https://www.npmjs.com/package/lightcookie) internally.
 
 ```js
-it('get all comments', async () => {
-  await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/comments')
-    .withCookies('name=foo')
-    .withCookies('age', '23')
-    .withCookies({
-      boo: 'oo',
-      http: null 
-    })
-    .expectStatus(200);
-});
+await pactum.spec()
+  .get('https://jsonplaceholder.typicode.com/comments')
+  .withCookies('name=foo')
+  .withCookies('age', '23')
+  .withCookies({
+    boo: 'oo',
+    http: null 
+  })
+  .expectStatus(200);
 ```
 
 In general, we set default headers to all the requests that are sent during API Testing. For example, authorization headers.
@@ -259,38 +282,32 @@ Use `withBody` or `withJson` *(preferred)* methods to pass the body to the reque
 ### withBody
 
 ```js
-it('post body', async () => {
-  await pactum.spec()
-    .post('https://jsonplaceholder.typicode.com/posts')
-    .withBody('{ "title": "foo", "content": "bar"}')
-    .expectStatus(201);
-});
+await pactum.spec()
+  .post('https://jsonplaceholder.typicode.com/posts')
+  .withBody('{ "title": "foo", "content": "bar"}')
+  .expectStatus(201);
 ```
 
 ### withJson
 
 ```js
-it('post json object', async () => {
-  await pactum.spec()
-    .post('https://jsonplaceholder.typicode.com/posts')
-    .withJson({
-      title: 'foo',
-      body: 'bar',
-      userId: 1
-    })
-    .expectStatus(201);
-});
+await pactum.spec()
+  .post('https://jsonplaceholder.typicode.com/posts')
+  .withJson({
+    title: 'foo',
+    body: 'bar',
+    userId: 1
+  })
+  .expectStatus(201);
 ```
 
 `withJson` method also accepts file paths to load JSON file directly. 
 
 ```js
-it('post json object', async () => {
-  await pactum.spec()
-    .post('https://jsonplaceholder.typicode.com/posts')
-    .withJson('/path/to/file.json')
-    .expectStatus(201);
-});
+await pactum.spec()
+  .post('https://jsonplaceholder.typicode.com/posts')
+  .withJson('/path/to/file.json')
+  .expectStatus(201);
 ```
 
 ## File Uploads
@@ -300,40 +317,28 @@ Use `withFile` method to upload a file. Under the hood, it uses [form-data](http
 ### Basic File Upload
 
 ```js
-it('post a file', async () => {
-  await pactum.spec()
-    .post('https://httpbin.org/forms/posts')
-    .withFile('./path/to/the/file')
-    .expectStatus(201);
-});
-
-// => (new FormData()).append('file', file-buffer, { filename });
+await pactum.spec()
+  .post('https://httpbin.org/forms/posts')
+  .withFile('./path/to/the/file')
+  .expectStatus(201);
 ```
 
 ### File Upload with custom options
 
 ```js
-it('post a file with custom options', async () => {
-  await pactum.spec()
-    .post('https://httpbin.org/forms/posts')
-    .withFile('./path/to/the/file', { contentType: 'image/png' })
-    .expectStatus(201);
-});
-
-// => (new FormData()).append('file', file-buffer, { filename, contentType });
+await pactum.spec()
+  .post('https://httpbin.org/forms/posts')
+  .withFile('./path/to/the/file', { contentType: 'image/png' })
+  .expectStatus(201);
 ```
 
 ### File Upload with custom key & options
 
 ```js
-it('post a file with custom key & options', async () => {
-  await pactum.spec()
-    .post('https://httpbin.org/forms/posts')
-    .withFile('file-image', './path/to/the/file', { contentType: 'image/png' })
-    .expectStatus(201);
-});
-
-// => (new FormData()).append('file-image', file-buffer, { filename, contentType });
+await pactum.spec()
+  .post('https://httpbin.org/forms/posts')
+  .withFile('file-image', './path/to/the/file', { contentType: 'image/png' })
+  .expectStatus(201);
 ```
 
 For more advanced usage, see [withMultiPartFormData](#withMultiPartFormData)
@@ -348,16 +353,13 @@ Use `withForm` or `withMultiPartFormData` to pass form data to the request.
 * `content-type` header will be auto updated to `application/x-www-form-urlencoded`
 
 ```js 
-it('post with form', async () => {
-  await pactum.spec()
-    .post('https://httpbin.org/forms/posts')
-    .withForm({
-      title: 'foo',
-      body: 'bar',
-      userId: 1
-    })
-    .expectStatus(201);
-});
+await pactum.spec()
+  .post('https://httpbin.org/forms/posts')
+  .withForm({
+    "user": 'jon',
+    "password": 'abc'
+  })
+  .expectStatus(201);
 ```
 
 ### withMultiPartFormData
@@ -366,12 +368,10 @@ it('post with form', async () => {
 * `content-type` header will be auto updated to `multipart/form-data`
 
 ```js
-it('post with multipart form data', async () => {
-  await pactum.spec()
-    .post('https://httpbin.org/forms/posts')
-    .withMultiPartFormData('file', fs.readFileSync('a.txt'), { contentType: 'application/js', filename: 'a.txt' })
-    .expectStatus(201);
-});
+await pactum.spec()
+  .post('https://httpbin.org/forms/posts')
+  .withMultiPartFormData('file', fs.readFileSync('a.txt'), { filename: 'a.txt' })
+  .expectStatus(201);
 ```
 
 We can also directly use the form-data object.
@@ -380,12 +380,10 @@ We can also directly use the form-data object.
 const form = new pactum.request.FormData();
 form.append(/* form data */);
 
-it('post with multipart form data', async () => {
-  await pactum.spec()
-    .post('https://httpbin.org/forms/posts')
-    .withMultiPartFormData(form)
-    .expectStatus(201);
-});
+await pactum.spec()
+  .post('https://httpbin.org/forms/posts')
+  .withMultiPartFormData(form)
+  .expectStatus(201);
 ```
 
 ## GraphQL
@@ -393,26 +391,48 @@ it('post with multipart form data', async () => {
 Use `withGraphQLQuery` or `withGraphQLVariables` to pass GraphQL data to the request.
 
 ```js
-it('post graphql query & variables', async () => {
-  await pactum.spec()
-    .post('https://jsonplaceholder.typicode.com/posts')
-    .withGraphQLQuery(
-      `
-        query HeroNameAndFriends($episode: Episode) {
-          hero(episode: $episode) {
+await pactum.spec()
+  .post('https://jsonplaceholder.typicode.com/posts')
+  .withGraphQLQuery(
+    `
+      query HeroNameAndFriends($episode: Episode) {
+        hero(episode: $episode) {
+          name
+          friends {
             name
-            friends {
-              name
-            }
           }
         }
-      `
-    )
-    .withGraphQLVariables({
-      "episode": "JEDI"
-    })
-    .expectStatus(201);
-});
+      }
+    `
+  )
+  .withGraphQLVariables({
+    "episode": "JEDI"
+  })
+  .expectStatus(201);
+```
+
+## Core Options
+
+To further customize the request, pactum allows us directly set the core options of the request - https://nodejs.org/api/http.html#http_http_request_url_options_callback
+
+```js
+await pactum.spec().spec()
+  .get('some-url')
+  .withCore({
+    agent: myAgent
+  })
+  .expectStatus(200);
+```
+
+## Authentication
+
+### UserName & Password
+
+```js
+await pactum.spec().spec()
+  .get('some-url')
+  .withAuth('my-username', 'super-secret-password')
+  .expectStatus(200);
 ```
 
 ## Request Timeout

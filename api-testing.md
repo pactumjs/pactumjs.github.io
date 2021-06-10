@@ -39,7 +39,7 @@ Write tests in two styles
 
 <!-- tabs:start -->
 
-#### ** Chaining **
+#### ** Chaining (Mocha, Jest, Jasmine) **
 
 We can build the request & expectations by chaining the descriptive methods offered by this library.
 
@@ -68,7 +68,7 @@ it('should have a user with name bolt', async () => {
 });
 ```
 
-#### ** Breaking **
+#### ** Breaking  (Cucumber) **
 
 When you want to make your tests much more clearer, you can break your spec into multiple steps. This will come into handy when integrating **pactum** with **cucumber**. See [pactum-cucumber-boilerplate](https://github.com/pactumjs/pactum-cucumber-boilerplate) for more details on pactum & cucumber integration.
 
@@ -85,6 +85,39 @@ Assertions should be made by either using
 - `spec.response()` - prints request & response in terminal if the test case fails & keeps a track of the test case status. *(Recommended)*
 
 Reporting with this testing style differs. Learn more about it at [reporting](reporting)
+
+**Example - Cucumber**
+
+```gherkin
+Scenario: Check Tea Pot
+  Given I make a GET request to "http://httpbin.org/status/418"
+  When I receive a response
+  Then response should have a status 418
+```
+
+```js
+// steps.js
+const pactum = require('pactum');
+const { Given, When, Then, Before } = require('cucumber');
+
+let spec = pactum.spec();
+
+Before(() => { spec = pactum.spec(); });
+
+Given('I make a GET request to {string}', function (url) {
+  spec.get(url);
+});
+
+When('I receive a response', async function () {
+  await spec.toss();
+});
+
+Then('response should have a status {int}', async function (code) {
+  spec.response().should.have.status(code);
+});
+```
+
+**Example - Mocha**
 
 ```js
 const pactum = require('pactum');

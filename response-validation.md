@@ -161,9 +161,83 @@ it('get post with id 1', async () => {
 });
 ```
 
+## expectCookies
+
+Performs exact match on cookies in the response. Pass either key-value pair or JSON object or raw cookies string. PactumJS uses [lightcookie](https://www.npmjs.com/package/lightcookie) internally to parse.
+
+```js
+// key-value pair
+await pactum.spec()
+  .get('some-url')
+  .expectCookies('Expires', 'Thu, 21 Oct 2021 07:28:00 GMT');
+
+// object
+await pactum.spec()
+  .get('some-url')
+  .expectCookies({ 
+    'Expires': 'Thu, 21 Oct 2021 07:28:00 GMT',
+    'httpOnly': null
+  });
+
+// raw string
+await pactum.spec()
+  .get('some-url')
+  .expectCookies('Expires=Thu, 31 Oct 2021 07:28:00 GMT; httpOnly;');
+```
+
+## expectCookiesLike
+
+Performs partial match on cookies in the response. Pass either key-value pair or JSON object or raw cookies string. PactumJS uses [lightcookie](https://www.npmjs.com/package/lightcookie) internally to parse.
+
+```js
+// key-value pair
+await pactum.spec()
+  .get('some-url')
+  .expectCookiesLike('Expires', 'Thu, 21 Oct 2021 07:28:00 GMT');
+
+// object
+await pactum.spec()
+  .get('some-url')
+  .expectCookiesLike({ 
+    'Expires': 'Thu, 21 Oct 2021 07:28:00 GMT',
+    'httpOnly': null
+  });
+
+// raw string
+await pactum.spec()
+  .get('some-url')
+  .expectCookiesLike('Expires=Thu, 31 Oct 2021 07:28:00 GMT; httpOnly;');
+```
+
+## expectBody
+
+Performs strict equal on body text.
+
+```js
+it('get health', async () => {
+  const response = await pactum.spec()
+    .get('api/health')
+    .expectStatus(200)
+    .expectBody('OK');
+});
+```
+
+## expectBodyContains
+
+Performs partial equal on body text.
+
+```js
+it('get health', async () => {
+  const response = await pactum.spec()
+    .get('api/health')
+    .expectStatus(200)
+    .expectBodyContains('OK');
+});
+```
+
 ## expectJson
 
-Performs deep equal.
+Performs deep equal of JSON objects. If the JSON object has array of elements, order of the items is considered strictly.
 
 ```js
 it('get post with id 1', async () => {
@@ -523,47 +597,7 @@ await pactum.spec().get(healthUrl).expectError('ECONNREFUSED');
 await pactum.spec().get(healthUrl).expectError({ code: 'ECONNREFUSED' });
 ```
 
-# Response Settings
-
-This library also offers us to set default expectations for all the responses received.
-
-## setDefaultExpectHeaders
-
-Sets the expected headers from all the HTTP responses.
-
-```js
-const pactum = require('pactum');
-const { request, response } = pactum;
-
-request.setBaseUrl('http://localhost:3000');
-response.setDefaultExpectHeaders({ 'content-type': 'application/json'});
-
-it('get projects', async () => {
-  // request will be sent to http://localhost:3000/api/projects
-  await pactum.spec()
-    .get('/api/projects');
-    // default expectations are applied
-});
-```
-
-## setDefaultExpectResponseTime
-
-Sets the default expected response time (in ms) for all the HTTP responses.
-
-```js
-pactum.response.setDefaultExpectResponseTime(500);
-```
-
-## setDefaultExpectStatus
-
-Sets default expected HTTP status from HTTP responses.
-
-```js
-pactum.response.setDefaultExpectStatus(201);
-```
-
-
-## Custom Validations
+# Custom Validations
 
 By default, this library provides a rich set of assertion methods that mainly focuses on JSON content. We can also add custom expect handlers for making much more complicated assertions on different data types. You can bring your own assertion library or take advantage of popular libraries like [chai](https://www.npmjs.com/package/chai).
 
@@ -665,6 +699,45 @@ it('should have user', async () => {
 ```
 
 <!-- tabs:end -->
+
+# Response Settings
+
+This library also offers us to set default expectations for all the responses received.
+
+## setDefaultExpectHeaders
+
+Sets the expected headers from all the HTTP responses.
+
+```js
+const pactum = require('pactum');
+const { request, response } = pactum;
+
+request.setBaseUrl('http://localhost:3000');
+response.setDefaultExpectHeaders({ 'content-type': 'application/json'});
+
+it('get projects', async () => {
+  // request will be sent to http://localhost:3000/api/projects
+  await pactum.spec()
+    .get('/api/projects');
+    // default expectations are applied
+});
+```
+
+## setDefaultExpectResponseTime
+
+Sets the default expected response time (in ms) for all the HTTP responses.
+
+```js
+pactum.response.setDefaultExpectResponseTime(500);
+```
+
+## setDefaultExpectStatus
+
+Sets default expected HTTP status from HTTP responses.
+
+```js
+pactum.response.setDefaultExpectStatus(201);
+```
 
 ----
 
