@@ -10,6 +10,7 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta property="og:image" content="https://pactumjs.github.io/_media/social.png">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="assets/style.css">
   <link rel="icon" href="_media/favicon.png">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-803PP418EL"></script>
@@ -62,6 +63,9 @@
           'api-stash'
         ]
       },
+      scrollToTop: {
+        text: '👆'
+      },
       plugins: [
         function (hook) {
           hook.afterEach(function (html) {
@@ -88,6 +92,8 @@
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
   <script src="//unpkg.com/docsify-plantuml/dist/docsify-plantuml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-example-panels"></script>
+  <script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
 </body>
 
 </html>

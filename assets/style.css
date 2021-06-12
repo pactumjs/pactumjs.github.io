@@ -1,0 +1,7 @@
+:root {
+  /* Panel Left */
+  --docsify-example-panels-left-panel-width : 50%;
+
+  /* Panel Right */
+  --docsify-example-panels-right-panel-width : 50%;
+}

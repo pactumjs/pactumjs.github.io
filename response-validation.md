@@ -5,7 +5,9 @@ Once a request is made, the server will send a response back. Validating the res
 ```plantuml
 @startuml
 
-Tests <- "API Server": Status Code, Headers & Body
+"API Tests" <- "API Server": Validate Response Status Code
+"API Tests" <- "API Server": Validate Response Headers
+"API Tests" <- "API Server": Validate Response Body
 
 @enduml
 ```
@@ -23,22 +25,17 @@ Received response is validated through expectation methods. This library provide
 | `expectBody`              | `body`                  | check exact match of body                   |
 | `expectBodyContains`      | `bodyContains`          | check body contains the value               |
 | `expectJson`              | `json`                  | check exact match of json                   |
-| `expectJsonAt`            | `jsonAt`                | check json using **json-query**             |
 | `expectJsonLike`          | `jsonLike`              | check loose match of json                   |
-| `expectJsonLikeAt`        | `jsonLikeAt`            | check json like using **json-query**        |
 | `expectJsonSchema`        | `jsonSchema`            | check json schema                           |
-| `expectJsonSchemaAt`      | `jsonSchemaAt`          | check json schema using **json-query**      |
 | `expectJsonMatch`         | `jsonMatch`             | check json to match                         |
-| `expectJsonMatchAt`       | `jsonMatchAt`           | check json to match using **json-query**    |
 | `expectJsonMatchStrict`   | `jsonMatchStrict`       | check json to strictly match                |
-| `expectJsonMatchStrictAt` | `jsonMatchStrictAt`     | check json to strictly match at given path  |
 | `expectJsonSnapshot`      | -                       | check json to match with a snapshot         |
 | `expectResponseTime`      | `responseTimeLessThan`  | check response time                         |
 | `expectError`             | `error`                 | check network errors                        |
 
 # Expectations Style
 
-Based on chosen [Testing Style](api-testing?id=testing-style), expectations methods are used.
+Based on chosen [Testing Style](api-testing?id=testing-style), expectations methods are varied.
 
 <!-- tabs:start -->
 
@@ -150,18 +147,18 @@ it('should have a user with name bolt', async () => {
 Expecting Status Code & Headers & response time from the response.
 
 ```js
-it('get post with id 1', async () => {
-  const response = await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/posts/1')
-    .expectStatus(200)
-    .expectHeader('content-type', 'application/json; charset=utf-8')
-    .expectHeader('connection', /\w+/)
-    .expectHeaderContains('content-type', 'application/json')
-    .expectResponseTime(100);
-});
+await pactum.spec()
+  .get('https://jsonplaceholder.typicode.com/posts/1')
+  .expectStatus(200)
+  .expectHeader('content-type', 'application/json; charset=utf-8')
+  .expectHeader('connection', /\w+/)
+  .expectHeaderContains('content-type', 'application/json')
+  .expectResponseTime(100);
 ```
 
-## expectCookies
+## Cookies
+
+### expectCookies
 
 Performs exact match on cookies in the response. Pass either key-value pair or JSON object or raw cookies string. PactumJS uses [lightcookie](https://www.npmjs.com/package/lightcookie) internally to parse.
 
@@ -185,7 +182,7 @@ await pactum.spec()
   .expectCookies('Expires=Thu, 31 Oct 2021 07:28:00 GMT; httpOnly;');
 ```
 
-## expectCookiesLike
+### expectCookiesLike
 
 Performs partial match on cookies in the response. Pass either key-value pair or JSON object or raw cookies string. PactumJS uses [lightcookie](https://www.npmjs.com/package/lightcookie) internally to parse.
 
@@ -211,70 +208,121 @@ await pactum.spec()
 
 ## expectBody
 
-Performs strict equal on body text.
+Performs strict equal on body text. *Use this for text comparison.*
 
 ```js
-it('get health', async () => {
-  const response = await pactum.spec()
-    .get('api/health')
-    .expectStatus(200)
-    .expectBody('OK');
-});
+await pactum.spec()
+  .get('api/health')
+  .expectStatus(200)
+  .expectBody('OK');
 ```
 
 ## expectBodyContains
 
-Performs partial equal on body text.
+Performs partial equal on body text. *Use this for text comparison.*
 
 ```js
-it('get health', async () => {
-  const response = await pactum.spec()
-    .get('api/health')
-    .expectStatus(200)
-    .expectBodyContains('OK');
-});
+await pactum.spec()
+  .get('api/health')
+  .expectStatus(200)
+  .expectBodyContains('OK');
 ```
 
 ## expectJson
 
-Performs deep equal of JSON objects. If the JSON object has array of elements, order of the items is considered strictly.
-
-```js
-it('get post with id 1', async () => {
-  const response = await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/posts/1')
-    .expectStatus(200)
-    .expectJson({
-      "userId": 1,
-      "id": 1,
-      "title": "some title",
-      "body": "some body"
-    });
-});
-```
-
-## expectJsonAt
-
-Allows validation of specific part in a JSON. See [json-query](https://www.npmjs.com/package/json-query) for more usage details.
+`expectJson(value)` - Performs deep equal of JSON objects. If the JSON object has array of elements, order of the items should be same.
 
 * Performs deep equal or strict equal.
 * Order of items in an array does matter.
 
+<!-- tabs:start -->
+
+### **Example 1**
+
+Validating a plain JSON body.
+
 ```js
-it('get people', async () => {
-  await pactum.spec()
-    .get('https://some-api/people')
-    .expectStatus(200)
-    .expectJson({
-      people: [
-        { name: 'Matt', country: 'NZ' },
-        { name: 'Pete', country: 'AU' },
-        { name: 'Mike', country: 'NZ' }
-      ]
-    })
-    .expectJsonAt('people[country=NZ].name', 'Matt')
-    .expectJsonAt('people[*].name', ['Matt', 'Pete', 'Mike']);
-});
+await pactum.spec()
+  .get('https://jsonplaceholder.typicode.com/posts/1')
+  .expectStatus(200)
+  .expectJson({
+    "userId": 1,
+    "id": 1,
+    "title": "some title",
+    "body": "some body"
+  });
+```
+
+### **Example 2**
+
+Validating a JSON body with array of items.
+
+```js
+await pactum.spec()
+  .get('/api/users')
+  .expectStatus(200)
+  .expectJson([
+    {
+      "id": 1,
+      "name": "jon"
+    },
+    {
+      "id": 2,
+      "name": "snow"
+    }
+  ]);
+```
+
+The assertion will pass, if the actual response body has the same items in the same order.
+
+```json
+// actual response body
+[
+  {
+    "id": 1,
+    "name": "jon"
+  },
+  {
+    "id": 2,
+    "name": "snow"
+  }
+]
+```
+
+The assertion will fail, if the actual response body has the same items in a different order.
+
+```json
+// actual response body
+[
+  {
+    "id": 2,
+    "name": "snow"
+  },
+  {
+    "id": 1,
+    "name": "jon"
+  }
+]
+```
+
+<!-- tabs:end -->
+
+`expectJson('path', value)` - Allows validation of specific part in a JSON. See [json-query](https://www.npmjs.com/package/json-query) for more usage details.
+
+```js
+await pactum.spec()
+  .get('https://some-api/people')
+  .expectStatus(200)
+  .expectJson({
+    people: [
+      { name: 'Matt', country: 'NZ' },
+      { name: 'Pete', country: 'AU' },
+      { name: 'Mike', country: 'NZ' }
+    ]
+  })
+  .expectJson('people[0]', { name: 'Matt', country: 'NZ' })
+  .expectJson('people[country=NZ].name', 'Matt')
+  .expectJson('people[*].name', ['Matt', 'Pete', 'Mike']);
 ```
 
 ## expectJsonLike
@@ -286,18 +334,122 @@ Performs partial deep equal.
 * Allows Assert Handlers.
 * Order of items in an array doesn't matter.
 
-```js
-it('posts should have a item with title -"some title"', async () => {
-  await pactum.spec()
-    .get('https://jsonplaceholder.typicode.com/posts')
-    .expectStatus(200)
-    .expectJsonLike([
+Consider the following response from server
+
+```json
+[
+  {
+    "id": 1,
+    "name": "jon",
+    "address": [
       {
-        "userId": /\d+/,
-        "title": "some title"
+        "type": "home",
+        "pin": "878878"
       }
-    ]);
-});
+    ]
+  },
+  {
+    "id": 2,
+    "name": "snow",
+    "address": [
+      {
+        "type": "home",
+        "pin": "755344"
+      },
+      {
+        "type": "work",
+        "pin": "655320"
+      }
+    ]
+  }
+]
+```
+
+<!-- tabs:start -->
+
+### **Example 1**
+
+This will pass - *partial matching*
+
+```js
+await pactum.spec()
+  .get('/api/users')
+  .expectStatus(200)
+  .expectJsonLike([
+    {
+      "id": 1,
+      "name": "jon"
+    },
+    {
+      "id": 2,
+      "address": [
+        {
+          "type": "work"
+        }
+      ]
+    }
+  ]);
+```
+
+### **Example 2**
+
+This will also pass - *order of items is not considered*
+
+```js
+await pactum.spec()
+  .get('/api/users')
+  .expectStatus(200)
+  .expectJsonLike([
+    {
+      "id": 2,
+      "name": "snow"
+    }
+  ]);
+```
+
+### **Example 3**
+
+This will also pass - *order of the nested items is also not considered*
+
+```js
+await pactum.spec()
+  .get('/api/users')
+  .expectStatus(200)
+  .expectJsonLike([
+    {
+      "id": 2,
+      "address": [
+        {
+          "type": "work",
+          "pin": "655320"
+        },
+        {
+          "type": "home",
+          "pin": /\w+/
+        }
+      ]
+    }
+  ]);
+```
+
+<!-- tabs:end -->
+
+`expectJsonLike('path', value)` - Allows validation of specific part in a JSON. See [json-query](https://www.npmjs.com/package/json-query) for more usage details.
+
+
+```js
+await pactum.spec()
+  .get('https://some-api/people')
+  .expectStatus(200)
+  .expectJson({
+    people: [
+      { name: 'Matt', country: 'NZ' },
+      { name: 'Pete', country: 'AU' },
+      { name: 'Mike', country: 'NZ' }
+    ]
+  })
+  .expectJson('people[*].name', ['Matt', 'Pete', 'Mike']);
+  .expectJsonLike('people[*].name', ['Mike', 'Matt']);
 ```
 
 ### Assert Expressions
@@ -310,19 +462,19 @@ Assert Expressions helps to run custom JavaScript code on a JSON that performs u
 
 !> String containing **$V** will be automatically treated as a Assert Expression.
 
+!> Assert Expressions can be only used in `expectJsonLike`.
+
 ```js
-it('get users', async () => {
-  await pactum.spec()
-    .get('/api/users')
-    .expectJsonLike('$V.length === 10'); // api should return an array with length 10
-    .expectJsonLike([
-      {
-        id: 'typeof $V === "string"',
-        name: 'jon',
-        age: '$V > 30' // age should be greater than 30 
-      }
-    ]);
-});
+await pactum.spec()
+  .get('/api/users')
+  .expectJsonLike('$V.length === 10'); // api should return an array with length 10
+  .expectJsonLike([
+    {
+      id: 'typeof $V === "string"',
+      name: 'jon',
+      age: '$V > 30' // age should be greater than 30 
+    }
+  ]);
 ```
 
 You are also allowed to change the default value `$V` to some other string based on your usage. *Be cautious that all the strings containing the new value will be treated as assert expressions and pactum will try to evaluate it as a javascript code*.
@@ -330,16 +482,14 @@ You are also allowed to change the default value `$V` to some other string based
 ```js
 pactum.settings.setAssertExpressionStrategy({ includes: '$' });
 
-it('get users', async () => {
-  await pactum.spec()
-    .get('/api/users')
-    .expectJsonLike([
-      {
-        name: 'jon',
-        age: '$ > 30' // age should be greater than 30 
-      }
-    ]);
-});
+await pactum.spec()
+  .get('/api/users')
+  .expectJsonLike([
+    {
+      name: 'jon',
+      age: '$ > 30' // age should be greater than 30 
+    }
+  ]);
 ```
 
 ### Assert Handlers
@@ -349,7 +499,9 @@ Assert Handlers helps us to reuse the custom JavaScript assertion code on a JSON
  * Handler name will be prefixed with `#`.
  * Handler function should return a *boolean*.
 
-!> String starting with **#** will be automatically treated as a Assert Handler. 
+!> String starting with **#** will be automatically treated as a Assert Handler.
+
+!> Assert Handlers can be only used in `expectJsonLike`.
 
 Handlers is a powerful concept in pactum that helps to reuse different things. To add a assert handler use `handler.addAssertHandler` function.
 
@@ -361,16 +513,14 @@ pactum.handler.addAssertHandler('number', (ctx) => {
   return typeof ctx.data === 'number';
 });
 
-it('get users', async () => {
-  await pactum.spec()
-    .get('/api/users')
-    .expectJsonLike([
-      {
-        id: '#number',
-        name: 'jon'
-      }
-    ]);
-});
+await pactum.spec()
+  .get('/api/users')
+  .expectJsonLike([
+    {
+      id: '#number',
+      name: 'jon'
+    }
+  ]);
 ```
 
 Custom arguments can be passed to the handler function by using comma separated values after `:`.
@@ -380,16 +530,14 @@ pactum.handler.addAssertHandler('type', (ctx) => {
   return typeof ctx.data === ctx.args[0];
 });
 
-it('get users', async () => {
-  await pactum.spec()
-    .get('/api/users')
-    .expectJsonLike([
-      {
-        id: '#type:number',
-        name: 'jon'
-      }
-    ]);
-});
+await pactum.spec()
+  .get('/api/users')
+  .expectJsonLike([
+    {
+      id: '#type:number',
+      name: 'jon'
+    }
+  ]);
 ```
 
 You are also allowed to change the default value `#` to some other string based on your usage. *Be cautious that all the strings starting with the new value will be treated as assert handlers*.
@@ -397,43 +545,14 @@ You are also allowed to change the default value `#` to some other string based 
 ```js
 pactum.settings.setAssertHandlerStrategy({ starts: '##' });
 
-it('get users', async () => {
-  await pactum.spec()
-    .get('/api/users')
-    .expectJsonLike([
-      {
-        id: '##handlerName:arg1,arg2',
-        name: 'jon'
-      }
-    ]);
-});
-```
-
-## expectJsonLikeAt
-
-Allows validation of specific part in a JSON. See [json-query](https://www.npmjs.com/package/json-query) for more usage details.
-
-* Performs partial deep equal.
-* Allows Regular Expressions.
-* Allows Assert Expressions.
-* Allows Assert Handlers.
-* Order of items in an array doesn't matter.
-
-```js
-it('get people', async () => {
-  await pactum.spec()
-    .get('https://some-api/people')
-    .expectStatus(200)
-    .expectJson({
-      people: [
-        { name: 'Matt', country: 'NZ' },
-        { name: 'Pete', country: 'AU' },
-        { name: 'Mike', country: 'NZ' }
-      ]
-    })
-    .expectJsonAt('people[*].name', ['Matt', 'Pete', 'Mike']);
-    .expectJsonLikeAt('people[*].name', ['Mike', 'Matt']);
-});
+await pactum.spec()
+  .get('/api/users')
+  .expectJsonLike([
+    {
+      id: '##handlerName:arg1,arg2',
+      name: 'jon'
+    }
+  ]);
 ```
 
 ## expectJsonSchema
@@ -441,48 +560,42 @@ it('get people', async () => {
 Allows validation of the schema of a JSON. See [json-schema](https://json-schema.org/learn/) for more usage details.
 
 ```js
-it('get people', async () => {
-  await pactum.spec()
-    .get('https://some-api/people')
-    .expectStatus(200)
-    .expectJson({
-      people: [
-        { name: 'Matt', country: 'NZ' },
-        { name: 'Pete', country: 'AU' },
-        { name: 'Mike', country: 'NZ' }
-      ]
-    })
-    .expectJsonSchema({
-      "type": "object",
-      "properties": {
-        "people": {
-          "type": "array"
-        }
+await pactum.spec()
+  .get('https://some-api/people')
+  .expectStatus(200)
+  .expectJson({
+    people: [
+      { name: 'Matt', country: 'NZ' },
+      { name: 'Pete', country: 'AU' },
+      { name: 'Mike', country: 'NZ' }
+    ]
+  })
+  .expectJsonSchema({
+    "type": "object",
+    "properties": {
+      "people": {
+        "type": "array"
       }
-    });
-});
+    }
+  });
 ```
 
-## expectJsonSchemaAt
-
-Allows validation of the schema of a JSON at a specific place. See [json-schema](https://json-schema.org/learn/) for more usage details.
+`expectJsonSchema('path', value)` - Allows validation of the schema of a JSON at a specific place. See [json-schema](https://json-schema.org/learn/) for more usage details.
 
 ```js
-it('get people', async () => {
-  await pactum.spec()
-    .get('https://some-api/people')
-    .expectStatus(200)
-    .expectJson({
-      people: [
-        { name: 'Matt', country: 'NZ' },
-        { name: 'Pete', country: 'AU' },
-        { name: 'Mike', country: 'NZ' }
-      ]
-    })
-    .expectJsonSchemaAt('people', {
-      "type": "array"
-    });
-});
+await pactum.spec()
+  .get('https://some-api/people')
+  .expectStatus(200)
+  .expectJson({
+    people: [
+      { name: 'Matt', country: 'NZ' },
+      { name: 'Pete', country: 'AU' },
+      { name: 'Mike', country: 'NZ' }
+    ]
+  })
+  .expectJsonSchema('people', {
+    "type": "array"
+  });
 ```
 
 ## expectJsonMatch
@@ -492,33 +605,27 @@ Allows validation of JSON with a set of matchers. See [Matching](matching) for m
 ```js
 const { like } = require('pactum-matchers');
 
-it('get people', async () => {
-  await pactum.spec()
-    .get('https://some-api/people')
-    .expectStatus(200)
-    .expectJsonMatch({
-      id: like(1),
-      name: 'jon'
-    });
-});
+await pactum.spec()
+  .get('https://some-api/people')
+  .expectStatus(200)
+  .expectJsonMatch({
+    id: like(1),
+    name: 'jon'
+  });
 ```
 
-## expectJsonMatchAt
-
-Allows validation of specific part in a JSON with a set of matchers. See [Matching](matching) for more usage details. See [json-query](https://www.npmjs.com/package/json-query) for more usage details.
+`expectJsonMatch('path', value)` - Allows validation of specific part in a JSON with a set of matchers. See [Matching](matching) for more usage details. See [json-query](https://www.npmjs.com/package/json-query) for more usage details.
 
 ```js
 const { like } = require('pactum-matchers');
 
-it('get people', async () => {
-  await pactum.spec()
-    .get('https://some-api/people')
-    .expectStatus(200)
-    .expectJsonMatchAt('people[0]', {
-      id: like(1),
-      name: 'jon'
-    });
-});
+await pactum.spec()
+  .get('https://some-api/people')
+  .expectStatus(200)
+  .expectJsonMatch('people[0]', {
+    id: like(1),
+    name: 'jon'
+  });
 ```
 
 ## expectJsonSnapshot
@@ -534,13 +641,11 @@ A snapshot needs a name & it can be defined through `pactum.spec().name("<some n
 !> It is mandatory to commit the snapshot files to the version control system. 
 
 ```js
-it('get people', async () => {
-  const response = await pactum.spec()
-    .name('GET_People')
-    .get('https://some-api/people')
-    .expectStatus(200)
-    .expectJsonSnapshot();
-});
+await pactum.spec()
+  .name('GET_People')
+  .get('https://some-api/people')
+  .expectStatus(200)
+  .expectJsonSnapshot();
 ```
 
 There are high chances that our server will return response containing dynamic data like `ids` or `dates`. Not to fail the snapshot at every run, pactum provides matchers for any property in the JSON. See [Matching](matching) for more usage details.
@@ -548,16 +653,14 @@ There are high chances that our server will return response containing dynamic d
 ```js
 const { like } = require('pactum-matchers');
 
-it('get user mark', async () => {
-  const response = await pactum.spec()
-    .name('GET_User_Mark')
-    .get('https://some-api/user/{username}')
-    .withPathParams('username', 'Mark')
-    .expectStatus(200)
-    .expectJsonSnapshot({
-      id: like(123)
-    });
-});
+await pactum.spec()
+  .name('GET_User_Mark')
+  .get('https://some-api/user/{username}')
+  .withPathParams('username', 'Mark')
+  .expectStatus(200)
+  .expectJsonSnapshot({
+    id: like(123)
+  });
 ```
 
 When there is an intentional change in the API response, our snapshot test fails because the snapshot for our updated API no longer matches the snapshot artifact for this test case. To resolve this, we will need to update our snapshot artifacts. Use `updateSnapshot` method in the test case & run the test to update the snapshot.
@@ -567,17 +670,15 @@ When there is an intentional change in the API response, our snapshot test fails
 ```js
 const { like } = require('pactum-matchers');
 
-it('get user mark', async () => {
-  await pactum.spec()
-    .name('GET_User_Mark')
-    .get('https://some-api/user/{username}')
-    .withPathParams('username', 'Mark')
-    .expectStatus(200)
-    .expectJsonSnapshot({
-      id: like(123)
-    })
-    .updateSnapshot();
-});
+await pactum.spec()
+  .name('GET_User_Mark')
+  .get('https://some-api/user/{username}')
+  .withPathParams('username', 'Mark')
+  .expectStatus(200)
+  .expectJsonSnapshot({
+    id: like(123)
+  })
+  .updateSnapshot();
 ```
 
 To change file location of snapshots, use `settings.setSnapshotDirectoryPath` method.

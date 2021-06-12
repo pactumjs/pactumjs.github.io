@@ -5,13 +5,13 @@ API Testing in general can improve the efficiency of our testing strategy, helpi
 ```plantuml
 @startuml
 
-Tests -> "API Server": Send Request 
-"API Server" -> Tests: Validate Response
+"API Tests" -> "API Server": Send a HTTP Request 
+"API Server" -> "API Tests": Validate the Server Response
 
 @enduml
 ```
 
-> **pactum** is packed with a rich set of features to make a request & validate the server response.
+> **pactum** is packed with a rich set of features for making HTTP requests & validating the server responses.
 
 - [Request Making](request-making)
 - [Response Validation](response-validation)
@@ -22,9 +22,9 @@ Depending upon a lot of factors, API testing requires different ingredients to t
 
 !> As said earlier in the [Quick Start](quick-start) guide, **pactum** is not a test runner. It needs to be used alongside a test runner like **mocha**, **jest**, **jasmine** or **cucumber**.
 
-We can integrate **pactum** with any of the test runners that support *promises* like [mocha](https://www.npmjs.com/package/mocha), [jest](https://www.npmjs.com/package/jest), [jasmine](https://www.npmjs.com/package/jasmine), [ava](https://www.npmjs.com/package/ava), [uvu](https://www.npmjs.com/package/uvu), [tap](https://www.npmjs.com/package/tap) or [cucumber](https://www.npmjs.com/package/@cucumber). Or build your own if your heart desires, **pactum** should work out of the box.
+We can integrate **pactum** with any of the test runners that support *promises* like [mocha](https://www.npmjs.com/package/mocha), [jest](https://www.npmjs.com/package/jest), [jasmine](https://www.npmjs.com/package/jasmine), [ava](https://www.npmjs.com/package/ava), [uvu](https://www.npmjs.com/package/uvu), [tap](https://www.npmjs.com/package/tap) or [cucumber](https://www.npmjs.com/package/@cucumber). Or build your own if your heart desires, pactum should work out of the box.
 
-The whole documentation will be using **mocha** as the test runner. **Cucumber** is a popular choice among organizations, see [pactum-cucumber-boilerplate](https://github.com/pactumjs/pactum-cucumber-boilerplate) for a working example.
+Most of the documentation here will be using **mocha** as the test runner. **Cucumber** is a popular choice among organizations, see [pactum-cucumber-boilerplate](https://github.com/pactumjs/pactum-cucumber-boilerplate) for a working example.
   
 > Before starting with **pactum**, get familiar with any of the above test runners. It will help us to write more readable & maintainable tests. 
 
@@ -73,16 +73,18 @@ it('should have a user with name bolt', async () => {
 When you want to make your tests much more clearer, you can break your spec into multiple steps. This will come into handy when integrating **pactum** with **cucumber**. See [pactum-cucumber-boilerplate](https://github.com/pactumjs/pactum-cucumber-boilerplate) for more details on pactum & cucumber integration.
 
 
-Use `pactum.spec()` to get an instance of the spec. With **spec** you can build your request & expectations in multiple steps.
+Use `pactum.spec()` to get an instance of the spec. With **spec instance** you can build your request & expectations in multiple steps.
 
-Once the request is built, perform the request by calling `.toss()` method and wait for the promise to resolve.
+Once the request is built, perform the request by calling the `spec.toss()` method and wait for the promise to resolve.
 
-**Assertions should be made after the request is performed & resolved**.
+!> Assertions methods can be used before calling the `spec.toss()` method. In that particular case, if the actual response deviates from the expected response, then the test will fail at the step where  `spec.toss()` method is invoked.
 
-Assertions should be made by either using 
+**Ideally assertions should be made after the request is performed & resolved**.
 
-- `pactum.expect` - Doesn't keep a track of the test case status. *(Not Recommended)*
+Assertions can be made by either using 
+
 - `spec.response()` - prints request & response in terminal if the test case fails & keeps a track of the test case status. *(Recommended)*
+- `pactum.expect()` - Doesn't keep a track of the test case status. *(Not Recommended)*
 
 Reporting with this testing style differs. Learn more about it at [reporting](reporting)
 
@@ -121,12 +123,10 @@ Then('response should have a status {int}', async function (code) {
 
 ```js
 const pactum = require('pactum');
-const expect = pactum.expect;
 
 describe('should have a user with name bolt', () => {
 
   let spec = pactum.spec();
-  let response;
 
   it('given a user is requested', () => {
     spec.get('http://localhost:9393/api/users');
@@ -137,11 +137,11 @@ describe('should have a user with name bolt', () => {
   });
 
   it('should return a response', async () => {
-    response = await spec.toss();
+    await spec.toss();
   });
 
   it('should return a status 200', () => {
-    expect(response).to.have.status(200);
+    spec.response().to.have.status(200);
   });
 
   it('should return a valid user', async () => {
@@ -149,7 +149,7 @@ describe('should have a user with name bolt', () => {
   });
 
   it('should return a valid user schema', async () => {
-    expect(response).to.have.jsonSchema({ type: 'object'});
+    spec.response().to.have.jsonSchema({ type: 'object'});
   });
 
   it('should return response within 100 milliseconds', async () => {

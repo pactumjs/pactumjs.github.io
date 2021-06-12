@@ -4,17 +4,17 @@ In general, the first step in API testing is to make a request to the server. Th
 
 - `pactum.spec()` - General API Testing
 - `pactum.flow()` - Component & Contract API Testing
-- `pactum.fuzz()` - Fuzz Testing
-- `pactum.e2e()` - e2e Testing
+- `pactum.fuzz()` - Fuzz API Testing
+- `pactum.e2e()` - E2E API Testing
 
-`pactum.spec()` forms the base for all the above methods. So we will learn about `spec` method first and later about the rest of them.
+?> `pactum.spec()` forms the base for all the above methods. So we will learn about `spec` method first and later about the rest of them.
 
 ```plantuml
 @startuml
 
-Tests -> "API Server": GET /api/users
-Tests -> "API Server": POST /api/users { "name": "snow" } 
-Tests -> "API Server": DELETE /api/users/1
+"API Tests" -> "API Server": GET /api/users
+"API Tests" -> "API Server": POST /api/users { "name": "snow" } 
+"API Tests" -> "API Server": DELETE /api/users/1
 
 @enduml
 ```
@@ -112,7 +112,7 @@ await pactum.spec().patch('http://domain.com/user');
 await pactum.spec().delete('http://domain.com/user');
 ```
 
-In general, we set the base url to a constant value during API Testing. See [Request Settings](request-making?id=request-settings) to learn more about default configuration.
+In general, we set the base url to a constant value and just mention the HTTP path in test cases. See [Request Settings](request-making?id=request-settings) to learn more about default configuration.
 
 <!-- tabs:start -->
 

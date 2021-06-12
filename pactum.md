@@ -6,8 +6,8 @@
 
 ![----------](https://raw.githubusercontent.com/pactumjs/pactum/master/assets/rainbow.png)
 
-<h3>REST API Testing Tool for all levels in a Test Pyramid</h3>
-<h5> E2E - Integration - Contract - Component </h5>
+<h4>REST API Testing Tool for all levels in a Test Pyramid</h4>
+<p><strong>E2E - Integration - Contract - Component</strong></p>
 
 ![Build](https://github.com/pactumjs/pactum/workflows/Build/badge.svg?branch=master)
 ![Coverage](https://img.shields.io/codeclimate/coverage/ASaiAnudeep/pactum)
@@ -21,6 +21,10 @@
 ![Demo](_media/demo.gif)
 
 </span>
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
 
 ## Tutorials
 
@@ -38,9 +42,27 @@
 - [Matching](matching) - *Request & Response Matchers*
 - [Reporting](reporting) - *JSON, InfluxDB, Swagger*
 
+<!-- div:right-panel -->
+
+## API
+- [Expect](api-expect.md)
+- [Handlers](api-handlers.md)
+- [Mock](api-mock.md)
+- [Reporter](api-reporter.md)
+- [Request](api-request.md)
+- [Response](api-response.md)
+- [Settings](api-settings.md)
+- [Stash](api-stash.md)
+
+<!-- panels:end -->
+
+<!-- panels:start -->
+
 ## Usage
 
 **PactumJS** can be used for API automation tests across all levels in a test pyramid. It can also act as an standalone **mock server** to generate contracts for contract testing.
+
+<!-- div:left-panel -->
 
 ### API Testing
 
@@ -61,7 +83,7 @@ it('should be a teapot', async () => {
 
 it('should save a new user', async () => {
   await pactum.spec()
-    .post('https://jsonplaceholder.typicode.com/users')
+    .post('/api/users')
     .withHeaders('Authorization', 'Basic xxxx')
     .withJson({
       name: 'bolt',
@@ -104,11 +126,11 @@ Then('response should have a status {int}', async function (code) {
 
 <!-- tabs:end -->
 
+<!-- div:right-panel -->
+
 ### Mock Server
 
 **PactumJS** can act as a standalone *mock server* that allows us to mock any server via HTTP or HTTPS, such as a REST endpoint. Simply it is a simulator for HTTP-based APIs.
-
-Running **pactum** as a standalone *mock server*.
 
 ```js
 const { mock } = require('pactum');
@@ -131,6 +153,8 @@ mock.addInteraction({
 
 mock.start(3000);
 ```
+
+<!-- panels:end -->
 
 ## Need Help
 
