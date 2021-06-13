@@ -56,7 +56,7 @@ Once we publish the actual & assumed behavior to **PactumJS Flow Server**, pactu
 @enduml
 ```
 
-Flows & Interactions are published to PactumJS Flow Server using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin). Learn more about reporters [here](reporting)
+Flows & Interactions are published to PactumJS Flow Server using [pactum-flow-plugin](https://www.npmjs.com/package/pactum-flow-plugin). Learn more about reporters [here](api-reporting).
 
 ## Pactum Flow Server
 

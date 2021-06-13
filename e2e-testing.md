@@ -132,3 +132,94 @@ Post User Fails.
 - Post User ❌
 - Get User ⚠️ - *This step will be skipped as one of the previous step is failed*
 - Clean Up ✔️ - *Clean up will try to run the registered clean up specs for successful steps (0)*
+
+### Advanced Test
+
+- Create a new user with help of spec handlers.
+- Validate the newly created user with the dynamic id.
+- Delete the user with the dynamic id at the end.
+
+<!-- tabs:start -->
+
+#### **spec.handlers.js**
+
+```js
+const { addSpecHandler } = require('pactum').handler;
+
+addSpecHandler('AddUser', (ctx) => {
+  const { spec } = ctx;
+
+  // request makers
+  spec.post('/api/users');
+  spec.withJson({ "name": "jon" })
+
+  // response validations
+  spec.expectStatus(200);
+  spec.expectJsonSchema({ type: 'object' });
+
+  // data management
+  spec.stores('UserID', 'id');
+});
+
+addSpecHandler('DeleteUser', (ctx) => {
+  const { spec } = ctx;
+
+  // request makers
+  spec.delete('/api/users/{id}');
+  spec.withPathParams('id', '$S{UserID}');
+
+  // response validations
+  spec.expectStatus(200);
+});
+```
+
+#### ** base.test.js **
+
+```js
+const { request } = require('pactum');
+
+// load handlers
+require('./spec.handlers');
+
+// global hook
+before(() => {
+  request.setBaseUrl('http://localhost:3000');
+});
+```
+
+#### ** users.test.js **
+
+```js
+const pactum = require('pactum');
+
+describe('AddUser_ReadUser', () => {
+
+  let e2e = pactum.e2e('Add User');
+
+  it('create user', async () => {
+    await e2e.step('Post User')
+      .spec('AddUser')
+      .clean('DeleteUser');
+  });
+
+  it('get user', async () => {
+    await e2e.step('Get User')
+      .spec()
+      .get('/api/users/{id}')
+      .withPathParams('id', '$S{UserID}')
+      .expectStatus(200)
+      .expectJson({
+        "id": "$S{UserID}",
+        "name": "snow"
+      });
+  });
+
+  it('clean up', async () => {
+    // runs all registered cleanup methods in LIFO order
+    await e2e.cleanup();
+  });
+
+});
+```
+
+<!-- tabs:end -->

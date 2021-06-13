@@ -40,19 +40,19 @@
 - [Contract Testing](contract-testing) - *Compatibility b/w consumers & providers*
 - [Data Management](data-management) - *Data Templates, Maps, Functions & Stores*
 - [Matching](matching) - *Request & Response Matchers*
-- [Reporting](reporting) - *JSON, InfluxDB, Swagger*
 
 <!-- div:right-panel -->
 
 ## API
-- [Expect](api-expect.md)
+
+- [Settings](api-settings.md)
 - [Handlers](api-handlers.md)
-- [Mock](api-mock.md)
 - [Reporter](api-reporter.md)
+- [Mock](api-mock.md)
 - [Request](api-request.md)
 - [Response](api-response.md)
-- [Settings](api-settings.md)
 - [Stash](api-stash.md)
+- [Expect](api-expect.md)
 
 <!-- panels:end -->
 

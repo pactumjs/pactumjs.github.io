@@ -10,15 +10,14 @@
   - [Contract Testing](contract-testing.md)
   - [Data Management](data-management.md)
   - [Matching](matching.md)
-  - [Reporting](reporting.md)
   - [Fuzz Testing](fuzz-testing.md)
 
 - **API**
-  - [Expect](api-expect.md)
+  - [Settings](api-settings.md)
   - [Handlers](api-handlers.md)
-  - [Mock](api-mock.md)
   - [Reporter](api-reporter.md)
+  - [Mock](api-mock.md)
   - [Request](api-request.md)
   - [Response](api-response.md)
-  - [Settings](api-settings.md)
   - [Stash](api-stash.md)
+  - [Expect](api-expect.md)

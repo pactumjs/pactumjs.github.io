@@ -86,7 +86,7 @@ Assertions can be made by either using
 - `spec.response()` - prints request & response in terminal if the test case fails & keeps a track of the test case status. *(Recommended)*
 - `pactum.expect()` - Doesn't keep a track of the test case status. *(Not Recommended)*
 
-Reporting with this testing style differs. Learn more about it at [reporting](reporting)
+Reporting with this testing style differs. Learn more about it at [reporting](api-reporting)
 
 **Example - Cucumber**
 
