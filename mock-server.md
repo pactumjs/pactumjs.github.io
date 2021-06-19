@@ -729,7 +729,7 @@ const interaction = {
 ## Remote API
 
 Pactum allows us to add or remove interactions dynamically through the REST API.
-Once the server is started, interact with the following API to control the mock server.
+Once the server is started, interact with the following APIs to control the mock server.
 
 ```js
 const mock = require('pactum').mock;
@@ -832,9 +832,7 @@ curl --location --request DELETE 'http://localhost:9393/api/pactum/interactions'
 Interaction Handler allows us to dynamically enable & reuse interactions in the mock server. Let's say you have a mock server running on port 3000 with one interaction handler.
 
 ```js
-const pactum = require('pactum');
-const mock = pactum.mock;
-const handler = pactum.handler;
+const { mock, handler } = require('pactum');
 
 handler.addInteractionHandler('get user with', (ctx) => {
   const user = db.getUser(ctx.data.id);
@@ -865,6 +863,31 @@ Response - returns the interaction id.
 
 ```JSON
 [ "x121w" ]
+```
+
+### State
+
+State handlers helps us to run specific asynchronous code that puts our application in a specific state.
+
+```js
+const { mock, handler } = require('pactum');
+
+handler.addStateHandler('some state name', async (ctx) => {
+  const { data } = ctx;
+  // code to add data in database - redis.set()
+  // or code to add mock interactions - mock.addInteraction()
+  // or custom code
+});
+
+mock.start(3000);
+```
+
+Run the state handler using
+
+```Shell
+curl --location --request POST 'http://localhost:9393/api/pactum/state' \
+--header 'Content-Type: application/json' \
+--data-raw '[ { "name": "some state name", "data": { "id": "some-random-id" } } ]'
 ```
 
 ## Next
