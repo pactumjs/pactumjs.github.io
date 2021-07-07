@@ -238,7 +238,7 @@ before(() => {
   {
     "FirstName": "Jon",
     "LastName": "Snow",
-    "FullName": "Jon Snow"
+    "FullName": "Jon Snow",
     "Age": 26,
     "Gender": "male",
     "House": "Castle Black"
