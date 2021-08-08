@@ -8,6 +8,9 @@ Customize PactumJS behavior.
 | ----------------------------  | ------------------------------------  |
 | `setLogLevel`                 | set log level                         |
 | `setLogger`                   | set custom logger                     |
+| `setJsonLikeAdapter`          | set custom json like validator        |
+| `setJsonMatchAdapter`         | set custom json match validator       |
+| `setJsonSchemaAdapter`        | set custom json schema validato       |
 | `setAssertHandlerStrategy`    | set custom assert handler strategy    |
 | `setAssertExpressionStrategy` | set custom assert expression strategy |
 | `setCaptureHandlerStrategy`   | set custom capture handler strategy   |

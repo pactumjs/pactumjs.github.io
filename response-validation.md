@@ -557,7 +557,7 @@ await pactum.spec()
 
 ## expectJsonSchema
 
-Allows validation of the schema of a JSON. See [json-schema](https://json-schema.org/learn/) for more usage details.
+Allows validation of the schema of a JSON. See [json-schema](https://json-schema.org/learn/) for more usage details. Pactum internally uses [@exodus/schemasafe](https://www.npmjs.com/package/@exodus/schemasafe) to valaidate the JSON schema.
 
 ```js
 await pactum.spec()
@@ -596,6 +596,29 @@ await pactum.spec()
   .expectJsonSchema('people', {
     "type": "array"
   });
+```
+
+Custom options can also be passed for enhancing the validation process. See [@exodus/schemasafe](https://www.npmjs.com/package/@exodus/schemasafe) for more usage details.
+
+```js
+await pactum.spec()
+  .get('api/get')
+  .expectJsonSchema(
+    {
+      type: 'object',
+      properties: {
+        method: {
+          type: 'string',
+          format: 'only-get'
+        }
+      }
+    },
+    {
+      formats: {
+        'only-get': /^GET$/
+      }
+    }
+  );
 ```
 
 ## expectJsonMatch
