@@ -21,7 +21,7 @@ Install **pactum** via `npm`.
 
 ```shell
 # install pactum
-npm install pactum
+npm install --save-dev pactum
 ```
 
 #### ** New Project **
@@ -91,7 +91,7 @@ mocha test.js
 
 ```shell
 # install a test runner
-npm install @cucumber/cucumber -g
+npm install @cucumber/cucumber
 ```
 
 Create a feature file & copy the below code.
@@ -108,7 +108,7 @@ Create a JS file & copy the below code.
 ```js
 // steps.js
 const pactum = require('pactum');
-const { Given, When, Then, Before } = require('cucumber');
+const { Given, When, Then, Before } = require('@cucumber/cucumber');
 
 let spec = pactum.spec();
 
