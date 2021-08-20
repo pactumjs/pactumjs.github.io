@@ -64,7 +64,10 @@ Install a test runner that supports *promises*.
 
 ```shell
 # install a test runner
-npm install mocha -g
+npm install --save-dev mocha
+
+# or globally
+npm install -g mocha
 ```
 
 Create a JS file & copy the below code.
@@ -85,13 +88,20 @@ Running the test.
 ```shell
 # mocha is a test framework to execute test cases
 mocha test.js
+
+# or if installed as a dev dependency
+# update 'test' script in package.json to include 'mocha test.js' as value
+npm run test
 ```
 
 #### **Cucumber**
 
 ```shell
-# install a test runner
-npm install @cucumber/cucumber
+# install a test runner 
+npm install --save-dev @cucumber/cucumber
+
+# or globally
+npm install -g @cucumber/cucumber
 ```
 
 Create a feature file & copy the below code.
@@ -130,7 +140,12 @@ Then('response should have a status {int}', async function (code) {
 Running the test.
 
 ```shell
+# if installed globally
 cucumber-js
+
+# or if installed as a dev dependency
+# update 'test' script in package.json to include 'cucumber-js' as value
+npm run test
 ```
 
 <!-- tabs:end -->
