@@ -15,3 +15,4 @@ npm i docsify-cli -g
 ```sh
 docsify serve .
 ```
+Documentation will be served at http://localhost:3000
