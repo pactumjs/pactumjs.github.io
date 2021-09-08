@@ -14,24 +14,25 @@ Once a request is made, the server will send a response back. Validating the res
 
 Received response is validated through expectation methods. This library provides a rich set of methods to assert the response.
 
-| Method (Chaining)         | Method (Breaking)       | Description                                 |
-| ------------------------  | ----------------------- | ------------------------------------------- |
-| `expect`                  | `_`                     | runs custom expect handler                  |
-| `expectStatus`            | `status`                | check HTTP status                           |
-| `expectHeader`            | `header`                | check HTTP header key + value               |
-| `expectHeaderContains`    | `headerContains`        | check HTTP header key + partial value       |
-| `expectCookies`           | `cookies`               | check exact match of cookies                |
-| `expectCookiesLike`       | `cookiesLike`           | check partial match of cookies              |
-| `expectBody`              | `body`                  | check exact match of body                   |
-| `expectBodyContains`      | `bodyContains`          | check body contains the value               |
-| `expectJson`              | `json`                  | check exact match of json                   |
-| `expectJsonLike`          | `jsonLike`              | check loose match of json                   |
-| `expectJsonSchema`        | `jsonSchema`            | check json schema                           |
-| `expectJsonMatch`         | `jsonMatch`             | check json to match                         |
-| `expectJsonMatchStrict`   | `jsonMatchStrict`       | check json to strictly match                |
-| `expectJsonSnapshot`      | -                       | check json to match with a snapshot         |
-| `expectResponseTime`      | `responseTimeLessThan`  | check response time                         |
-| `expectError`             | `error`                 | check network errors                        |
+| Method (Chaining)                                 | Method (Breaking)      | Description                           |
+| ------------------------------------------------- | ---------------------- | ------------------------------------- |
+| [`expect`               ](#custom-validations)    | `_`                    | runs custom expect handler            |
+| [`expectStatus`         ](#expectations)          | `status`               | check HTTP status                     |
+| [`expectHeader`         ](#expectations)          | `header`               | check HTTP header key + value         |
+| [`expectHeaderContains` ](#expectations)          | `headerContains`       | check HTTP header key + partial value |
+| [`expectCookies`        ](#expectCookies)         | `cookies`              | check exact match of cookies          |
+| [`expectCookiesLike`    ](#expectCookiesLike)     | `cookiesLike`          | check partial match of cookies        |
+| [`expectBody`           ](#expectBody)            | `body`                 | check exact match of body             |
+| [`expectBodyContains`   ](#expectBodyContains)    | `bodyContains`         | check body contains the value         |
+| [`expectJson`           ](#expectJson)            | `json`                 | check exact match of json             |
+| [`expectJsonLike`       ](#expectJsonLike)        | `jsonLike`             | check loose match of json             |
+| [`expectJsonSchema`     ](#expectJsonSchema)      | `jsonSchema`           | check json schema                     |
+| [`expectJsonMatch`      ](#expectJsonMatch)       | `jsonMatch`            | check json to match                   |
+| [`expectJsonMatchStrict`](#expectJsonMatchStrict) | `jsonMatchStrict`      | check json to strictly match          |
+| [`expectJsonLength`     ](#expectJsonLength)      | `jsonLength`           | check length of arrays in json        |
+| [`expectJsonSnapshot`   ](#expectJsonSnapshot)    | -                      | check json to match with a snapshot   |
+| [`expectResponseTime`   ](#expectResponseTime)    | `responseTimeLessThan` | check response time                   |
+| [`expectError`          ](#expectError)           | `error`                | check network errors                  |
 
 # Expectations Style
 
@@ -649,6 +650,27 @@ await pactum.spec()
     id: like(1),
     name: 'jon'
   });
+```
+
+## expectJsonLength
+
+Allows validation of JSON length if it is an array.
+
+```js
+await pactum.spec()
+  .get('https://some-api/users')
+  .withQueryParams('limit', 10)
+  .expectStatus(200)
+  .expectJsonLength(10);
+```
+
+`expectJsonLength('path', value)` - Allows validation of length of an array at a specific part in a JSON.
+
+```js
+await pactum.spec()
+  .get('https://some-api/users/1')
+  .expectStatus(200)
+  .expectJsonLength('address', 2);
 ```
 
 ## expectJsonSnapshot

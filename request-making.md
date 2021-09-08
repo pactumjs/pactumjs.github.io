@@ -185,6 +185,17 @@ await pactum.spec()
 //  The above would result in a url like - https://randomuser.me/api?gender=male&country=IND&age=17
 ```
 
+Passing an array of values would result in comma separated values.
+
+```js
+await pactum.spec()
+  .get('https://some.me/api/users')
+  .withQueryParams('id', [1, 2, 3])
+  .expectStatus(200);
+
+//  The above would result in a url like - https://some.me/api/users?id=1,2,3
+```
+
 ## Headers
 
 Use `withHeaders` to pass headers to the request. We can either pass key-value pair or object as an argument.

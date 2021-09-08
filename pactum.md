@@ -15,8 +15,8 @@
 ![Size](https://img.shields.io/bundlephobia/minzip/pactum)
 ![Platform](https://img.shields.io/node/v/pactum)
 
-![Stars](https://img.shields.io/github/stars/pactumjs/pactum?style=social)
-![Twitter](https://img.shields.io/twitter/follow/pactumjs?label=Follow&style=social)
+[![Stars](https://img.shields.io/github/stars/pactumjs/pactum?style=social)](https://github.com/pactumjs/pactum/stargazers)
+[![Twitter](https://img.shields.io/twitter/follow/pactumjs?label=Follow&style=social)](https://twitter.com/pactumjs)
 
 ![Demo](_media/demo.gif)
 
@@ -162,7 +162,7 @@ We use Github [Discussions](https://github.com/pactumjs/pactum/discussions) to r
 
 ## Support
 
-Like this project! Star it on [Github](https://github.com/pactumjs/pactum/stargazers). Your support means a lot to us.
+Like this project! Star it on [Github](https://github.com/pactumjs/pactum/stargazers) and follow on [Twitter](https://twitter.com/pactumjs). Your support means a lot to us.
 
 ## Under Development
 
