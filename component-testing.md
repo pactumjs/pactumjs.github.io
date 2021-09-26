@@ -424,6 +424,52 @@ it('some background process', async () => {
 });
 ```
 
+#### Background Interactions
+
+For Non-CRUD endpoints, your service could be taking to other dependent services after replying with a response. This behavior is mostly seen in asynchronous tasks. For such test cases, add a background interaction and invoke the `wait` method.
+
+By default when a background interaction is present, pactum will wait for `1000` milliseconds with a polling interval of `100` milliseconds to check the background interactions are exercised or not.
+
+Imagine it as an Explicit Wait in Selenium.
+
+```js
+it('some background process', async () => {
+  await pactum.spec()
+    .useInteraction({
+      background: true,
+      request: {
+        method: 'GET',
+        path: '/api/products'
+      },
+      response: {
+        status: 200,
+        body: []
+      }
+    })
+    .post('/api/process')
+    .expectStatus(202)
+    .wait();
+});
+```
+
+We are allowed to override the default behavior.
+
+```js
+it('some background process', async () => {
+  await pactum.spec()
+    .useInteraction('some background interaction')
+    .post('/api/process')
+    .expectStatus(202)
+    .wait(2000, 500); // wait for 2000 ms with a polling interval of 500 ms
+});
+```
+
+#### Wait Handlers
+
+Wait handlers are custom functions that helps us to wait for background tasks to complete before moving to the next test case or API call.
+
+Check more information [here](https://pactumjs.github.io/#/api-handlers?id=addwaithandler)
+
 ## Using Remote Mock Server
 
 For some reasons, you want the mock server to be independent of component tests & you still want the ability to control it remotely while running your api tests. This can be achieved through `mock.useRemoteServer` function. While using remote server, all the existing functions will return promises.

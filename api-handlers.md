@@ -14,6 +14,7 @@ Handlers is a powerful concept that allows us to reuse & customize different thi
 | Retry       | `addRetryHandler`         |
 | Capture     | `addCaptureHandler`       |
 | State       | `addStateHandler`         |
+| Wait        | `addWaitHandler`         |
 
 
 ## API
@@ -378,3 +379,64 @@ mock.addInteraction('get product out of stock');
 
 mock.start(3000);
 ```
+
+### addWaitHandler
+
+Wait handlers helps us to wait for background tasks to complete before moving to the next test case or API call.
+
+The function accepts two arguments
+
+- **handler name** - name of the handler
+- **callback function** - receives a context object containing `req`, `res`, optional custom `data` and optional `rootData` (*spec handler data*)  properties. This call back function can return a *promise*.
+
+<!-- tabs:start -->
+
+#### ** wait.handlers.js **
+
+```js
+const pactum = require('pactum');
+const { addWaitHandler } = pactum.handler;
+
+addWaitHandler('WaitForJob', async (ctx) => {
+  const { res } = ctx; // 'res' will be the response of the invoking spec
+
+  await pactum.spec()
+    .get('/api/job/progress')
+    .withQueryPrams('id', res.json.id)
+    .expectJson({ status: 'completed' })
+    .retry(5, 100)
+
+});
+```
+
+#### ** base.test.js **
+
+```js
+const { request } = require('pactum');
+
+// load handlers
+require('./wait.handlers');
+
+// global hook
+before(() => {
+  request.setBaseUrl('http://localhost:3000');
+});
+```
+
+#### ** users.test.js **
+
+```js
+const pactum = require('pactum');
+
+it('trigger job', async () => {
+  await pactum.spec()
+    .post('/trigger/background/job')
+    .expectStatus(200)
+    .expectJsonLike({
+      id: /\w+/
+    })
+    .wait('WaitForJob');
+});
+```
+
+<!-- tabs:end -->

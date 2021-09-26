@@ -87,6 +87,7 @@ Request Matching:
 | strict                    | enable/disable strict matching              |
 | provider                  | name of the provider                        |
 | flow                      | name of the flow                            |
+| background                | is a background call                        |
 | request                   | request details                             |
 | request.method            | HTTP method                                 |
 | request.path              | api path                                    |

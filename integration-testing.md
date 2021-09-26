@@ -283,7 +283,8 @@ Use `retry` to specify your retry strategy. It accepts options object as an argu
 | count     | `number`   | number of times to retry - defaults to 3   |
 | delay     | `number`   | delay between retries - defaults to 1000ms |
 | strategy  | `function` | retry strategy function - returns boolean  |
-| strategy  | `string`   | retry strategy handler name                | 
+| strategy  | `string`   | retry strategy handler name                |
+| status    | `number`   | retry for the given status code/codes      | 
 
 #### AdHoc Handler
 
