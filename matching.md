@@ -15,6 +15,13 @@ In real world applications, sometimes it is hard to match an expected request/re
   * [expression](#expression)
   * [string](#string)
   * [email](#email)
+* [Number Matchers](#number-matchers)
+  * [int](#int)
+  * [float](#float)
+  * [gt](#gt)
+  * [gte](#gte)
+  * [lt](#lt)
+  * [lte](#lte)
 
 ## Supported Matchers
 
@@ -29,6 +36,13 @@ It supports following matchers
 - `string` - checks for non empty string
 - `email` - checks for email pattern
 - `uuid` - checks for uuid pattern
+- `int` - checks for numbers without decimals
+- `float` - checks for numbers with decimals
+- `gt` - checks for greater than a given number
+- `gte` - checks for greater than or equal to a given number
+- `lt` - checks for less than a given number
+- `lte` - checks for less than or equal to a given number
+
 
 Matchers are applied on JSON
   
@@ -367,9 +381,15 @@ const exp1 = {
 }
 
 // actual === exp2 -> False
-const exp1 = {
+const exp2 = {
   name: 'Jon',
-  gender: 'Male'
+  gender: ''
+}
+
+// actual === exp3 -> False
+const exp3 = {
+  name: 'Jon',
+  gender: 1
 }
 ```
 
@@ -394,8 +414,196 @@ const exp1 = {
 }
 
 // actual === exp2 -> False
-const exp1 = {
+const exp2 = {
   name: 'Jon',
   mail: 'some'
+}
+```
+
+## Number Matchers
+
+### int
+
+Checks if actual value is an integer number.
+
+- `int` method accepts an optional interger number. Actual value should be a number without decimals.
+
+```js
+const { int } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  gender: int(23)
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  age: 30
+}
+
+// actual === exp2 -> False
+const exp2 = {
+  name: 'Jon',
+  age: 20.5
+}
+
+// actual === exp3 -> False
+const exp3 = {
+  name: 'Jon',
+  age: '30'
+}
+```
+
+### float
+
+Checks if actual value is a float number.
+
+- `int` method accepts an optional floating-point number. Actual value should be a number with decimals.
+
+```js
+const { float } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  height: float(5.7)
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  height: 5.10
+}
+
+// actual === exp2 -> False
+const exp2 = {
+  name: 'Jon',
+  height: '6.2'
+}
+
+// actual === exp3 -> False
+const exp3 = {
+  name: 'Jon',
+  height: 5
+}
+```
+
+### gt
+
+Checks if actual value is greater than a given number.
+
+- `gt` method accepts a number. Actual value should be greater than the given number.
+
+```js
+const { gt } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  height: gt(5)
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  height: 6
+}
+
+// actual === exp2 -> False
+const exp2 = {
+  name: 'Jon',
+  height: 4.7
+}
+```
+
+### gte
+
+Checks if actual value is greater than or equal to a given number.
+
+- `gte` method accepts a number. Actual value should be greater than or equal to the given number.
+
+```js
+const { gte } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  height: gte(5)
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  height: 5
+}
+
+// actual === exp2 -> True
+const exp2 = {
+  name: 'Jon',
+  height: 5.7
+}
+
+// actual === exp3 -> False
+const exp3 = {
+  name: 'Jon',
+  height: 4.7
+}
+```
+
+### lt
+
+Checks if actual value is less than a given number.
+
+- `lt` method accepts a number. Actual value should be less than the given number.
+
+```js
+const { lt } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  height: lt(5)
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  height: 4.11
+}
+
+// actual === exp2 -> False
+const exp2 = {
+  name: 'Jon',
+  height: 5.7
+}
+```
+
+### lte
+
+Checks if actual value is less than or equal to a given number.
+
+- `lte` method accepts a number. Actual value should be less than or equal to the given number.
+
+```js
+const { lte } = require('pactum-matchers');
+
+const actual = {
+  name: 'Jon'
+  height: lte(5)
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  name: 'Jon',
+  height: 4.11
+}
+
+// actual === exp2 -> True
+const exp2 = {
+  name: 'Jon',
+  height: 5
+}
+
+// actual === exp3 -> False
+const exp3 = {
+  name: 'Jon',
+  height: 5.7
 }
 ```
