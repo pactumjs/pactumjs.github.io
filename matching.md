@@ -459,7 +459,7 @@ const exp3 = {
 
 Checks if actual value is a float number.
 
-- `int` method accepts an optional floating-point number. Actual value should be a number with decimals.
+- `float` method accepts an optional floating-point number. Actual value should be a number with decimals.
 
 ```js
 const { float } = require('pactum-matchers');
