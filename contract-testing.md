@@ -60,9 +60,11 @@ Flows & Interactions are published to PactumJS Flow Server using [pactum-flow-pl
 
 ## Pactum Flow Server
 
-Before starting with contract testing, we need to set up the **pactumjs-flow-server** to save the assumed & actual behavior in a centralized location. Find official docker image of **pactumjs-flow-server** at https://hub.docker.com/r/asaianudeep/pactumjs. Follow the instructions to set it up.
+Before starting with contract testing, we need to set up the **pactumjs-flow-server** to save the assumed & actual behavior in a centralized location. Find official docker image of **pactumjs-flow-server** at https://hub.docker.com/r/pactumjs/flows. Follow the instructions to set it up.
 
 Open your browser & navigate to [http://localhost:8080](http://localhost:8080). You should be able to find the below page.
+
+By default three users are created - `admin`, `viewer` and `scanner`. Passwords are same as usernames.
 
 ![Home Page](_media/flow-server-home.png)
 

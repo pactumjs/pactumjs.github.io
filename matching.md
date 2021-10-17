@@ -270,6 +270,18 @@ const exp2 = [
 ];
 ```
 
+#### Return multiple items
+
+By default `eachLike` returns an array with length `1`. To return multiple elements use the `items` property.
+
+```js
+
+const actual = eachLike(1, { items: [ 5, 7 ]});
+
+// actual === exp1 -> True
+const exp1 = [3, 4]
+```
+
 ## Regex Matching
 
 Sometimes you will have keys in a request or response with values that are hard to know beforehand - timestamps and generated IDs are two examples.
