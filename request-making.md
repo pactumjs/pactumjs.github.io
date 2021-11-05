@@ -299,6 +299,31 @@ await pactum.spec()
   .expectStatus(201);
 ```
 
+To use an xml payload. (*update content-type headers accordingly*)
+
+```js
+await pactum.spec()
+    .post('https://reqbin.com/echo/post/xml')
+    .withBody(`
+      <?xml version="1.0" encoding="utf-8"?>
+      <Request>
+        <Login>login</Login>
+        <Password>password</Password>
+      </Request>
+    `)
+```
+
+To upload a file without multi-part. (*update content-type headers accordingly*)
+
+```js
+await pactum.spec()
+    .post('https://reqbin.com/echo/post/xml')
+    .withBody({
+      file: 'path/to/file'
+    });
+```
+
+
 ### withJson
 
 ```js
@@ -324,6 +349,8 @@ await pactum.spec()
 ## File Uploads
 
 Use `withFile` method to upload a file. Under the hood, it uses [form-data](https://www.npmjs.com/package/form-data).
+
+> From **v3.1.0**, pactum uses [form-data-lite](https://www.npmjs.com/package/form-data-lite) that has just the standard mime-types. (*this reduces the overall package size*). If you have a custom file type to be uploaded, you need to mention the content-type of the file explicitly.
 
 ### Basic File Upload
 
@@ -388,7 +415,7 @@ await pactum.spec()
 We can also directly use the form-data object.
 
 ```js
-const form = new pactum.request.FormData();
+const form = require('form-data-lite');
 form.append(/* form data */);
 
 await pactum.spec()

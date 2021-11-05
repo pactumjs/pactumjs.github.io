@@ -10,7 +10,8 @@ Customize PactumJS behavior.
 | `setLogger`                   | set custom logger                     |
 | `setJsonLikeAdapter`          | set custom json like validator        |
 | `setJsonMatchAdapter`         | set custom json match validator       |
-| `setJsonSchemaAdapter`        | set custom json schema validato       |
+| `setJsonSchemaAdapter`        | set custom json schema validator      |
+| `setFormDataAdapter`          | set custom form data                  |
 | `setAssertHandlerStrategy`    | set custom assert handler strategy    |
 | `setAssertExpressionStrategy` | set custom assert expression strategy |
 | `setCaptureHandlerStrategy`   | set custom capture handler strategy   |
@@ -151,4 +152,32 @@ Updates default request retry delay for retry mechanism. Default retry delay is 
 const { settings } = require('pactum');
 
 settings.setRequestDefaultRetryDelay(2000);
+```
+
+### setFormDataAdapter
+
+This method helps to use custom form-data library.
+
+From **v3.1.0**, pactum uses [form-data-lite](https://www.npmjs.com/package/form-data-lite) that has just the standard mime-types. (*this reduces the overall package size*).
+
+If you have a custom file type to be uploaded, you need to mention the content-type of the file explicitly.
+
+```js
+await pactum.spec()
+  .post('https://httpbin.org/forms/posts')
+  .withFile('./path/to/the/file'), { contentType: 'text/plain' })
+  .expectStatus(201);
+```
+
+To avoid mentioning content type, you can update the default **form-data-lite** package to the previous **form-data** package.
+
+```js
+const { settings } = require('pactum');
+const FormData = require('form-data');
+
+settings.setFormDataAdapter({
+  get() {
+    return FormData;
+  }
+});
 ```
