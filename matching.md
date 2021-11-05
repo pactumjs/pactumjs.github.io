@@ -8,6 +8,7 @@ In real world applications, sometimes it is hard to match an expected request/re
 * [Type Matching](#type-matching)
   * [like](#like)
   * [eachLike](#eachLike)
+  * [any](#any)
 * [Regex Matching](#regex-matching)
   * [regex](#regex)
 * [Misc](#misc)
@@ -29,6 +30,7 @@ It supports following matchers
 
 - `like` - matches with the type
 - `eachLike` - matches all the elements in the array with the specified type
+- `any` - matches with the any type
 - `regex` - matches with the regular expression
 - `includes` - checks if actual value includes a specified value in it
 - `oneOf` - checks if actual value is one of the expected value
@@ -56,6 +58,7 @@ Often, you will not care what the exact value is at a particular path is, you ju
 
 - `like`
 - `eachLike`
+- `any`
 
 ### like
 
@@ -281,6 +284,63 @@ const actual = eachLike(1, { items: [ 5, 7 ]});
 // actual === exp1 -> True
 const exp1 = [3, 4]
 ```
+
+### any
+
+Type matching for any data type - *string*/*number*/*boolean*/*object*/*symbol*/*null*/*undefined*
+
+```js
+const { any } = require('pactum-matchers');
+
+const actual = {
+  value: any(123),
+  name: 'jon'
+}
+
+// actual === exp1 -> True
+const exp1 = {
+  value: "Hello",
+  name: 'jon',
+  active: true
+}
+
+// actual === exp2 -> True
+const exp2 = {
+  value: 354554,
+  name: 'jon'
+}
+
+// actual === exp3 -> True
+const exp3 = {
+  value: True,
+  name: 'jon'
+}
+
+// actual === exp4 -> True
+const exp4 = {
+  value: { id: '234 },
+  name: 'snow'
+}
+
+// actual === exp5 -> True
+const exp5 = {
+  value: Symbol('value'),
+  name: 'jon'
+}
+
+// actual === exp6 -> True
+const exp6 = {
+  value: null,
+  name: 'jon'
+}
+
+// actual === exp7 -> True
+const exp7 = {
+  value: undefined,
+  name: 'jon'
+}
+```
+
 
 ## Regex Matching
 
