@@ -22,45 +22,26 @@
 
 </span>
 
-<!-- panels:start -->
+## What is PactumJS?
 
-<!-- div:left-panel -->
+PactumJS is a next generation free and open-source REST API automation testing tool for all levels in a [Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html). It makes backend testing a productive and enjoyable experience. This library provides all the necessary ingredients for the most common things to write better API automation tests in an easy, fast & fun way.
 
-## Tutorials
+The original intention of building this tool was to reuse component tests written in [frisby](https://docs.frisbyjs.com/) for contract testing with [pact](https://docs.pact.io). As you might have guessed, it was inspired from both these tools. The initial versions of this library is compatible with them but later it went on to become an independent testing tool.
 
-- [Quick Start](quick-start) - *Installation & Setup*
-- [API Testing](api-testing) - *Testing Styles*
-  - [Request Making](request-making)
-  - [Response Validation](response-validation)
-- [Integration Testing](integration-testing) - *Retry Mechanism & Passing Data b/w tests*
-- [E2E Testing](e2e-testing) - *Initialization & Cleanup*
-- [Fuzz Testing](fuzz-testing) - *Fuzzing*
-- [Mock Server](mock-server) - *Interactions*  
-- [Component Testing](component-testing) - *Testing CRUD & Non-CRUD operations in isolation* 
-- [Contract Testing](contract-testing) - *Compatibility b/w consumers & providers*
-- [Data Management](data-management) - *Data Templates, Maps, Functions & Stores*
-- [Matching](matching) - *Request & Response Matchers*
+## Use Cases
 
-<!-- div:right-panel -->
+PactumJS users are typically Developers, QA Engineers and SDETs. It enables us to write all types of tests against backend servers (REST APIs). No matter the programming language used for building the API server, we can still use this library to write and run the tests.
 
-## API
+> This tool will be a perfect fit for all kinds of API testing needs if you live in a world of **micro-services**.
 
-- [Settings](api-settings.md)
-- [Handlers](api-handlers.md)
-- [Reporter](api-reporter.md)
-- [Mock](api-mock.md)
-- [Request](api-request.md)
-- [Response](api-response.md)
-- [Stash](api-stash.md)
-- [Expect](api-expect.md)
-
-<!-- panels:end -->
+- [General API Testing](api-testing)
+- [Component Testing](component-testing)
+- [Contract Testing](contract-testing)
+- [Integration Testing](integration-testing)
+- [E2E Testing](e2e-testing)
+- [Mock Server](mock-server)
 
 <!-- panels:start -->
-
-## Usage
-
-**PactumJS** can be used for API automation tests across all levels in a test pyramid. It can also act as an standalone **mock server** to generate contracts for contract testing.
 
 <!-- div:left-panel -->
 
@@ -164,25 +145,22 @@ We use Github [Discussions](https://github.com/pactumjs/pactum/discussions) to r
 
 Like this project! Star it on [Github](https://github.com/pactumjs/pactum/stargazers) and follow on [Twitter](https://twitter.com/pactumjs). Your support means a lot to us.
 
-## Under Development
+### Under Development
 
 - Contract Testing
 
-## Experimental
+### Experimental
 
 - E2E Testing
 - Fuzz Testing
 - Snapshot Testing
 
-## Notes
 
-- Inspired from [frisby](https://docs.frisbyjs.com/) & [pact](https://docs.pact.io).
-
-## Contributors
+### Contributors
 
 If you've ever wanted to contribute to open source, and a great cause, now is your chance!
 
-See the [contributing docs](https://github.com/pactumjs/pactum/blob/master/CONTRIBUTING.md) for more information
+See the [contributing docs](https://github.com/pactumjs/pactum/blob/master/CONTRIBUTING.md) for more information.
 
 <a href="https://github.com/pactumjs/pactum/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=pactumjs/pactum" />

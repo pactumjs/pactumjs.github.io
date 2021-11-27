@@ -12,6 +12,6 @@
 - 🔗 Component, Contract & E2E testing of APIs
 
 [GitHub](https://github.com/pactumjs/pactum)
-<a href="#pactum">Get Started</a>
+<a href="#welcome">Get Started</a>
 
 ![color](#f0f0f0)
