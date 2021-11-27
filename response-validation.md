@@ -850,7 +850,7 @@ it('should have user', async () => {
 
 This library also offers us to set default expectations for all the responses received.
 
-## setDefaultExpectHeaders
+### setDefaultExpectHeaders
 
 Sets the expected headers from all the HTTP responses.
 
@@ -869,7 +869,7 @@ it('get projects', async () => {
 });
 ```
 
-## setDefaultExpectResponseTime
+### setDefaultExpectResponseTime
 
 Sets the default expected response time (in ms) for all the HTTP responses.
 
@@ -877,7 +877,7 @@ Sets the default expected response time (in ms) for all the HTTP responses.
 pactum.response.setDefaultExpectResponseTime(500);
 ```
 
-## setDefaultExpectStatus
+### setDefaultExpectStatus
 
 Sets default expected HTTP status from HTTP responses.
 

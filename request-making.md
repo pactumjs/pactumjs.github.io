@@ -19,9 +19,11 @@ In general, the first step in API testing is to make a request to the server. Th
 @enduml
 ```
 
-## spec
+### spec
 
 `pactum.spec()` will return an instance of *spec* which can be used to build the request and expectations.
+
+!> A spec can only make a single API request. To make multiple requests, we need to invoke `pactum.spec()` multiple times.
 
 <!-- tabs:start -->
 
@@ -100,7 +102,7 @@ To pass additional parameters to the request, we can chain or use the following 
 | `useLogLevel`             | sets log level for troubleshooting        |
 | `toss` (optional)         | runs the spec & returns a promise         |
 
-## Request Method
+## Request Methods
 
 The request method indicates the method to be performed on the resource identified by the given Request-URI.
 
@@ -141,7 +143,7 @@ it('get projects', async () => {
 
 <!-- tabs:end -->
 
-## Non CRUD Methods
+### Non CRUD Methods
 
 Apart from the built-in request methods available in pactum, we can also pass custom HTTP methods and paths using `withMethod` and `withPath` functions.
 
@@ -475,7 +477,9 @@ await pactum.spec().spec()
 
 ## Request Timeout
 
-By default, pactum's request will timeout after 3000 ms. To increase the timeout for the current request use the `withRequestTimeout` method. **Make Sure To Increase The Test Runners Timeout As Well**
+By default, pactum's request will timeout after 3000 ms. To increase the timeout for the current request use the `withRequestTimeout` method. 
+
+!> **Make sure to increase the test runners timeout as well**
 
 
 ```js
@@ -497,7 +501,7 @@ it('some action that will take more time to complete', async () => {
 
 This library also offers us to set default options for all the requests that are sent through it.
 
-## setBaseUrl
+### setBaseUrl
 
 Sets the base URL for all the HTTP requests.
 
@@ -514,7 +518,7 @@ it('get projects', async () => {
 });
 ```
 
-## setDefaultTimeout
+### setDefaultTimeout
 
 Sets the default timeout for all the HTTP requests.
 The default value is **3000 ms**
@@ -523,7 +527,7 @@ The default value is **3000 ms**
 pactum.request.setDefaultTimeout(5000);
 ```
 
-## setDefaultHeaders
+### setDefaultHeaders
 
 Sets default headers for all the HTTP requests.
 
@@ -532,7 +536,7 @@ pactum.request.setDefaultHeaders('Authorization', 'Basic xxxxx');
 pactum.request.setDefaultHeaders({ 'content-type': 'application/json'});
 ```
 
-## setDefaultFollowRedirects
+### setDefaultFollowRedirects
 
 Sets default follow redirect option for HTTP requests.
 

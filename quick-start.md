@@ -150,7 +150,7 @@ npm run test
 
 <!-- tabs:end -->
 
-## Mock Server
+## Running Mock Server
 
 **pactum** can also be used as a standalone mock server or a service virtualization tool to mock external dependencies.
 

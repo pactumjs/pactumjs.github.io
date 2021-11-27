@@ -6,7 +6,7 @@ When it comes to API Integration Testing, essentially it involves testing how mu
 
 > This documentation majorly focuses on the features offered by **pactum** to support integration testing by chaining multiple requests & passing data between them.
 
-## Pre Requisite
+### Pre Requisite
 
 - [API Testing](api-testing)
   - [Request Making](request-making)

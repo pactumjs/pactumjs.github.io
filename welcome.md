@@ -30,7 +30,7 @@ The original intention of building this tool was to reuse component tests writte
 
 ## Use Cases
 
-PactumJS users are typically Developers, QA Engineers and SDETs. It enables us to write all types of tests against backend servers (REST APIs). No matter the programming language used for building the API server, we can still use this library to write and run the tests.
+PactumJS users are typically Developers, QA Engineers and SDETs. It enables them to write all types of tests against backend servers (REST APIs). No matter the programming language used for building the API servers, we can still use this library to write and run the tests against them.
 
 > This tool will be a perfect fit for all kinds of API testing needs if you live in a world of **micro-services**.
 
@@ -139,11 +139,11 @@ mock.start(3000);
 
 ## Need Help
 
-We use Github [Discussions](https://github.com/pactumjs/pactum/discussions) to receive feedback, discuss ideas & answer questions.
+We use Github [Discussions](https://github.com/pactumjs/pactum/discussions) to receive feedback, discuss ideas & answer questions. Head over to it and feel free to start a discussion. We are always happy to help 😊.
 
 ## Support
 
-Like this project! Star it on [Github](https://github.com/pactumjs/pactum/stargazers) and follow on [Twitter](https://twitter.com/pactumjs). Your support means a lot to us.
+Like this project! Star it on [Github](https://github.com/pactumjs/pactum/stargazers) ⭐ and follow on [Twitter](https://twitter.com/pactumjs) 🐦. Your support means a lot to us.
 
 ### Under Development
 

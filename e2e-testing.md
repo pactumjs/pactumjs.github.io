@@ -6,7 +6,7 @@ During e2e testing, most likely we will be running our tests against a real appl
 
 **pactum** packs with features that helps us to write better e2e tests.
 
-## Pre Requisite
+### Pre Requisite
 
 * [API Testing](api-testing)
 * [Integration Testing](integration-testing)
