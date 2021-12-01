@@ -355,7 +355,7 @@ const { regex } = require('pactum-matchers');
 
 const actual = {
   name: 'Jon'
-  birthDate: regex(/\d{2}\/\d{2}\/\d{4}/)
+  birthDate: regex('01/01/2020', /\d{2}\/\d{2}\/\d{4}/)
 }
 
 // actual === exp1 -> True
