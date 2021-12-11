@@ -1,6 +1,6 @@
 # Quick Start
 
-**PactumJS** is a Node.js project & available as an `npm` package.
+**PactumJS** is a Node.js project & available as an `npm` package under the name [pactum](https://www.npmjs.com/package/pactum).
 
 ## System Requirements
 

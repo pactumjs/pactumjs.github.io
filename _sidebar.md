@@ -1,7 +1,7 @@
 - **🚀 Getting Started**
   - [Welcome](welcome.md)
   - [Quick Start](quick-start.md)
-  - [API Testing](api-testing.md)
+  - [Test Setup](test-setup.md)
 
 - **📚 Tutorials**
   - [Request Making](request-making.md)

@@ -1,6 +1,6 @@
 # API Testing
 
-API Testing in general can improve the efficiency of our testing strategy, helping us to deliver software faster than ever. It has many aspects but generally consists of making a request & validating the response.
+API Testing in general can improve the efficiency of our testing strategy, helping us to deliver software faster than ever. It has many aspects but generally consists of making a request & validating the response. This tool is packed with a rich set of features for making HTTP requests & validating the server responses. Head over to [Request Making](request-making) and [Response Validation](response-validation) for more details.
 
 ```plantuml
 @startuml
@@ -11,22 +11,13 @@ API Testing in general can improve the efficiency of our testing strategy, helpi
 @enduml
 ```
 
-> **pactum** is packed with a rich set of features for making HTTP requests & validating the server responses.
-
-- [Request Making](request-making)
-- [Response Validation](response-validation)
-
-Depending upon a lot of factors, API testing requires different ingredients to test the functionality of an application. This library provides all the necessary ingredients to write better API automation tests in an easy, fast & fun way.
-
 ## Test Runners
 
 !> As said earlier in the [Quick Start](quick-start) guide, **pactum** is not a test runner. It needs to be used alongside a test runner like **mocha**, **jest**, **jasmine** or **cucumber**.
 
-We can integrate **pactum** with any of the test runners that support *promises* like [mocha](https://www.npmjs.com/package/mocha), [jest](https://www.npmjs.com/package/jest), [jasmine](https://www.npmjs.com/package/jasmine), [ava](https://www.npmjs.com/package/ava), [uvu](https://www.npmjs.com/package/uvu), [tap](https://www.npmjs.com/package/tap) or [cucumber](https://www.npmjs.com/package/@cucumber). Or build your own if your heart desires, pactum should work out of the box.
+We can integrate **pactum** with any of the test runners that support *promises* like [mocha](https://www.npmjs.com/package/mocha), [jest](https://www.npmjs.com/package/jest), [jasmine](https://www.npmjs.com/package/jasmine), [ava](https://www.npmjs.com/package/ava), [uvu](https://www.npmjs.com/package/uvu), [tap](https://www.npmjs.com/package/tap) or [cucumber](https://www.npmjs.com/package/@cucumber). Or build your own if your heart desires, pactum should work out of the box. Before starting with this tool, get familiar with any of the test runners. It will help us to write more readable & maintainable tests.
 
-Most of the documentation here will be using **mocha** as the test runner. **Cucumber** is a popular choice among organizations, see [pactum-cucumber-boilerplate](https://github.com/pactumjs/pactum-cucumber-boilerplate) for a working example.
-  
-> Before starting with **pactum**, get familiar with any of the above test runners. It will help us to write more readable & maintainable tests.
+Most of the documentation here will be using **mocha** as the test runner. **Cucumber** is a popular choice among organizations, see [pactum-cucumber-boilerplate](https://github.com/pactumjs/pactum-cucumber-boilerplate) for a working example or the below video to see it in action.
 
 <iframe width="900" height="500" src="https://www.youtube.com/embed/ISAjES_Gklc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>

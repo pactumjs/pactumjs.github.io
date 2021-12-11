@@ -1,32 +1,25 @@
-<span align="center">
+<!-- <span align="center">
 
-![logo](_media/logo-icon-small.svg)
-
-# **PactumJS**
+# ![logo](_media/logo.png)
 
 ![----------](https://raw.githubusercontent.com/pactumjs/pactum/master/assets/rainbow.png)
 
-<h4>REST API Testing Tool for all levels in a Test Pyramid</h4>
-<p><strong>E2E - Integration - Contract - Component</strong></p>
-
-![Build](https://github.com/pactumjs/pactum/workflows/Build/badge.svg?branch=master)
-![Coverage](https://img.shields.io/codeclimate/coverage/ASaiAnudeep/pactum)
-![Downloads](https://img.shields.io/npm/dt/pactum)
-![Size](https://img.shields.io/bundlephobia/minzip/pactum)
-![Platform](https://img.shields.io/node/v/pactum)
-
-[![Stars](https://img.shields.io/github/stars/pactumjs/pactum?style=social)](https://github.com/pactumjs/pactum/stargazers)
-[![Twitter](https://img.shields.io/twitter/follow/pactumjs?label=Follow&style=social)](https://twitter.com/pactumjs)
-
-![Demo](_media/demo.gif)
-
-</span>
+</span> -->
 
 ## What is PactumJS?
 
 PactumJS is a next generation free and open-source REST API automation testing tool for all levels in a [Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html). It makes backend testing a productive and enjoyable experience. This library provides all the necessary ingredients for the most common things to write better API automation tests in an easy, fast & fun way.
 
-The original intention of building this tool was to reuse component tests written in [frisby](https://docs.frisbyjs.com/) for contract testing with [pact](https://docs.pact.io). As you might have guessed, it was inspired from both these tools. The initial versions of this library is compatible with them but later it went on to become an independent testing tool.
+The original intention of building this tool was to reuse component tests written in [frisby](https://docs.frisbyjs.com/) for contract testing with [pact](https://docs.pact.io). As you might have guessed, it was inspired from both these tools. The initial versions of this library was compatible with them but later it went on to become an independent testing tool.
+
+
+<span align="center">
+
+![Demo](_media/demo.gif)
+![----------](https://raw.githubusercontent.com/pactumjs/pactum/master/assets/rainbow.png)
+
+</span>
+
 
 ## Use Cases
 
@@ -141,7 +134,7 @@ mock.start(3000);
 
 We use Github [Discussions](https://github.com/pactumjs/pactum/discussions) to receive feedback, discuss ideas & answer questions. Head over to it and feel free to start a discussion. We are always happy to help 😊.
 
-## Support
+## Support Us
 
 Like this project! Star it on [Github](https://github.com/pactumjs/pactum/stargazers) ⭐ and follow on [Twitter](https://twitter.com/pactumjs) 🐦. Your support means a lot to us.
 
