@@ -6,6 +6,11 @@
   --docsify-example-panels-right-panel-width : 50%;
 }
 
+/****** Banner ******/
+#TOPBANNER {
+  position: relative !important;
+}
+
 /****** Sidebar Toggle ******/
 .sidebar-toggle {
   cursor: pointer;
