@@ -250,6 +250,41 @@ it('should not get product details', async () => {
 });
 ```
 
+In case the Interaction expects needs to be skipped for a special use case, it can be achieved by adding an optional `disable` flag in the `expects`.
+```js
+it('should get user details', async () => {
+  await pactum.spec()
+    .useInteraction([{
+      request: {
+        method: 'GET',
+        path: '/api/project'
+      },
+      response: {
+        status: 200
+      },
+      expects: {
+        disable: true,  // default value is false
+        exercised: true,
+        callCount: 1
+      }
+    },
+    {
+      request: {
+        method: 'GET',
+        path: '/api/users'
+      },
+      response: {
+        status: 200      
+      },
+    }])
+    .get('http://localhost:9393/api/users/1')
+    .expectStatus(200)
+});
+```
+In the above example, the first interation in the array will not be exercised in this test and it will result in `Interaction not exercised` error. Adding the `disable` flag in `expects` of first Interation will skip the check.
+
+!> For more details on Interaction options, check [Interaction Options](mock-server?id=interaction-options)
+
 ## Multiple Interactions
 
 In real-life scenarios, a single service might be dependent upon *"n"* number of services. You can use `useInteraction` method multiple times to add multiple interactions.
