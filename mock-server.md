@@ -109,6 +109,7 @@ Request Matching:
 | response.onCall           | response on consecutive calls               |
 | response(req, res)        | response with custom function               |
 | expects                   | expectations are used in component testing  |
+| expects.disable           | disable checks exercised and call count (default: `false`)           |
 | expects.exercised         | check exercised (default: `true`)           |
 | expects.callCount         | check call count (default: `> 0`)           |
 | stores                    | stores data from the request                |
@@ -759,9 +760,12 @@ Response - returns all the interactions
 [
   {
     "id": "<id>",
+    "strict": true,
     "exercised": false,
+    "calls": [],
     "callCount": 0,
     "request": {
+      "matchingRules": {},
       "method": "GET",
       "path": "/api/projects/2",
       "query": {
@@ -769,6 +773,7 @@ Response - returns all the interactions
       }
     },
     "response": {
+      "matchingRules": {},
       "status": 200,
       "headers": {
         "content-type": "application/json"
@@ -777,6 +782,10 @@ Response - returns all the interactions
         "id": 1,
         "name": "fake"
       }
+    },
+    "expects": {
+      "disable": false,
+      "exercised": true
     }
   }
 ]
