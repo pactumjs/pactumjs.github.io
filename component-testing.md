@@ -23,11 +23,15 @@ Tests -> "Service Under Test": Send Request
 @enduml
 ```
 
+?> **PactumJS** might be the best tool available in the market for component testing. ¯\\_(ツ)_/¯ 
+
 ### Pre Requisite
 
-* [API Testing](api-testing)
-* [Integration Testing](integration-testing)
-* [Mock Server](mock-server)
+- API Testing
+  - [Request Making](request-making)
+  - [Response Validation](response-validation)
+- [Integration Testing](integration-testing)
+- [Mock Server](mock-server)
 
 ## Example
 
@@ -108,9 +112,9 @@ This looks simple & easy to test. But as the functionality of the application gr
 
 # Component Testing Pattern
 
-**pactum** makes component testing easy & fun as it allows us to control the behavior of the mock server for each & every test case. It works on top of [API Testing](api-testing) & [Mock Server](mock-server). If you haven't read about them, use the above links to learn more about them.
+**pactum** makes component testing easy & fun as it allows us to control the behavior of the mock server for each & every test case. It combines the features of **API Testing** and **Mock Server**. If you haven't read about them, use the above links to learn more about them.
 
-Instead of maintaining a separate mock server, pactum comes with it. Interactions can be added to the mock server before the execution of a test case through `useInteraction` method. Once the interactions are added, you can build your request & expectations on top of it.
+Instead of maintaining a separate mock server, pactum comes with it. Interactions can be added to the mock server before the execution of a test case through `useInteraction` method. Once the interactions are added, you can build your request & expectations on top of it. This mock interaction is auto removed after the test case is executed and for the next test cases we can make mock server to behave in a different manner.
 
 ## Workflow
 
@@ -586,14 +590,3 @@ it('some background process', async () => {
   await mock.removeInteraction(id);
 });
 ```
-
-## Next
-
-----
-
-<a href="#/mock-server" >
-  <img src="https://img.shields.io/badge/PREV-Mock%20Server-orange" alt="Mock Server" align="left" style="display: inline;" />
-</a>
-<a href="#/contract-testing" >
-  <img src="https://img.shields.io/badge/NEXT-Contract%20Testing-blue" alt="Contract Testing" align="right" style="display: inline;" />
-</a>

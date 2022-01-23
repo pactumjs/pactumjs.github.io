@@ -159,9 +159,3 @@ See the [contributing docs](https://github.com/pactumjs/pactum/blob/master/CONTR
   <img src="https://contrib.rocks/image?repo=pactumjs/pactum" />
 </a>
 <br />
-
-----
-
-<a href="#/quick-start" >
-  <img src="https://img.shields.io/badge/NEXT-Quick%20Start-blue" alt="Quick Start" align="right" style="display: inline;" />
-</a>

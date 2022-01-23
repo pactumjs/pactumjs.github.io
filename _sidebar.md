@@ -15,6 +15,12 @@
   - [Matching](matching.md)
   - [Fuzz Testing](fuzz-testing.md)
 
+- **📙 Media**
+  - [Blogs](blogs.md)
+  - [Videos](videos.md)
+  - [Projects](projects.md)
+  - [Media](media.md)
+
 - **📟 API**
   - [Settings](api-settings.md)
   - [Handlers](api-handlers.md)

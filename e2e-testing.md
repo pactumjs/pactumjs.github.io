@@ -8,8 +8,10 @@ During e2e testing, most likely we will be running our tests against a real appl
 
 ### Pre Requisite
 
-* [API Testing](api-testing)
-* [Integration Testing](integration-testing)
+- API Testing
+  - [Request Making](request-making)
+  - [Response Validation](response-validation)
+- [Integration Testing](integration-testing)
 
 ## API
 

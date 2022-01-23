@@ -899,14 +899,3 @@ curl --location --request POST 'http://localhost:9393/api/pactum/state' \
 --header 'Content-Type: application/json' \
 --data-raw '[ { "name": "some state name", "data": { "id": "some-random-id" } } ]'
 ```
-
-### Next
-
-----
-
-<a href="#/api-testing" >
-  <img src="https://img.shields.io/badge/PREV-API%20Testing-orange" alt="API Testing" align="left" style="display: inline;" />
-</a>
-<a href="#/component-testing" >
-  <img src="https://img.shields.io/badge/NEXT-Component%20Testing-blue" alt="Component Testing" align="right" style="display: inline;" />
-</a>

@@ -154,12 +154,3 @@ describe('should have a user with name bolt', () => {
 ```
 
 <!-- tabs:end -->
-
-----
-
-<a href="#/quick-start" >
-  <img src="https://img.shields.io/badge/PREV-Quick%20Start-orange" alt="Quick Start" align="left" style="display: inline;" />
-</a>
-<a href="#/request-making" >
-  <img src="https://img.shields.io/badge/NEXT-Request%20Making-blue" alt="Request Making" align="right" style="display: inline;" />
-</a>

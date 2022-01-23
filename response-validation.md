@@ -884,12 +884,3 @@ Sets default expected HTTP status from HTTP responses.
 ```js
 pactum.response.setDefaultExpectStatus(201);
 ```
-
-----
-
-<a href="#/request-making" >
-  <img src="https://img.shields.io/badge/PREV-Request%20Making-orange" alt="Request Making" align="left" style="display: inline;" />
-</a>
-<a href="#/integration-testing" >
-  <img src="https://img.shields.io/badge/NEXT-Integration%20Testing-blue" alt="Integration Testing" align="right" style="display: inline;" />
-</a>

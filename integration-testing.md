@@ -8,7 +8,7 @@ When it comes to API Integration Testing, essentially it involves testing how mu
 
 ### Pre Requisite
 
-- [API Testing](api-testing)
+- API Testing
   - [Request Making](request-making)
   - [Response Validation](response-validation)
 
@@ -329,13 +329,3 @@ it('should get posts', async () => {
     .expectStatus(200);
 });
 ```
-
-
-----
-
-<a href="#/api-testing" >
-  <img src="https://img.shields.io/badge/PREV-API%20Testing-orange" alt="API Testing" align="left" style="display: inline;" />
-</a>
-<a href="#/mock-server" >
-  <img src="https://img.shields.io/badge/NEXT-Mock%20Server-blue" alt="Mock Server" align="right" style="display: inline;" />
-</a>

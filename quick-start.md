@@ -9,7 +9,7 @@
 Before getting started, one needs to have a basic understanding of Node.js & any testing framework in it.
 
 - Learn [Node.js](https://www.youtube.com/watch?v=TlB_eWDSMt4)
-- Learn [Mocha](https://www.youtube.com/watch?v=MLTRHc5dk6s) or [Cucumber](https://cucumber.io/docs/cucumber/)
+- Learn [Mocha](https://www.youtube.com/watch?v=MLTRHc5dk6s), [Jest](https://www.youtube.com/watch?v=7r4xVDI2vho) or [Cucumber](https://cucumber.io/docs/cucumber/)
 
 ## Installation
 
@@ -188,12 +188,3 @@ Interacting with mock server.
 ```shell
 curl http://localhost:3000/api/health
 ```
-
-----
-
-<a href="#/pactum" >
-  <img src="https://img.shields.io/badge/PREV-Home-orange" alt="Home" align="left" style="display: inline;" />
-</a>
-<a href="#/api-testing" >
-  <img src="https://img.shields.io/badge/NEXT-API%20Testing-blue" alt="API Testing" align="right" style="display: inline;" />
-</a>

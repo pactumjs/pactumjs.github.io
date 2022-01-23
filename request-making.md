@@ -609,12 +609,3 @@ it('get invalid user', async () => {
 <!-- tabs:end -->
 
 - We are allowed to use request making methods & expectations while using spec handlers.
-
-----
-
-<a href="#/api-testing" >
-  <img src="https://img.shields.io/badge/PREV-API%20Testing-orange" alt="API Testing" align="left" style="display: inline;" />
-</a>
-<a href="#/response-validation" >
-  <img src="https://img.shields.io/badge/NEXT-Response%20Validation-blue" alt="Response Validation" align="right" style="display: inline;" />
-</a>
