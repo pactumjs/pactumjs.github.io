@@ -456,7 +456,7 @@ await pactum.spec()
 To further customize the request, pactum allows us directly set the core options of the request - https://nodejs.org/api/http.html#http_http_request_url_options_callback
 
 ```js
-await pactum.spec().spec()
+await pactum.spec()
   .get('some-url')
   .withCore({
     agent: myAgent
@@ -469,7 +469,7 @@ await pactum.spec().spec()
 ### UserName & Password
 
 ```js
-await pactum.spec().spec()
+await pactum.spec()
   .get('some-url')
   .withAuth('my-username', 'super-secret-password')
   .expectStatus(200);
