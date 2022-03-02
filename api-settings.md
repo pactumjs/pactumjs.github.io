@@ -128,7 +128,7 @@ Using the feature, will result in saving outputs in a local file system. By defa
 
 ### setReporterAutoRun
 
-The reporting structure for [Breaking](api-testing?id=testing-style) testing style differs as the `spec` runs in multiple steps. To have a proper reporting, we need to run additional methods.
+The reporting structure for [Breaking](test-setup?id=testing-style) testing style differs as the `spec` runs in multiple steps. To have a proper reporting, we need to run additional methods.
 
 - Run `settings.setReporterAutoRun(false)` before test execution.
 - Run `spec.end()` after each test case.

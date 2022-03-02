@@ -36,7 +36,7 @@ Received response is validated through expectation methods. This library provide
 
 # Expectations Style
 
-Based on chosen [Testing Style](api-testing?id=testing-style), expectations methods are varied.
+Based on chosen [Testing Style](test-setup?id=testing-style), expectations methods are varied.
 
 <!-- tabs:start -->
 

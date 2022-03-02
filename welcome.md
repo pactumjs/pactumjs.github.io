@@ -27,7 +27,7 @@ PactumJS users are typically Developers, QA Engineers and SDETs. It enables them
 
 > This tool will be a perfect fit for all kinds of API testing needs if you live in a world of **micro-services**.
 
-- [General API Testing](api-testing)
+- [General API Testing](request-making)
 - [Component Testing](component-testing)
 - [Contract Testing](contract-testing)
 - [Integration Testing](integration-testing)

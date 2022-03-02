@@ -1,6 +1,5 @@
 - **Tutorials**
   - [Quick Start](quick-start.md)
-  - [API Testing](api-testing.md)
   - [Request Making](request-making.md)
   - [Response Validation](response-validation.md)
   - [Integration Testing](integration-testing.md)
