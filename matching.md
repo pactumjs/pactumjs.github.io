@@ -48,7 +48,7 @@ It supports following matchers
 
 Matchers are applied on JSON
   
-- during response validation - [expectJsonMatch](api-testing#expectJsonMatch)
+- during response validation - [expectJsonMatch](response-validation?id=expectjsonmatch)
 - during request matching for interactions in [Mock Server](mock-server)
 - during request and response matching for [Contract Testing](contract-testing)
 
