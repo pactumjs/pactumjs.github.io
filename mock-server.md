@@ -62,11 +62,9 @@ Use `stop` to stop the mock server. It returns a promise. *Waiting for the serve
 await mock.stop();
 ```
 
-## Adding Behavior
+## Interactions
 
 In general, the role of a mock server is to simulate behavior of a real server. Interactions will help us to simulate the HTTP requests & responses. An interaction contains request & response details. When a real request is sent to mock server, it will try to match the received request with the interactions request. If a match is found it will return the specified response or 404 will be returned.
-
-### Interactions
 
 As said earlier, the simplest way to add behavior to the mock server is through interactions. Use `addInteraction` to add a interaction to the server. It has `request` & `response` objects to handle a request. When the mock server receives a request, it will match the request with interactions `request` properties. If the request matches, the mock server will respond with details in `response` object.
 
@@ -431,7 +429,7 @@ For capturing other parts of the request,
 - `req.headers` - Request Headers
 - `req.body` - Request Body
 
-### Handlers
+## Handlers
 
 Handlers is a powerful concept in **pactum**. It helps us to reuse different features in this library like expectations, assertions, retry mechanisms, data and many more. Handlers also support interactions.
 
