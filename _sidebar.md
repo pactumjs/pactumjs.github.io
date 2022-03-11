@@ -30,3 +30,6 @@
   - [Response](api-response.md)
   - [Stash](api-stash.md)
   - [Expect](api-expect.md)
+
+- **🕸 Reference**
+  - [spec](reference/spec.md)
