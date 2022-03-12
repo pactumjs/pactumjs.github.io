@@ -31,5 +31,10 @@
   - [Stash](api-stash.md)
   - [Expect](api-expect.md)
 
-- **🕸 Reference**
+- **🧩 Reference**
+  - [clone](reference/clone.md)
+  - [parse](reference/parse.md)
+  - [sleep](reference/sleep.md)
   - [spec](reference/spec.md)
+  - [withMethod](reference/withMethod.md)
+  - [withPath](reference/withPath.md)

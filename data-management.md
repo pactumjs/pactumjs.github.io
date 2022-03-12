@@ -320,7 +320,7 @@ await pactum.spec()
 
 A data store is a reference of custom response data that is received while running API tests. This comes in handy while running integration or e2e API testing to pass data between tests.
 
-See [Integration Testing](#integration-testing) for more information.
+See [Integration Testing](integration-testing) for more information.
 
 ## Loading Data
 
