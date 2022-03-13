@@ -258,36 +258,6 @@ await pactum.spec()
   .expectStatus(200);
 ```
 
-In general, we set default headers to all the requests that are sent during API Testing. For example, authorization headers.
-
-<!-- tabs:start -->
-
-#### ** base.test.js **
-
-```js
-const { request } = require('pactum');
-
-// global hook
-before(() => {
-  request.setBaseUrl('http://localhost:3000');
-  request.setDefaultHeaders('Authorization', 'Basic xxxxx');
-});
-```
-
-#### ** projects.test.js **
-
-```js
-const pactum = require('pactum');
-
-it('get projects', async () => {
-  // request will be sent with authorization header.
-  await pactum.spec()
-    .get('/api/projects');
-});
-```
-
-<!-- tabs:end -->
-
 ## Body
 
 Use `withBody` or `withJson` *(preferred)* methods to pass the body to the request.
