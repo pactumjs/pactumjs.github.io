@@ -2,7 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pactumjs.github.io</loc>
-    <lastmod>2022-03-12T14:57:31+05:30</lastmod>
+    <lastmod>2022-03-13T14:05:06+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/request-making</loc>
+    <lastmod>2022-03-13T14:05:06+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withQueryParams</loc>
+    <lastmod>2022-03-13T14:05:06+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withPathParams</loc>
+    <lastmod>2022-03-13T14:05:06+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withHeaders</loc>
+    <lastmod>2022-03-13T14:05:06+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withCookies</loc>
+    <lastmod>2022-03-13T14:05:06+05:30</lastmod>
   </url>
    
   <url>
@@ -83,11 +108,6 @@
   <url>
     <loc>https://pactumjs.github.io/api-reporter</loc>
     <lastmod>2022-03-02T16:22:03+05:30</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://pactumjs.github.io/request-making</loc>
-    <lastmod>2022-01-29T03:42:19+05:30</lastmod>
   </url>
    
   <url>
