@@ -387,7 +387,8 @@ await pactum.spec()
 We can also directly use the form-data object.
 
 ```js
-const form = require('form-data-lite');
+const FormData = require('form-data-lite');
+const form = new FormData();
 form.append(/* form data */);
 
 await pactum.spec()
