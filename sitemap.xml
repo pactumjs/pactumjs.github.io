@@ -2,12 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pactumjs.github.io</loc>
-    <lastmod>2022-03-13T14:05:52+05:30</lastmod>
+    <lastmod>2022-03-18T18:33:08+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withRequestTimeout</loc>
+    <lastmod>2022-03-18T18:33:08+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withPath</loc>
+    <lastmod>2022-03-18T18:33:08+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/setDefaultTimeout</loc>
+    <lastmod>2022-03-18T18:33:08+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/setDefaultHeaders</loc>
+    <lastmod>2022-03-18T18:33:08+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/setBaseUrl</loc>
+    <lastmod>2022-03-18T18:33:08+05:30</lastmod>
   </url>
    
   <url>
     <loc>https://pactumjs.github.io/request-making</loc>
-    <lastmod>2022-03-13T14:05:06+05:30</lastmod>
+    <lastmod>2022-03-18T13:17:45+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withMultiPartFormData</loc>
+    <lastmod>2022-03-18T13:17:45+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withGraphQLVariables</loc>
+    <lastmod>2022-03-18T13:17:45+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withGraphQLQuery</loc>
+    <lastmod>2022-03-18T13:17:45+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withForm</loc>
+    <lastmod>2022-03-18T13:17:45+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withCore</loc>
+    <lastmod>2022-03-18T13:17:45+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withAuth</loc>
+    <lastmod>2022-03-18T13:17:45+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withJson</loc>
+    <lastmod>2022-03-14T19:37:48+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withFile</loc>
+    <lastmod>2022-03-14T19:37:48+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/withBody</loc>
+    <lastmod>2022-03-14T19:37:48+05:30</lastmod>
   </url>
    
   <url>
@@ -28,11 +98,6 @@
   <url>
     <loc>https://pactumjs.github.io/reference/withCookies</loc>
     <lastmod>2022-03-13T14:05:06+05:30</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://pactumjs.github.io/reference/withPath</loc>
-    <lastmod>2022-03-12T13:24:45+05:30</lastmod>
   </url>
    
   <url>
