@@ -83,3 +83,4 @@ Returns an object of spec which contains all the methods for making a request an
 ## See Also
 
 - [withMethod](reference/withMethod)
+- [setBaseUrl](reference/setBaseUrl)
