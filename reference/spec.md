@@ -67,7 +67,7 @@ Name of the spec handler to use.
 
 #### > handler-options (any)
 
-Handler options could be anything. With the help of this options, we can make the spec handler dynamic.
+Handler options could be anything. With the help of this options, we can make the spec handlers dynamic.
 
 ## Yields
 
