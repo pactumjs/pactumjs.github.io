@@ -2,7 +2,87 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pactumjs.github.io</loc>
-    <lastmod>2022-03-18T18:33:08+05:30</lastmod>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/spec</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/inspect</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectResponseTime</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectJsonSnapshot</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectJsonSchema</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectJsonMatch</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectJsonLike</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectJsonLength</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectJson</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectError</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectCookiesLike</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectCookies</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectBodyContains</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectBody</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expect</loc>
+    <lastmod>2022-03-26T20:35:29+05:30</lastmod>
+  </url>
+   
+  <url>
+    <loc>https://pactumjs.github.io/reference/expectStatus</loc>
+    <lastmod>2022-03-24T12:15:27+05:30</lastmod>
   </url>
    
   <url>
@@ -102,11 +182,6 @@
    
   <url>
     <loc>https://pactumjs.github.io/reference/withMethod</loc>
-    <lastmod>2022-03-12T13:24:45+05:30</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://pactumjs.github.io/reference/spec</loc>
     <lastmod>2022-03-12T13:24:45+05:30</lastmod>
   </url>
    
