@@ -49,6 +49,7 @@
   - [expectStatus](reference/expectStatus.md)
   - [inspect](reference/inspect.md)
   - [parse](reference/parse.md)
+  - [records](reference/records.md)
   - [response](reference/response.md)
   - [returns](reference/returns.md)
   - [sleep](reference/sleep.md)

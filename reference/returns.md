@@ -43,6 +43,16 @@ const postID = await spec()
 
 Json path. See [json-query](https://www.npmjs.com/package/json-query) for more usage details.
 
+If the `path` starts with one of the value, it has a special meaning
+
+| path              | description                       |
+|-------------------|-----------------------------------|
+| `req.pathParams`  | Request path params               |
+| `req.queryParams` | Request query params              |
+| `req.headers`     | Request headers                   |
+| `res.body`        | Response body *(this is default)* |
+| `res.headers`     | Request headers                   |
+
 #### > custom_function (function)
 
 A callback function to return a custom reply. A context object is passed as an argument that has `req` *(request)*, `res` *(response)* and `data` properties.
