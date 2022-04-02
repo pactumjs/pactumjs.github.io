@@ -51,6 +51,7 @@
   - [parse](reference/parse.md)
   - [records](reference/records.md)
   - [response](reference/response.md)
+  - [retry](reference/retry.md)
   - [returns](reference/returns.md)
   - [sleep](reference/sleep.md)
   - [setBaseUrl](reference/setBaseUrl.md)

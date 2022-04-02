@@ -280,7 +280,7 @@ Use `retry` to specify your retry strategy. It accepts options object as an argu
 
 | Property  | Type       | Description                                |
 | --------- | ---------- | ------------------------------------------ |
-| count     | `number`   | number of times to retry - defaults to 3   |
+| count     | `number`   | number of times to retry - defaults to 1   |
 | delay     | `number`   | delay between retries - defaults to 1000ms |
 | strategy  | `function` | retry strategy function - returns boolean  |
 | strategy  | `string`   | retry strategy handler name                |
