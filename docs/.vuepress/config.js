@@ -194,7 +194,7 @@ module.exports = {
 
     nav: [
       { text: '🏠 Home', link: '/introduction/welcome' },
-      { text: '⇌ API', link: '/api/' },
+      { text: '⇌ API', link: '/api/requests/spec' },
       { text: '🌟 GitHub', link: 'https://github.com/pactumjs/pactum' }
     ],
 
