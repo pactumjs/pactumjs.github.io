@@ -1,0 +1,6 @@
+---
+tags:
+  - base url
+---
+
+# setBaseUrl

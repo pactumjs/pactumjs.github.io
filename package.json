@@ -1,0 +1,29 @@
+{
+  "name": "pactumjs.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:serve": "vuepress serve docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pactumjs/pactumjs.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pactumjs/pactumjs.github.io/issues"
+  },
+  "homepage": "https://github.com/pactumjs/pactumjs.github.io#readme",
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.9.7",
+    "@vuepress/plugin-google-analytics": "^1.9.7",
+    "vue": "^2.6.14",
+    "vuepress": "^1.9.7",
+    "vuepress-plugin-sitemap": "^2.3.1"
+  }
+}
