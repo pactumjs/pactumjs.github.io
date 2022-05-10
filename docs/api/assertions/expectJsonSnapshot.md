@@ -65,6 +65,7 @@ Json matchers.
 const { spec } = require('pactum');
 
 await spec()
+  .name('get first user')
   .get('https://reqres.in/api/users/1')
   .expectJsonSnapshot();
 ```
@@ -76,6 +77,7 @@ const { spec } = require('pactum');
 const { like } = require('pactum-matchers');
 
 await spec()
+  .name('get first user')
   .get('https://reqres.in/api/users/1')
   .expectJsonSnapshot({
     "data": {
@@ -83,3 +85,7 @@ await spec()
     }
   });
 ```
+
+## See Also
+
+- [name](/api/requests/name)

@@ -61,7 +61,10 @@ const api_sidebar = [
       '/api/requests/returns',
       '/api/requests/stores',
       '/api/requests/records',
-      '/api/requests/toss'
+      '/api/requests/toss',
+      '/api/requests/use',
+      '/api/requests/name',
+      '/api/requests/flow'
     ]
   },
   {
