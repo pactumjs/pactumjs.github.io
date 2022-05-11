@@ -64,7 +64,8 @@ const api_sidebar = [
       '/api/requests/toss',
       '/api/requests/use',
       '/api/requests/name',
-      '/api/requests/flow'
+      '/api/requests/flow',
+      '/api/requests/useLogLevel',
     ]
   },
   {
@@ -157,6 +158,13 @@ const api_sidebar = [
       '/api/handlers/addSpecHandler',
       '/api/handlers/addStateHandler',
       '/api/handlers/addWaitHandler'
+    ]
+  },
+  {
+    title: '🎭 Mock',
+    collapsable: true,
+    children: [
+      '/api/mock/interaction'
     ]
   },
 ];
