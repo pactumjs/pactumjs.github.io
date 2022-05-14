@@ -14,12 +14,18 @@ Checks if actual value satisfies the expected expression.
 ## Syntax
 
 ```js
+expression(expr)
 expression(input, expr)
 ```
 
 ## Usage
 
 ### ✅  Correct Usage
+
+```js
+// expression
+expression('$V.length > 0');
+```
 
 ```js
 // input and expression

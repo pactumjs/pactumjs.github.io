@@ -253,7 +253,7 @@ If the `json-query` starts with one of the value, it has a special meaning
 | `req.queryParams` | Request query params              |
 | `req.headers`     | Request headers                   |
 | `res.body`        | Response body *(this is default)* |
-| `res.headers`     | Request headers                   |
+| `res.headers`     | Response headers                   |
 
 ## Loading Data
 

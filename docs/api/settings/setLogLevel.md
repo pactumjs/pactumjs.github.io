@@ -45,3 +45,7 @@ const { settings } = require('pactum');
 
 settings.setLogLevel('ERROR');
 ```
+
+## See Also
+
+- [useLogLevel](/api/requests/useLogLevel)

@@ -121,6 +121,7 @@ const api_sidebar = [
       '/api/matching/gte',
       '/api/matching/lt',
       '/api/matching/lte',
+      '/api/matching/notIncludes',
     ]
   },
   {
@@ -164,7 +165,8 @@ const api_sidebar = [
     title: '🎭 Mock',
     collapsable: true,
     children: [
-      '/api/mock/interaction'
+      '/api/mock/interaction',
+      '/api/mock/useInteraction'
     ]
   },
 ];
