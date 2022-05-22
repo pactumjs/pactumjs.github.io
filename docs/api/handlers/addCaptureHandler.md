@@ -4,7 +4,7 @@
 
 - Handler name will be prefixed with `#` while using in json.
 
-::: danger
+::: danger NOTE
 Strings starting with `#` will be automatically treated as a Capture Handler.
 :::
 

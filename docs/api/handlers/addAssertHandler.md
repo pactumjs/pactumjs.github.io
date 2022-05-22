@@ -5,7 +5,7 @@
 - Handler name will be prefixed with `#` while using in json.
 - Handler function should return a boolean.
 
-::: danger
+::: danger NOTE
 Strings starting with `#` will be automatically treated as a Assert Handler.
 :::
 

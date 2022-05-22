@@ -85,7 +85,7 @@ Assert Expressions helps to run custom JavaScript code on a JSON that performs u
 - Expression should be a valid JavaScript code.
 - Expression should return a *boolean*.
 
-::: danger
+::: danger NOTE
 String containing **$V** will be automatically treated as a Assert Expression.
 :::
 
@@ -121,4 +121,4 @@ await spec()
 
 ## See Also
 
-[Assert Handlers](/api/handlers/addAssertHandler)
+- [Assert Handlers](/api/handlers/addAssertHandler)
