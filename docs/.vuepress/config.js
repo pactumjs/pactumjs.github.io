@@ -60,6 +60,7 @@ const api_sidebar = [
       '/api/requests/retry',
       '/api/requests/returns',
       '/api/requests/stores',
+      '/api/requests/save',
       '/api/requests/records',
       '/api/requests/toss',
       '/api/requests/use',
@@ -165,8 +166,12 @@ const api_sidebar = [
     title: '🎭 Mock',
     collapsable: true,
     children: [
+      '/api/mock/start',
+      '/api/mock/stop',
       '/api/mock/interaction',
-      '/api/mock/useInteraction'
+      '/api/mock/addInteraction',
+      '/api/mock/useInteraction',
+      '/api/mock/clearInteractions',
     ]
   },
 ];
@@ -222,7 +227,7 @@ module.exports = {
     docsDir: 'docs',
     docsBranch: 'main',
     editLinks: true,
-    editLinkText: '✏️ Help us improve this page!',
+    editLinkText: '✏️ Edit this page!',
 
     smoothScroll: true,
   },
