@@ -172,6 +172,9 @@ const api_sidebar = [
       '/api/mock/addInteraction',
       '/api/mock/useInteraction',
       '/api/mock/clearInteractions',
+      '/api/mock/getInteraction',
+      '/api/mock/removeInteraction',
+      '/api/mock/useRemoteServer',
     ]
   },
 ];
