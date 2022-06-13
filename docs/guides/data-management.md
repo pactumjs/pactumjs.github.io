@@ -56,6 +56,8 @@ await spec()
 
 This library internally replaces the json payload with the data template value.
 
+### Overrides
+
 The exact resource is not going to be used across every test. Every test might need specific values. This library supports extending the data templates by overriding specific values. This allows tests to be customized as much as you'd like when using templates.
 
 Use `@OVERRIDES@` to override or add new fields into an existing template.
@@ -86,7 +88,42 @@ await spec()
   });
 ```
 
-::: danger
+### Removes
+
+Removes helps to test negative testing scenarios by deleting properties from the data template.
+
+An example usage of `@REMOVES@` data templates.
+
+```js
+const { stash, spec } = require('pactum');
+
+stash.addDataTemplate({
+  'Address': {
+    "street": "society road",
+    "pin": 500500
+  }
+});
+
+stash.addDataTemplate({
+  'User': {
+    "name": "morpheus",
+    "job": "leader",
+    "address": {
+      "@DATA:TEMPLATE@": "Address",
+     
+    }
+  }
+});
+
+await spec()
+  .post('https://httpbin.org/anything')
+  .withJson({
+    '@DATA:TEMPLATE@': 'User',
+    '@REMOVES@': ['job']
+  });
+```
+
+::: danger WARNING
 Templates can also reference other templates. Be cautious not to create circular dependencies.
 :::
 
@@ -150,7 +187,7 @@ stash.addDataTemplate({
 });
 ```
 
-::: danger
+::: danger WARNING
 It's perfectly legal to refer other data maps from a data map. Be cautious not to create circular dependencies
 :::
 
