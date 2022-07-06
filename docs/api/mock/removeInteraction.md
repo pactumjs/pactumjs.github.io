@@ -1,3 +1,8 @@
+---
+tags:
+  - interaction
+---
+
 # removeInteraction
 
 Remove interactions from the mock server. 

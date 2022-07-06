@@ -1,3 +1,9 @@
+---
+tags:
+  - retry
+  - handler
+---
+
 # addRetryHandler
 
 **Retry Handlers** helps us to retry a request based on a custom logic.

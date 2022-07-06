@@ -1,3 +1,9 @@
+---
+tags:
+  - assert
+  - handler
+---
+
 # addAssertHandler
 
 **Assert Handlers** helps us to reuse the custom JavaScript assertion code on a JSON. With this we can easily extend the capabilities of [expectJsonLike](/api/assertions/expectJsonLike) to solve complex assertions.

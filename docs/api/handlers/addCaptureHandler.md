@@ -1,6 +1,12 @@
+---
+tags:
+  - capture
+  - handler
+---
+
 # addCaptureHandler
 
-**Capture Handlers** helps us to capture data from the response. Use this inside [returns](/api/requests/returns)
+**Capture Handlers** helps us to capture data from the response. Use this inside [returns](/api/requests/returns) or [stores](/api/requests/stores) or [records](/api/requests/records)
 
 - Handler name will be prefixed with `#` while using in json.
 

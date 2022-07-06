@@ -1,3 +1,9 @@
+---
+tags:
+  - state
+  - handler
+---
+
 # addStateHandler
 
 **State Handlers** helps us to run specific asynchronous code that puts our application in a specific state. Most common use case would be database interactions.

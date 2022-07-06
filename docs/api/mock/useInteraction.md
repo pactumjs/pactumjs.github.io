@@ -1,3 +1,8 @@
+---
+tags:
+  - interaction
+---
+
 # useInteraction
 
 Add interactions to the mock server during component testing before the start of the test case. Once the test case execution is completed the interactions are **auto** removed. 

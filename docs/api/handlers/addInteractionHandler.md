@@ -1,3 +1,9 @@
+---
+tags:
+  - interaction
+  - handler
+---
+
 # addInteractionHandler
 
 Interaction handlers helps us to define & reuse similar kind of interactions in mock server.

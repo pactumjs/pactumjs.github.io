@@ -1,3 +1,8 @@
+---
+tags:
+  - interaction
+---
+
 # clearInteractions
 
 Removes all interactions from the mock server.

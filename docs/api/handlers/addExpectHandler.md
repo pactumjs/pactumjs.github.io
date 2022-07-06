@@ -1,3 +1,10 @@
+---
+tags:
+  - expect
+  - custom expect
+  - handler
+---
+
 # addExpectHandler
 
 **Expect Handlers** helps us to reuse same set of custom assertions across different tests.

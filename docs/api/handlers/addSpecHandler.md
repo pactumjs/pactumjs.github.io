@@ -1,3 +1,9 @@
+---
+tags:
+  - spec
+  - handler
+---
+
 # addSpecHandler
 
 **Spec Handlers** helps us to reuse similar kind of request making & response validation across different test cases.

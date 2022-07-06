@@ -1,3 +1,9 @@
+---
+tags:
+  - data
+  - handler
+---
+
 # addDataFuncHandler
 
 **Data Function Handlers** helps us to generate common dynamic data and use it across different tests.

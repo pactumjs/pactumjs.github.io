@@ -1,3 +1,8 @@
+---
+tags:
+  - interaction
+---
+
 # getInteraction
 
 Get interactions from the mock server. 

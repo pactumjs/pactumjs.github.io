@@ -1,3 +1,9 @@
+---
+tags:
+  - wait
+  - handler
+---
+
 # addWaitHandler
 
 **Wait Handlers** helps us to wait for background tasks to complete before moving to the next test case or API call.

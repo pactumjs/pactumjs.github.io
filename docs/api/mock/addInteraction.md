@@ -1,3 +1,8 @@
+---
+tags:
+  - interaction
+---
+
 # addInteraction
 
 Add interactions to the mock server. 
@@ -123,6 +128,25 @@ handler.addInteractionHandler('get a user from user-service', (ctx) => {
 
 mock.addInteraction('get a user from user-service', { userId: 1 });
 mock.addInteraction('get a user from user-service', { userId: 2 });
+
+mock.start(3000);
+```
+
+### Return File
+
+```js
+const { mock } = require('pactum');
+
+mock.addInteraction({
+  request: {
+    method: 'GET',
+    path: '/api/image'
+  },
+  response: {
+    status: 200,
+    file: 'images/logo.png'
+  }
+});
 
 mock.start(3000);
 ```
