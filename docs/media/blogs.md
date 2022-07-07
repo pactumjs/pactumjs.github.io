@@ -1,5 +1,6 @@
 # Blogs
 
+- [Setup Guide - PactumJS and CucumberJS](https://elser.hashnode.dev/setup-guide-for-api-testing-with-cucumber-js-and-pactumjs) - Manuel Serafin Bugarin
 - [API mocking in JavaScript with Pactum](https://www.ontestautomation.com/api-mocking-in-javascript-with-pactum) - Bas Dijkstra
 - [Writing API tests in JavaScript with Pactum](https://www.ontestautomation.com/writing-api-tests-in-javascript-with-pactum/) - Bas Dijkstra
 - [REST API test automation with PactumJS](https://www.zeljkovic.sh/rest-api-test-automation-with-pactumjs/) - Aleksandar
