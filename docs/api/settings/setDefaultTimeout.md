@@ -1,3 +1,9 @@
+---
+tags:
+  - timeout
+  - request timeout
+---
+
 # setDefaultTimeout
 
 sets default timeout of requests.

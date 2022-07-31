@@ -1,11 +1,11 @@
-# addDataTemplate
+# addDataMap
 
-Adds a data template which can be used across pactum tests and mock server.
+Adds a data map which can be used across pactum tests and mock server.
 
 ## Syntax
 
 ```js
-addDataTemplate(templates)
+addDataMap(maps)
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ addDataTemplate(templates)
 ### ✅  Correct Usage
 
 ```js
-stash.addDataTemplate({
+stash.addDataMap({
   'User': {
     "name": "morpheus",
     "job": "leader"
@@ -23,16 +23,16 @@ stash.addDataTemplate({
 
 ## Arguments
 
-#### > templates *(object)*
+#### > maps *(object)*
 
-A template object.
+A maps object.
 
 ## Examples
 
 ```js
 const { stash, spec } = require('pactum');
 
-stash.addDataTemplate({
+stash.addDataMap({
   'User': {
     "name": "morpheus",
     "job": "leader"
@@ -42,6 +42,7 @@ stash.addDataTemplate({
 await spec()
   .post('https://reqres.in/api/users')
   .withJson({
-    '@DATA:TEMPLATE@': 'User',
+    "name": "$M{User.name}",
+    "job": "$M{User.job}"
   });
 ```

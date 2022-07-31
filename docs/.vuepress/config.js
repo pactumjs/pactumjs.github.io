@@ -36,6 +36,13 @@ const home_sidebar = [
 
 const api_sidebar = [
   {
+    title: 'API',
+    collapsable: true,
+    children: [
+      '/api/api/table-of-contents',
+    ]
+  },
+  {
     title: '🪄 Requests',
     collapsable: true,
     children: [
@@ -123,6 +130,7 @@ const api_sidebar = [
       '/api/matching/lt',
       '/api/matching/lte',
       '/api/matching/notIncludes',
+      '/api/matching/notNull',
     ]
   },
   {
@@ -177,6 +185,17 @@ const api_sidebar = [
       '/api/mock/useRemoteServer',
     ]
   },
+  {
+    title: '💼 Stash',
+    collapsable: true,
+    children: [
+      '/api/stash/addDataTemplate',
+      '/api/stash/getDataTemplate',
+      '/api/stash/addDataMap',
+      '/api/stash/getDataMap',
+      '/api/stash/loadData',
+    ]
+  },
 ];
 
 /**
@@ -215,7 +234,7 @@ module.exports = {
 
     nav: [
       { text: '🏠 Home', link: '/introduction/welcome' },
-      { text: '⇌ API', link: '/api/requests/spec' },
+      { text: '⇌ API', link: '/api/api/table-of-contents' },
       { text: '🌟 GitHub', link: 'https://github.com/pactumjs/pactum' }
     ],
 
