@@ -16,6 +16,7 @@ Prints request & response details to the console.
 
 ```js
 inspect()
+inspect('path')
 ```
 
 ## Usage
@@ -26,4 +27,11 @@ inspect()
 await spec()
   .get('/api/users/1')
   .inspect();
+```
+
+```js
+await spec()
+  .get('/api/users/1')
+  .inspect('name')
+  .inspect('age');
 ```
