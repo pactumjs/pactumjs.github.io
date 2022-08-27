@@ -1,6 +1,8 @@
 ---
 tags:
   - debug
+  - print
+  - log
 ---
 
 # inspect
@@ -18,6 +20,8 @@ Prints request & response details to the console.
 inspect()
 inspect('path')
 ```
+
+- `path` (**string**) - json path. *Visit [json-query](https://www.npmjs.com/package/json-query) for more usage details.*
 
 ## Usage
 

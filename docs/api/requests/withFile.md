@@ -6,7 +6,7 @@ tags:
 
 # withFile
 
-Upload files.
+Uploads a file. *Internally it uses [withMultiPartFormData](/api/requests/withMultiPartFormData)*
 
 > `content-type` header will be auto updated to `multipart/form-data`
 
@@ -18,6 +18,10 @@ withFile(file-path, file-options)
 withFile(key, file-path)
 withFile(key, file-path, file-options)
 ```
+
+- `key` (**string**) - key of a FormData object. Defaults to `file`.
+- `file-path` (**string**) - path of the file to upload.
+- `file-options` ([**object**](https://github.com/pactumjs/form-data-lite/blob/main/src/index.d.ts#L51-L57)) - key/value pairs of a FormData object.
 
 ## Usage
 
@@ -46,20 +50,6 @@ await spec()
   .withFile('custom-key', './path/to/the/file', { contentType: 'image/png' })
   .expectStatus(201);
 ```
-
-## Arguments
-
-#### > file-path (string)
-
-Path of the file to upload.
-
-#### > key (string)
-
-key of a FormData object. It defaults to `file`.
-
-#### > file-options (object)
-
-key/value pairs of a FormData object.
 
 ## Examples
 

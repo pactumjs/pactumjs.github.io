@@ -15,9 +15,17 @@ multipart/form-data is one of the value of enctype attribute, which is used in f
 
 ```js
 withMultiPartFormData(form-data)
+withMultiPartFormData(form-object)
 withMultiPartFormData(key, value)
 withMultiPartFormData(key, value, form-options)
 ```
+
+- `key` (**string**) - key of the form field.
+- `value` (**string**) - value of the form field.
+- `form-object` (**object**) - key value pairs of form fields.
+- `form-data` (**object**) - instance of [form-data-lite](https://www.npmjs.com/package/form-data-lite) object.
+- `form-options` ([**object**](https://github.com/pactumjs/form-data-lite/blob/main/src/index.d.ts#L51-L57)) - key/value pairs of a FormData object.
+
 
 ## Usage
 
@@ -43,23 +51,17 @@ await spec()
   .expectStatus(201);
 ```
 
-## Arguments
-
-#### > form-data (object)
-
-Instance of [form-data-lite](https://www.npmjs.com/package/form-data-lite) object.
-
-#### > key (string)
-
-Key of the form field.
-
-#### > value (any)
-
-Value of the form field.
-
-#### > form-options (object)
-
-Custom form options - [see](https://github.com/form-data/form-data/blob/master/index.d.ts#L51)
+```js
+// using form-object
+await spec()
+  .post('/forms/posts')
+  .withFile('a.txt')
+  .withMultiPartFormData({
+    'client': 'awk',
+    'runner': 'uvu'
+  })
+  .expectStatus(201);
+```
 
 ## Examples
 

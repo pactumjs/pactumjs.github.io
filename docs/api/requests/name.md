@@ -6,6 +6,8 @@ name method is used to uniquely identify the current test case name which can be
 name(test-name)
 ```
 
+- `test-name` (**string**) - unique name for the test.
+
 ## Usage
 
 ### ✅  Correct Usage
@@ -16,12 +18,6 @@ await spec()
   .get('/api/users/1')
   .expectStatus(200);
 ```
-
-## Arguments
-
-#### > test-name (string)
-
-Unique name for the test.
 
 ## Examples
 

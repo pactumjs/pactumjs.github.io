@@ -12,8 +12,13 @@ It provides a easy way to construct a set of key/value pairs representing form f
 ## Syntax
 
 ```js
-withForm(form-data)
+withForm(key, value)
+withForm(form-object)
 ```
+
+- `key` (**string**) - key of the form field.
+- `value` (**string**) - value of the form field.
+- `form-object` (**object**) - key value pairs of form fields.
 
 ## Usage
 
@@ -28,12 +33,6 @@ await spec()
   })
   .expectStatus(201);
 ```
-
-## Arguments
-
-#### > form-data (object)
-
-Key value form fields.
 
 ## Examples
 

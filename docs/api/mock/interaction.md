@@ -25,7 +25,7 @@ An **interaction** adds behavior to the mock server.
 | response.status           | response status code                        |
 | response.headers          | response headers                            |
 | response.body             | response body                               |
-| response.file             | file path to return                         |
+| response.file             | path of the file to return                  |
 | response.fixedDelay       | delays the response by ms                   |
 | response.randomDelay      | random delay details                        |
 | response.randomDelay.min  | delay the response by min ms                |

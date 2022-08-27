@@ -264,6 +264,7 @@ module.exports = {
         hostname: 'https://pactumjs.github.io/'
       }
     ],
+    ['vuepress-plugin-code-copy', true]
   ],
 
 }
