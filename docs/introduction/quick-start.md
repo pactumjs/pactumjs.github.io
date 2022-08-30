@@ -17,7 +17,7 @@ To write better maintainable tests -
 
 ## Installation
 
-Install **pactum** via `npm`.
+- Install **pactum** via `npm`.
 
 ```shell
 # install pactum
@@ -25,6 +25,12 @@ npm install -D pactum
 
 # install a test runner
 npm install -D mocha
+```
+
+- Install **pactum** via `npx`.
+
+```shell
+npx pactum-init
 ```
 
 ## Writing Tests
