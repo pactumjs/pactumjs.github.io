@@ -131,6 +131,7 @@ const api_sidebar = [
       '/api/matching/lte',
       '/api/matching/notIncludes',
       '/api/matching/notNull',
+      '/api/matching/notEquals',
     ]
   },
   {
