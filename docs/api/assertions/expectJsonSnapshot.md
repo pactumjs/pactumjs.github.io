@@ -13,7 +13,7 @@ A typical snapshot test in pactum will fetch the api response, then compares it 
 
 If you are running the test for the first time, pactum will save the api response body at `./pactum/snapshots` directory. For the next test runs, pactum will compare the actual response with the local reference file. 
 
-> A snapshot needs a unique name & it can be defined through `spec().name("<unique name>")`.
+> A snapshot needs a unique name & it can be defined through `spec().name("<unique name>")` or `expectJsonSnapshot("<name>")`.
 
 ::: warning
 - It is mandatory to commit the snapshot files to the version control system.
@@ -25,37 +25,59 @@ If you are running the test for the first time, pactum will save the api respons
 
 ```js
 expectJsonSnapshot()
+expectJsonSnapshot(name)
 expectJsonSnapshot(matchers)
+expectJsonSnapshot(name, matchers)
+
+// bdd style
+jsonSnapshot()
+jsonSnapshot(name)
+jsonSnapshot(matchers)
+jsonSnapshot(name, matchers)
 ```
+
+- `name?` (**string**) - name of the snapshot file.
+- `matchers?` (**[object](/guides/matching)**) - json matchers.
 
 ## Usage
 
 ### ✅  Correct Usage
 
-```js 
+```js
+// using 'name' method
 await spec()
-  .name('unique-test-name')
+  .name('first-user')
   .get('api/users/1')
-  .expectJsonSnapshot({
-    "type": "object"
-  });
+  .expectJsonSnapshot();
+```
+
+```js
+// using name inside expectJsonSnapshot
+await spec()
+  .name()
+  .get('api/users/1')
+  .expectJsonSnapshot('first-user');
 ```
 
 ```js
 // using matchers
 await spec()
-  .name('unique-test-name')
+  .name('first-user')
   .get('api/users/1')
   .expectJsonSnapshot({
     "id": like("A123")
   });
 ```
 
-## Arguments
-
-#### > matchers (object)
-
-Json matchers.
+```js
+// using name and matchers inside expectJsonSnapshot
+await spec()
+  .name('first-user')
+  .get('api/users/1')
+  .expectJsonSnapshot('first-user', {
+    "id": like("A123")
+  });
+```
 
 ## Examples
 
