@@ -20,7 +20,8 @@ const home_sidebar = [
       '/guides/contract-testing',
       '/guides/data-management',
       '/guides/matching',
-      '/guides/reporting'
+      '/guides/reporting',
+      '/guides/fuzz-testing'
     ]
   },
   {
@@ -195,6 +196,15 @@ const api_sidebar = [
       '/api/stash/addDataMap',
       '/api/stash/getDataMap',
       '/api/stash/loadData',
+    ]
+  },
+  {
+    title: '🎡 Fuzz',
+    collapsable: true,
+    children: [
+      '/api/fuzz/fuzz',
+      '/api/fuzz/onSwagger',
+      '/api/fuzz/withBatchSize',
     ]
   },
 ];
