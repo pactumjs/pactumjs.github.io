@@ -8,6 +8,8 @@ Remove a default expect header. Helps in removing a specific default expect head
 removeDefaultExpectHeader(key);
 ```
 
+- `key` (**string**) - header key.
+
 ## Usage
 
 ### ✅  Correct Usage
@@ -15,12 +17,6 @@ removeDefaultExpectHeader(key);
 ```js
 response.removeDefaultExpectHeaders('content-type');
 ```
-
-## Arguments
-
-#### > key (string)
-
-header key
 
 ## Examples
 

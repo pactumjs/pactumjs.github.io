@@ -7,25 +7,15 @@ set default expect handlers for all the response assertions.
 ```js
 setDefaultExpectHandlers(handler, data)
 ```
-
+- `handler` (**string**) - name of the expect handler
+- `data` (**any**) - custom data to be passed to handler
 ## Usage
 
 ### ✅  Correct Usage
 
 ```js
-// key-value pair
 response.setDefaultExpectHandlers('user', 'gender')
 ```
-
-## Arguments
-
-#### > handler (string)
-
-Name of the expect handler
-
-#### > data (any)
-
-custom data to be passed to handler
 
 ## Examples
 

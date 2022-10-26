@@ -5,8 +5,9 @@ set default expect response status code for all the response assertions.
 ## Syntax
 
 ```js
-setDefaultExpectStatus(value)
+setDefaultExpectStatus(statusCode)
 ```
+- `statusCode` (**number**) - response status code.
 
 ::: tip
 - Reference guide for HTTP status codes: [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
@@ -20,12 +21,6 @@ setDefaultExpectStatus(value)
 ```js
 response.setDefaultExpectStatus(200)
 ```
-
-## Arguments
-
-#### > value (number)
-
-response status code.
 
 ## Examples
 

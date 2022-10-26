@@ -8,6 +8,9 @@ set default expect headers for all response assertions.
 setDefaultExpectHeaders(key, value)
 setDefaultExpectHeaders(pair)
 ```
+- `key` (**string**) - key of the header
+- `value` (**string**) - value of the header
+- `pair` (**object**) - key value pair/object of headers
 
 ## Usage
 
@@ -22,20 +25,6 @@ response.setDefaultExpectHeaders('content-type', 'application/json')
 // key-value pair object
 response.setDefaultExpectHeaders({ 'content-type': 'application/json', 'connection': 'keep-alive' })
 ```
-
-## Arguments
-
-#### > key (string)
-
-header key
-
-#### > value (string)
-
-header value
-
-#### > pair (object)
-
-header key-value pair object
 
 ## Examples
 

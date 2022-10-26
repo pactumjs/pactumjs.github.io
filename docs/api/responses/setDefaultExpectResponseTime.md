@@ -5,8 +5,10 @@ set default expect response time (ms) for all the response assertions.
 ## Syntax
 
 ```js
-setDefaultExpectResponseTime(value)
+setDefaultExpectResponseTime(timeInMs)
 ```
+- `timeInMs` (**number**) - response time value in milliseconds
+
 
 ## Usage
 
@@ -15,13 +17,6 @@ setDefaultExpectResponseTime(value)
 ```js
 response.setDefaultExpectResponseTime(2000)
 ```
-
-## Arguments
-
-#### > value (number)
-
-response time value in milliseconds
-
 
 ## Examples
 
