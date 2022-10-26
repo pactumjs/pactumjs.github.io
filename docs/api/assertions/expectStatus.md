@@ -44,3 +44,7 @@ await spec()
   .get('https://reqres.in/api/users')
   .expectStatus(200);
 ```
+
+## See Also
+
+- [setDefaultExpectStatus](/api/responses/setDefaultExpectStatus)

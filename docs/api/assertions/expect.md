@@ -116,3 +116,4 @@ await spec()
 ## See Also
 
 - [Expect Handler](/api/handlers/addExpectHandler)
+- [setDefaultExpectHandlers](/api/responses/setDefaultExpectHandlers)
