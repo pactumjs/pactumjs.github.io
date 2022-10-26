@@ -21,7 +21,8 @@ const home_sidebar = [
       '/guides/data-management',
       '/guides/matching',
       '/guides/reporting',
-      '/guides/fuzz-testing'
+      '/guides/fuzz-testing',
+      '/guides/environment-variables'
     ]
   },
   {
@@ -38,9 +39,9 @@ const home_sidebar = [
 const api_sidebar = [
   {
     title: 'API',
-    collapsable: true,
+    collapsable: false,
     children: [
-      '/api/api/table-of-contents',
+      '/api/table-of-contents',
     ]
   },
   {
@@ -75,6 +76,19 @@ const api_sidebar = [
       '/api/requests/name',
       '/api/requests/flow',
       '/api/requests/useLogLevel',
+    ]
+  },
+  {
+    title: '📨 Response Defaults',
+    collapsable: true,
+    children: [
+      '/api/responses/setDefaultExpectHeaders',
+      '/api/responses/setDefaultExpectResponseTime',
+      '/api/responses/setDefaultExpectStatus',
+      '/api/responses/setDefaultExpectHandlers',
+      '/api/responses/removeDefaultExpectHeader',
+      '/api/responses/removeDefaultExpectHeaders',
+      '/api/responses/removeDefaultExpectHandlers',
     ]
   },
   {
@@ -241,11 +255,29 @@ module.exports = {
     lastUpdated: 'Last Updated',
 
     search: true,
+    searchPlaceholder: 'Search',
     searchMaxSuggestions: 10,
 
     nav: [
       { text: '🏠 Home', link: '/introduction/welcome' },
-      { text: '⇌ API', link: '/api/api/table-of-contents' },
+      { text: '⇌ API', link: '/api/table-of-contents' },
+      { text: '📦 Releases', link: 'https://github.com/pactumjs/pactum/releases' },
+      { text: '📑 More',
+        items: [
+          {
+            text: 'Social',
+            items: [
+              { text: 'Twitter', link: 'https://twitter.com/pactumjs' }
+            ]
+          },
+          {
+            text: 'NPM Packages',
+            items: [
+              { text: 'PactumJS', link: 'https://www.npmjs.com/package/pactum' }
+            ]
+          }
+        ]
+      },
       { text: '🌟 GitHub', link: 'https://github.com/pactumjs/pactum' }
     ],
 

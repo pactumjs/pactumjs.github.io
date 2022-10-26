@@ -49,3 +49,8 @@ await spec()
   .get('https://reqres.in/api/users')
   .expectHeader('content-type', 'application/json; charset=utf-8');
 ```
+
+## See Also
+
+- [setDefaultExpectHeaders](/api/responses/setDefaultExpectHeaders)
+- [expectHeaderContains](/api/assertions/expectHeaderContains)
