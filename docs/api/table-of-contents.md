@@ -31,7 +31,32 @@
 - [flow](/api/requests/flow)
 - [useLogLevel](/api/requests/useLogLevel)
 
+#### Assertions
+
+- [expectStatus](/api/assertions/expectStatus)
+- [expectHeader](/api/assertions/expectHeader)
+- [expectHeaderContains](/api/assertions/expectHeaderContains)
+- [expectCookies](/api/assertions/expectCookies)
+- [expectCookiesLike](/api/assertions/expectCookiesLike)
+- [expectJson](/api/assertions/expectJson)
+- [expectJsonLike](/api/assertions/expectJsonLike)
+- [expectJsonMatch](/api/assertions/expectJsonMatch)
+- [expectJsonMatchStrict](/api/assertions/expectJsonMatchStrict)
+- [expectJsonSchema](/api/assertions/expectJsonSchema)
+- [expectJsonLength](/api/assertions/expectJsonLength)
+- [expectJsonSnapshot](/api/assertions/expectJsonSnapshot)
+- [updateSnapshot](/api/assertions/updateSnapshot)
+- [expectBody](/api/assertions/expectBody)
+- [expectBodyContains](/api/assertions/expectBodyContains)
+- [expectResponseTime](/api/assertions/expectResponseTime)
+- [expectError](/api/assertions/expectError)
+- [expect](/api/assertions/expect)
+
 #### Stash
 
 - [addDataTemplate](/api/stash/addDataTemplate)
+- [getDataTemplate](/api/stash/getDataTemplate)
 - [addDataMap](/api/stash/addDataMap)
+- [getDataMap](/api/stash/getDataMap)
+- [getDataStore](/api/stash/getDataStore)
+- [loadData](/api/stash/loadData)

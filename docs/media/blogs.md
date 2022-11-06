@@ -1,5 +1,7 @@
 # Blogs
 
+- [Writing API tests with PactumJS and Jest](https://www.testingwithmarie.com/post/writing-api-tests-with-pactumjs-and-jest) - Marie Cruz
+- [How to do API testing with PactumJS](https://medium.com/@prayaganeethu/how-to-do-api-testing-with-pactumjs-135c964b6abb) - Neethu Mohandas
 - [API Testing with PactumJS](https://medium.com/@mohdjeeshan007/api-testing-with-pactumjs-b29655e65805) - Mohd Jeeshan
 - [Setup Guide - PactumJS and CucumberJS](https://elser.hashnode.dev/setup-guide-for-api-testing-with-cucumber-js-and-pactumjs) - Manuel Serafin Bugarin
 - [API mocking in JavaScript with Pactum](https://www.ontestautomation.com/api-mocking-in-javascript-with-pactum) - Bas Dijkstra

@@ -14,6 +14,10 @@ withQueryParams(name, value)      // key-value pair
 withQueryParams(query-params)     // key-value pairs as object
 ```
 
+- `name` (**string**) - name of the query param.
+- `value?` (**string**) - value of the query param.
+- `query-params` (**object**) - key/value pairs.
+
 ## Usage
 
 #### ✅  Correct Usage
@@ -68,20 +72,6 @@ await spec()
   })
   .expectStatus(200);
 ```
-
-## Arguments
-
-#### > name (string)
-
-Name of the query param.
-
-#### > value (string)
-
-Value of the query param.
-
-#### > query-params (object)
-
-key-value pairs of query params.
 
 ## Examples
 
