@@ -65,6 +65,8 @@ const api_sidebar = [
       '/api/requests/withGraphQLQuery',
       '/api/requests/withGraphQLVariables',
       '/api/requests/withRequestTimeout',
+      '/api/requests/withCompression',
+      '/api/requests/withFollowRedirects',
       '/api/requests/inspect',
       '/api/requests/retry',
       '/api/requests/returns',

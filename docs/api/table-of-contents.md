@@ -19,6 +19,8 @@
 - [withGraphQLQuery](/api/requests/withGraphQLQuery)
 - [withGraphQLVariables](/api/requests/withGraphQLVariables)
 - [withRequestTimeout](/api/requests/withRequestTimeout)
+- [withCompression](/api/requests/withCompression)
+- [withFollowRedirects](/api/requests/withFollowRedirects)
 - [inspect](/api/requests/inspect)
 - [retry](/api/requests/retry)
 - [returns](/api/requests/returns)
