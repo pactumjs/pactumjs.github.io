@@ -5,3 +5,4 @@
 - [nest-e2e-sample](https://github.com/jmcdo29/nest-e2e-sample) - An E2E testing sample using uvu and pactumJS to test a NestJS application
 - [integration-tests-jest](https://github.com/ugioni/integration-tests-jest) - API testing with a simple integration between JestJS and PactumJS
 - [api-testing-js-pactum](https://github.com/basdijkstra/api-testing-js-pactum) - API testing and mocking examples using jest
+- [api-testing-pactumjs-mocha-javascript](https://github.com/codewithmmak/api-testing-pactumjs-mocha-javascript) - Boilerplate project to run REST API tests on reqres.in
