@@ -14,6 +14,8 @@ Specifies bearer authentication.
 withBearerToken(token)
 ```
 
+- `token` (**string**) - bearer token.
+
 ## Usage
 
 ### ✅  Correct Usage
@@ -24,12 +26,6 @@ await spec()
   .withBearerToken('token')
   .expectStatus(200);
 ```
-
-## Arguments
-
-#### > token (string)
-
-Bearer token.
 
 ## Examples
 
