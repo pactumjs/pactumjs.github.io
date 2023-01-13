@@ -56,6 +56,7 @@ const api_sidebar = [
       '/api/requests/withHeaders',
       '/api/requests/withCookies',
       '/api/requests/withAuth',
+      '/api/requests/withBearerToken',
       '/api/requests/withCore',
       '/api/requests/withBody',
       '/api/requests/withJson',
