@@ -63,7 +63,7 @@ Name of the expect handler
 
 custom data to be passed to handler
 
-::: tip
+::: tip TIP
 handlers and callback functions can be asynchronous
 :::
 

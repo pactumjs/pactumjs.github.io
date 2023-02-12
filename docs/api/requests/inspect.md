@@ -9,7 +9,7 @@ tags:
 
 Prints request & response details to the console.
 
-::: tip
+::: tip TIP
 - Use it for debugging purpose.
 - By default, request and response are printed to the terminal when a test case fails.
 :::

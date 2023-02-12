@@ -37,6 +37,6 @@ PACTUM_REQUEST_BASE_URL=https://example.com
 
 ## See Also
 
-- [API](/api/table-of-contents)
+- [API](/api/requests/spec)
 - [setDefaultTimeout](/api/settings/setDefaultTimeout)
 - [setBaseUrl](/api/settings/setBaseUrl)

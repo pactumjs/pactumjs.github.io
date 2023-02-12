@@ -8,7 +8,7 @@ This tool is packed with a rich set of features for making HTTP requests & valid
 
 In general, the first step in API testing is to make a request to the server. There are different ways available in **PactumJS** that allows us to send a request.
 
-::: tip
+::: tip TIP
 `spec()` method will return an instance of spec object that exposes all methods to build a request.
 :::
 
@@ -37,7 +37,7 @@ it('should get random male users', async () => {
 });
 ```
 
-::: warning
+::: warning WARNING
 Always remember to place `await` statement before `spec()` method to run the test case.
 :::
 

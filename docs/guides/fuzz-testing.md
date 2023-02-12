@@ -2,7 +2,7 @@
 
 Fuzz testing or fuzzing is an automated software testing method that injects invalid, malformed, or unexpected inputs into a system to reveal software defects and vulnerabilities.
 
-::: danger
+::: danger NOTE
 It is still in experimental phase.
 :::
 

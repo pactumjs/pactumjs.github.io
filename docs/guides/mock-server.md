@@ -25,7 +25,7 @@ curl http://localhost:3000/api/pactum/health
 
 Use `mock.stop()` method to stop the mock server. It returns a promise. 
 
-::: tip
+::: tip TIP
 Waiting for the server to stop will be useful while running the mock server along with your unit or component tests.
 :::
 

@@ -123,7 +123,7 @@ await spec()
   });
 ```
 
-::: danger WARNING
+::: danger NOTE
 Templates can also reference other templates. Be cautious not to create circular dependencies.
 :::
 
@@ -187,7 +187,7 @@ stash.addDataTemplate({
 });
 ```
 
-::: danger WARNING
+::: danger NOTE
 It's perfectly legal to refer other data maps from a data map. Be cautious not to create circular dependencies
 :::
 
