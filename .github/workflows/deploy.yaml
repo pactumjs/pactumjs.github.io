@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -20,8 +20,8 @@ jobs:
       - name: Build
         run: npm run docs:build
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      env:
-        github_token: ${{ secrets.DOCS_TOKEN }}
-        publish_dir: docs/.vitepress/dist
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.DOCS_TOKEN }}
+          publish_dir: docs/.vitepress/dist
