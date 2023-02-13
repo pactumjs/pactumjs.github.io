@@ -6,18 +6,22 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    
-    - name: Checkout
-      uses: actions/checkout@master
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
 
-    - name: vuepress-deploy
-      uses: jenkey2011/vuepress-deploy@master
+      - name: Build
+        run: npm run docs:build
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       env:
-        ACCESS_TOKEN: ${{ secrets.DOCS_TOKEN }}
-        TARGET_REPO: pactumjs/pactumjs.github.io
-        TARGET_BRANCH: docs
-        BUILD_SCRIPT: npm i && npm run docs:build
-        BUILD_DIR: docs/.vuepress/dist
+        github_token: ${{ secrets.DOCS_TOKEN }}
+        publish_dir: docs/.vitepress/dist
