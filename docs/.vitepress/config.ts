@@ -1,6 +1,7 @@
 const github = 'https://github.com/pactumjs/pactum';
 const releases = 'https://github.com/pactumjs/pactum/releases';
 const packages = 'https://www.npmjs.com/package/pactum';
+const twitter = 'https://twitter.com/pactumjs';
 
 import { SitemapStream } from 'sitemap';
 import { createWriteStream } from 'node:fs'
@@ -260,6 +261,7 @@ const config = defineConfig({
 
     socialLinks: [
       { icon: 'github', link: github },
+      { icon: 'twitter', link: twitter },
     ],
 
     editLink: {
@@ -276,21 +278,10 @@ const config = defineConfig({
     nav: [
       { text: '🏠 Home', link: '/introduction/welcome', activeMatch: '/guides/'},
       { text: '⇌ API', link: '/api/requests/spec',  activeMatch: '/api/' },
-      { text: '📦 Releases', link: releases },
-      { text: '📑 More',
+      { text: '📑 v3.x.x',
         items: [
-          {
-            text: 'Social',
-            items: [
-              { text: 'Twitter', link: 'https://twitter.com/pactumjs' }
-            ]
-          },
-          {
-            text: 'NPM Packages',
-            items: [
-              { text: 'PactumJS', link: packages }
-            ]
-          }
+          { text: 'Github Releases', link: releases },
+          { text: 'NPM Package', link: packages }
         ]
       }
     ],
