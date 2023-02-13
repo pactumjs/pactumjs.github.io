@@ -2,7 +2,7 @@
 
 **PactumJS** is a Node.js project & available as an `npm` package under the name [pactum](https://www.npmjs.com/package/pactum).
 
-::: tip
+::: tip TIP
 **PactumJS** is not a test runner. It needs to be used alongside with a test runner like **mocha**, **jest**, **jasmine**, **cucumber** or build your own if your heart desires, pactum should work out of the box.
 :::
 

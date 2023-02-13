@@ -9,7 +9,7 @@ tags:
 
 When there is an intentional change in the API response, our snapshot test fails because the snapshot for our updated API no longer matches the snapshot artifact for this test case. To resolve this, we will need to update our snapshot artifacts. Use `updateSnapshot` method in the test case & run the test to update the snapshot.
 
-::: danger
+::: danger NOTE
 Remove `updateSnapshot` method from the test case after the snapshot is updated.
 :::
 

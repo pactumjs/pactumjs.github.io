@@ -95,6 +95,6 @@ await spec()
 
 - Under the hood, PactumJS uses [form-data-lite](https://www.npmjs.com/package/form-data-lite)
 
-::: danger
+::: danger NOTE
 From **v3.1.0**, pactum uses [form-data-lite](https://www.npmjs.com/package/form-data-lite) that has just the standard mime-types. (*which reduces the overall package size*). If you have a custom file type to be uploaded, you need to mention the content-type of the file explicitly.
 :::

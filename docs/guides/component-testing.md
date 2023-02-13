@@ -4,7 +4,7 @@ Component testing is defined as a software testing type, in which the testing is
 
 These tests are all about testing the functionality of individual service. During this, your service will be trying to interact with external services. But instead of talking to real external services, they talk to mock servers and local databases.
 
-::: tip
+::: tip TIP
 [Docker](https://www.docker.com) is great place to test your applications in isolation. 
 
 **PactumJS** might be the best tool available in the market for component testing. ¯\\(ツ)/¯
@@ -98,7 +98,7 @@ This looks simple & easy to test. But as the functionality of the application gr
 
 Interactions can be added to the mock server before the execution of a test case through `useInteraction` method. Once the interactions are added, you can build your request & expectations on top of it. The mock interactions added through `useInteraction` method are auto removed after the test case is executed.
 
-::: danger
+::: danger NOTE
 If the interaction doesn't get exercised, the component test will fail. 
 :::
 
@@ -167,7 +167,7 @@ it('should not buy a product which is out-of-stock', async () => {
 });
 ```
 
-::: tip
+::: tip TIP
 Use interaction handlers and remote mock server to make component tests look simpler.
 :::
 

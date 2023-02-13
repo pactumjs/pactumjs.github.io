@@ -15,7 +15,7 @@ If you are running the test for the first time, pactum will save the api respons
 
 > A snapshot needs a unique name & it can be defined through `spec().name("<unique name>")` or `expectJsonSnapshot("<name>")`.
 
-::: warning
+::: warning WARNING
 - It is mandatory to commit the snapshot files to the version control system.
 
 - There are high chances that our server will return response containing dynamic data like `ids` or `dates`. Not to fail the snapshot at every run, pactum provides matchers for any property in the JSON. See [Matching](/guides/matching) for more usage details

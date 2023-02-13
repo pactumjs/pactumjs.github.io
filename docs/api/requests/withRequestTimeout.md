@@ -10,7 +10,7 @@ Set the request timeout for the current `spec`.
 
 > By default, request will timeout after **3000ms**.
 
-::: danger
+::: tip TIP
 Make sure to increase the test runners timeout as well
 :::
 

@@ -9,7 +9,7 @@ setDefaultExpectStatus(statusCode)
 ```
 - `statusCode` (**number**) - response status code.
 
-::: tip
+::: tip TIP
 - Reference guide for HTTP status codes: [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 :::
 

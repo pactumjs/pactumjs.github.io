@@ -62,7 +62,7 @@ Name of the interaction handler
 
 Callback function. It will receive a `context` object that has **data** property. 
 
-::: warning
+::: warning WARNING
 Callback function should return an `interaction` object or reference to other interactions.
 :::
 

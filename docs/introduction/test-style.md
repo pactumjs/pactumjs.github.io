@@ -59,6 +59,6 @@ describe('Posts', () => {
 });
 ```
 
-::: danger
+::: tip TIP
 Normal assertion methods like `expectStatus` or `expectJson` will only work if called before the `toss` method.
 :::
