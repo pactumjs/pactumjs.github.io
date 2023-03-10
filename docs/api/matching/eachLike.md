@@ -82,7 +82,7 @@ In this example, we are asserting the response from `random-user` api. The resul
 
 - `results` should be an array of objects.
   - each object in `results` should contain
-    - `name` and it should be a string
+    - `gender` and it should be a string
 
 ```js
 const { spec } = require('pactum');
