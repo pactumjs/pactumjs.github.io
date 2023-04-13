@@ -16,4 +16,4 @@ npm i
 npm run docs:dev
 ```
 
-Documentation will be served at http://localhost:8080
+Documentation will be served at http://localhost:5173
