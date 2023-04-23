@@ -59,6 +59,10 @@ If the `path` starts with one of the value, it has a special meaning
 
 Name of the capture handler to use.
 
+#### > cb ((request: Request, response: IncomingMessage & {body: Record<string, any>, json: Record<string, any>}) => T)
+
+A custom function which should return an object to store the response value for pactum.
+
 ## Examples
 
 ### Store single value
@@ -94,6 +98,25 @@ await spec()
 await spec()
   .get(`http://jsonplaceholder.typicode.com/posts/{id}/comments`)
   .withPathParams('id', '$S{FirstPostId}')
+  .expectStatus(200);
+```
+
+### Using custom function
+
+```js
+const { spec, handler } = require('pactum');
+
+await spec()
+  .get('http://jsonplaceholder.typicode.com/posts')
+  .expectStatus(200)
+  .stores((request, response) => {
+    return {
+      custom_func_id: response.body[0].id,
+    };
+  });
+await spec()
+  .get(`http://jsonplaceholder.typicode.com/posts/{id}/comments`)
+  .withPathParams('id', '$S{custom_func_id}')
   .expectStatus(200);
 ```
 

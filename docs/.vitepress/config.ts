@@ -8,7 +8,7 @@ import { createWriteStream } from 'node:fs'
 import { resolve } from 'node:path'
 import { defineConfig } from 'vitepress';
 
-const links = []
+const links: Array<{url: string, lastmod?: number}> = []
 
 const home_sidebar = [
   {
