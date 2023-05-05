@@ -1,5 +1,6 @@
 # Blogs
 
+- [PactumJS: The Key to Efficient API Automation Testing](https://razvanvancea.ro/blog/2023/05/04/pactumjs-the-key-to-efficient-api-automation-testing/) - Razvan Vancea
 - [Writing API tests with PactumJS and Jest](https://www.testingwithmarie.com/post/writing-api-tests-with-pactumjs-and-jest) - Marie Cruz
 - [How to do API testing with PactumJS](https://medium.com/@prayaganeethu/how-to-do-api-testing-with-pactumjs-135c964b6abb) - Neethu Mohandas
 - [API Testing with PactumJS](https://medium.com/@mohdjeeshan007/api-testing-with-pactumjs-b29655e65805) - Mohd Jeeshan
