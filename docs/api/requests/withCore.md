@@ -2,6 +2,7 @@
 tags:
   - core
   - agent
+  - proxy agent
 ---
 
 # withCore
@@ -45,5 +46,19 @@ await spec()
   .withCore({
     auth: 'user:pass'
   })
+  .expectStatus(200);
+```
+
+### Proxy Agent
+
+```js
+const { spec } = require('pactum');
+const { ProxyAgent } = require('proxy-agent');
+
+const agent = new ProxyAgent();
+
+await spec()
+  .get('https://pactumjs.github.io/')
+  .withCore({ agent })
   .expectStatus(200);
 ```

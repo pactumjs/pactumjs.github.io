@@ -13,6 +13,7 @@ PactumJS supports setting default values to configuration parameters via Envrion
 | `PACTUM_REQUEST_TIMEOUT`         | `3000` ms          | Sets default timeout of requests          |
 | `PACTUM_RESPONSE_TIME`           | `null`             | Sets default expected response time       |
 | `PACTUM_RESPONSE_STATUS`         | `null`             | Sets default expected response status code|
+| `PACTUM_DISABLE_USE_INTERACTION` | `null`             | Disable use interactions                  |
 
 ## Usage
 
