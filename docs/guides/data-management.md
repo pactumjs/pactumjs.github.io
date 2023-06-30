@@ -289,8 +289,10 @@ If the `json-query` starts with one of the value, it has a special meaning
 | `req.pathParams`  | Request path params               |
 | `req.queryParams` | Request query params              |
 | `req.headers`     | Request headers                   |
+| `req.cookies`     | Request cookies                   |
 | `res.body`        | Response body *(this is default)* |
-| `res.headers`     | Response headers                   |
+| `res.headers`     | Response headers                  |
+| `res.cookies`     | Response cookies                  |
 
 ## Loading Data
 
