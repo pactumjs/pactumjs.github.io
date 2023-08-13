@@ -198,6 +198,7 @@ const api_sidebar = [
     text: '🎭 Mock',
     collapsed: false,
     items: [
+      { text: 'setDefaults', link: '/api/mock/setDefaults', },
       { text: 'start', link: '/api/mock/start', },
       { text: 'stop', link: '/api/mock/stop', },
       { text: 'interaction', link: '/api/mock/interaction', },

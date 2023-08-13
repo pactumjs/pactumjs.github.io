@@ -4,6 +4,28 @@ Mock Server allows you to mock any server or service via HTTP or HTTPS, such as 
 
 At one end pactum is a REST API testing tool and on the other, it can act as a standalone mock server. It comes in handy while using this library for component & contract testing.
 
+
+## Default Configuration
+
+Use `mock.setDefaults()` method to set default configuration for the mock server.
+
+Configuring a http mock server!
+```js
+const { mock } = require('pactum');
+// sets port, host
+const mockOpts = {port: 3001, host: '127.0.0.1'};
+await mock.setDefaults(mockOpts)
+```
+
+Configuring a https mock server!
+```js
+const { mock } = require('pactum');
+// sets port, host, httpsOpts
+const mockOpts = {port: 3001, host: '127.0.0.1', httpsOpts: {key: "server.key", cert: "server.crt"}};
+await mock.setDefaults(mockOpts)
+```
+`key` & `cert` values are the paths to .key and .crt files.
+
 ## Start Server
 
 Use `mock.start()` method to run the server.
@@ -13,6 +35,9 @@ const { mock } = require('pactum');
 // runs mock server on port 3000
 await mock.start(3000);
 ```
+::: tip TIP
+Use of `mock.setDefaults()` is encouraged for setting port, hostname and/or https options
+:::
 
 Check the health of the mock server
 
