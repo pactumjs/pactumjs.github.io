@@ -239,6 +239,7 @@ For capturing other parts of the request,
 - `req.pathParams` - Request Path Params
 - `req.queryParams` - Request Query Params
 - `req.headers` - Request Headers
+- `req.cookies` - Request cookies
 - `req.body` - Request Body
 
 

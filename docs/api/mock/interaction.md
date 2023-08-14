@@ -16,6 +16,7 @@ An **interaction** adds behavior to the mock server.
 | request.path              | api path                                    |
 | request.pathParams        | api path params                             |
 | request.headers           | request headers                             |
+| request.cookies           | request cookies                             |
 | request.queryParams       | query parameters                            |
 | request.body              | request body                                |
 | request.graphQL           | graphQL details                             |
@@ -24,6 +25,7 @@ An **interaction** adds behavior to the mock server.
 | response                  | response details                            |
 | response.status           | response status code                        |
 | response.headers          | response headers                            |
+| response.cookies          | response cookies                            |
 | response.body             | response body                               |
 | response.file             | path of the file to return                  |
 | response.fixedDelay       | delays the response by ms                   |
