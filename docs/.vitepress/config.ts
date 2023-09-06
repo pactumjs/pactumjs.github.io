@@ -80,6 +80,7 @@ const api_sidebar = [
       { text: 'save', link: '/api/requests/save', },
       { text: 'records', link: '/api/requests/records', },
       { text: 'toss', link: '/api/requests/toss', },
+      { text: 'wait', link: '/api/requests/wait', },
       { text: 'use', link: '/api/requests/use', },
       { text: 'name', link: '/api/requests/name', },
       { text: 'flow', link: '/api/requests/flow', },
