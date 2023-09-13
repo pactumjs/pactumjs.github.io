@@ -1,1 +1,0 @@
-import{_ as e,o as a,c as t,a as r}from"./app.acddf348.js";const p=JSON.parse('{"title":"Videos","description":"","frontmatter":{},"headers":[],"relativePath":"media/videos.md","lastUpdated":1685182581000}'),o={name:"media/videos.md"},i=r("",2),n=[i];function l(s,c,u,d,_,h){return a(),t("div",null,n)}const f=e(o,[["render",l]]);export{p as __pageData,f as default};
