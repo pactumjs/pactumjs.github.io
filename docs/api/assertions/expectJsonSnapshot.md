@@ -11,7 +11,7 @@ Snapshot testing is a type of **output comparison** which will be very useful wh
 
 A typical snapshot test in pactum will fetch the api response, then compares it to a reference snapshot file stored alongside the test. The test will fail if the two snapshots do not match: either the change is unexpected, or the reference snapshot needs to be updated to the new version of the API response.
 
-If you are running the test for the first time, pactum will save the api response body at `./pactum/snapshots` directory. For the next test runs, pactum will compare the actual response with the local reference file. 
+If you are running the test for the first time, pactum will save the api response body at `.pactum/snapshots` directory. For the next test runs, pactum will compare the actual response with the local reference file. 
 
 > A snapshot needs a unique name & it can be defined through `spec().name("<unique name>")` or `expectJsonSnapshot("<name>")`.
 
