@@ -1,6 +1,6 @@
 # stores
 
-`stores` method lets use save response data under [Data Management]() which allows to refer the saved data anywhere in the tests using special syntax - `$S{<variable>}`.
+`stores` method lets use save response data under [Data Management](/guides/data-management) which allows to refer the saved data anywhere in the tests using special syntax - `$S{<variable>}`.
 
 ## Syntax
 
