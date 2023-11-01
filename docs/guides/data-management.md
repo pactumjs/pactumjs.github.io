@@ -1,6 +1,6 @@
 # Data Management
 
-Data Management is one of the most powerful features of **PactumJS**. It allows us to logically group, reuse common date across all tests.
+Data Management is one of the most powerful features of **PactumJS**. It allows us to logically group, reuse common data across all tests.
 
 ## Introduction
 
