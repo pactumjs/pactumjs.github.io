@@ -258,19 +258,19 @@ mock.start(3000);
 
 ```shell
 # Returns all interactions.
-curl --location --request GET 'http://localhost:9393/api/pactum/interactions'
+curl --location --request GET 'http://localhost:3000/api/pactum/interactions'
 ```
 
 ```shell
 # Returns a single interaction.
-curl --location --request GET 'http://localhost:9393/api/pactum/interactions?id=m1uh9'
+curl --location --request GET 'http://localhost:3000/api/pactum/interactions?id=m1uh9'
 ```
 
 #### POST - /api/pactum/interactions
 
 ```shell
 # Adds multiple interactions to the server and returns array of interaction ids
-curl --location --request POST 'http://localhost:9393/api/pactum/interactions' \
+curl --location --request POST 'http://localhost:3000/api/pactum/interactions' \
 --header 'Content-Type: application/json' \
 --data-raw '[{
     "request": {
@@ -297,12 +297,12 @@ curl --location --request POST 'http://localhost:9393/api/pactum/interactions' \
 
 ```shell
 # Removes a single interaction with id m1uh9
-curl --location --request DELETE 'http://localhost:9393/api/pactum/interactions?id=m1uh9'
+curl --location --request DELETE 'http://localhost:3000/api/pactum/interactions?id=m1uh9'
 ```
 
 ```shell
 # Removes all interactions
-curl --location --request DELETE 'http://localhost:9393/api/pactum/interactions'
+curl --location --request DELETE 'http://localhost:3000/api/pactum/interactions'
 ```
 
 ### Using Remote Mock Server
