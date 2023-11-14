@@ -124,7 +124,7 @@ await spec()
 ```js
 const { spec, handler } = require('pactum');
 
-handler.addSpecHandler('get user', () => {
+handler.addSpecHandler('get user', (ctx) => {
   const { spec, data } = ctx;
   spec.get('https://reqres.in/api/users/{id}');
   spec.withPathParams('id', data || 1)
