@@ -1,6 +1,6 @@
 # Environment Variables
 
-PactumJS supports setting default values to configuration parameters via Envrionment variables. 
+PactumJS supports setting default values to configuration parameters via Environment variables. 
 
 
 ## List of Environment Variables
