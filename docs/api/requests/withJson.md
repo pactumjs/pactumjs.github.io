@@ -43,7 +43,11 @@ relative path to the json file.
 
 #### > file_name (string)
 
-name of the file. This function looks for a file inside the `./data` folder and any folders nested within it. 
+name of the file. This will looks for a file inside the `./data` folder and any folders nested within it. 
+
+::: tip Tip
+We can customize the data folder path using [setDataDirectory](/api/settings/setDataDirectory).
+:::
 
 ## Examples
 
@@ -87,4 +91,4 @@ await spec()
 ## See Also
 
 - [withBody](/api/requests/withBody)
-- [withBody](/api/requests/withBody)
+- [setDataDirectory](/api/settings/setDataDirectory)
