@@ -27,14 +27,14 @@ settings.setSnapshotDirectoryPath('new/path')
 
 #### > path (string)
 
-Snapshot directory path url.
+Snapshot directory path.
 
 ## Examples
 
 ### Normal
 
 ```js
-const { spec, request } = require('pactum');
+const { spec, settings } = require('pactum');
 
 settings.setSnapshotDirectoryPath('new/path');
 

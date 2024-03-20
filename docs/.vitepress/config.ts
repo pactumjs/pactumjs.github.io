@@ -3,9 +3,9 @@ const releases = 'https://github.com/pactumjs/pactum/releases';
 const packages = 'https://www.npmjs.com/package/pactum';
 const twitter = 'https://twitter.com/pactumjs';
 
+import { createWriteStream } from 'node:fs';
+import { resolve } from 'node:path';
 import { SitemapStream } from 'sitemap';
-import { createWriteStream } from 'node:fs'
-import { resolve } from 'node:path'
 import { defineConfig } from 'vitepress';
 
 const links: Array<{url: string, lastmod?: number}> = []
@@ -84,7 +84,8 @@ const api_sidebar = [
       { text: 'use', link: '/api/requests/use', },
       { text: 'name', link: '/api/requests/name', },
       { text: 'flow', link: '/api/requests/flow', },
-      { text: 'useLogLevel', link: '/api/requests/useLogLevel', }       
+      { text: 'useLogLevel', link: '/api/requests/useLogLevel', },
+      { text: 'setState', link: '/api/requests/setState', },
     ]
   },
   {
@@ -177,7 +178,8 @@ const api_sidebar = [
       { text: 'setSnapshotDirectoryPath', link: '/api/settings/setSnapshotDirectoryPath', },
       { text: 'setReporterAutoRun', link: '/api/settings/setReporterAutoRun', },
       { text: 'setRequestDefaultRetryCount', link: '/api/settings/setRequestDefaultRetryCount', },
-      { text: 'setRequestDefaultRetryDelay', link: '/api/settings/setRequestDefaultRetryDelay', }      
+      { text: 'setRequestDefaultRetryDelay', link: '/api/settings/setRequestDefaultRetryDelay', },
+      { text: 'setDataDirectory', link: '/api/settings/setDataDirectory', },    
     ]
   },
   {

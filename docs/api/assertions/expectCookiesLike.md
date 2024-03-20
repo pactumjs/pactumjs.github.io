@@ -10,6 +10,10 @@ Performs partial match on cookies in the response. Pass either key-value pair or
 
 > PactumJS uses [lightcookie](https://www.npmjs.com/package/lightcookie) internally to parse.
 
+::: tip TIP
+And this validation is similar to [expectJsonLike](/api/assertions/expectJsonLike).
+:::
+
 ## Syntax
 
 ```js
