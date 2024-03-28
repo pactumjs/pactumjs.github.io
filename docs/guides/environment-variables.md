@@ -1,6 +1,6 @@
 # Environment Variables
 
-PactumJS supports setting default values to configuration parameters via Environment variables. 
+PactumJS allows configurations to be defined through environment variables.
 
 
 ## List of Environment Variables
@@ -27,7 +27,7 @@ export PACTUM_MOCK_PORT=9001
 export PACTUM_REQUEST_BASE_URL=https://example.com
 ```
 
-Adding to .env file
+Adding to `.env` file and read it through [dotenv](https://www.npmjs.com/package/dotenv) package.
 
 ```sh
 # contents in .env file

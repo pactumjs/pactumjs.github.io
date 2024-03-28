@@ -1,6 +1,7 @@
 # Blogs
 
 - [PactumJS: A Next-Gen REST API Testing Tool](https://medium.com/@joaovitorcoelho10/pactumjs-a-next-gen-rest-api-testing-tool-ae88a9e51916) - João Coelho
+- [API Automation With Pactum.JS](https://medium.com/@zinjurdepratik567/api-automation-with-pactum-js-3682c2d73845) - Pratik Zinjurde
 - [Automated Tests For Strapi API using PactumJS](https://strapi.io/blog/how-to-create-automated-tests-for-strapi-api-using-pactum-js) - Ahmed Ayman
 - [An Introduction to Contract Testing With PactumJS](https://www.applause.com/blog/contract-testing-with-pactumjs) - David Ruiz Hernandez
 - [A Complete Guide to PactumJS](https://www.programsbuzz.com/article/complete-guide-pactumjs) - Moeen

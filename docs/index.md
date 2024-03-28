@@ -21,7 +21,7 @@ features:
     details: Rich set of features to test complex scenarios yet wrapped inside a lightweight npm package.
   - title: 🧪 Clear & Comprehensive
     details: Clear and simple API to write readable and maintainable component, contract and end-to-end integration tests.
-footer: MIT Licensed | Copyright © 2023
+footer: MIT Licensed | Copyright © 2024
 ---
 
 <script setup>

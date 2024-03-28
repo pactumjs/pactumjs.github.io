@@ -177,5 +177,5 @@ To access the backend API (swagger page), navigate to [http://localhost:8080/api
 - Compatibility Results
 
 ::: warning WARNING
-Contract Testing is still in experimental phase. We are expecting it to be officially supported in the second quarter of **2022**. 🤞
+Contract Testing is still in beta phase.
 :::
