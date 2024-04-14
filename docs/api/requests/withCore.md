@@ -62,3 +62,7 @@ await spec()
   .withCore({ agent })
   .expectStatus(200);
 ```
+
+::: warning WARNING 
+If `withCore` is used at the end in request chaining, all [http core options](https://nodejs.org/api/http.html#httprequesturl-options-callback) provided in `withCore` will take precedence and they will override any previously values.
+:::
