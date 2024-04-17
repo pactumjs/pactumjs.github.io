@@ -14,6 +14,9 @@ Assert a JSON using a set of matchers.
 
 ```js
 expectJsonMatch(json)
+expectJson(template-name)
+expectJson(file-path)
+expectJson(file-name)
 expectJsonMatch(path, json)
 ```
 
@@ -21,10 +24,10 @@ expectJsonMatch(path, json)
 
 #### ✅  Correct Usage
 
-```js 
+```js
 await spec()
   .get('api/users/1')
-  .expectJsonMatch({ 
+  .expectJsonMatch({
     id: like(1)
   });
 ```
@@ -41,7 +44,7 @@ Json path. See [json-query](https://www.npmjs.com/package/json-query) for more u
 
 ## Examples
 
-### Partial deep equal 
+### Partial deep equal
 
 ```js
 const { spec } = require('pactum');
@@ -66,3 +69,8 @@ await spec()
   .get('https://reqres.in/api/users/1')
   .expectJsonMatch('data.first_name', like('George'));
 ```
+
+## See Also
+
+- [Matching](/guides/matching)
+- [setDataDirectory](/api/settings/setDataDirectory)

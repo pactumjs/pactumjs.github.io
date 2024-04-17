@@ -16,6 +16,9 @@ Assert based on JSON schema.
 
 ```js
 expectJsonSchema(schema)
+expectJson(template-name)
+expectJson(file-path)
+expectJson(file-name)
 expectJsonSchema(path, schema)
 ```
 
@@ -23,7 +26,7 @@ expectJsonSchema(path, schema)
 
 ### ✅  Correct Usage
 
-```js 
+```js
 await spec()
   .get('api/users/1')
   .expectJsonSchema({
@@ -67,3 +70,7 @@ await spec()
     "type": "object"
   });
 ```
+
+## See Also
+
+- [setDataDirectory](/api/settings/setDataDirectory)

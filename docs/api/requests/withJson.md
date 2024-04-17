@@ -13,6 +13,7 @@ Request body as json payload.
 
 ```js
 withJson(payload)
+withJson(template-name)
 withJson(file_path)
 withJson(file_name)
 ```
@@ -43,7 +44,7 @@ relative path to the json file.
 
 #### > file_name (string)
 
-name of the file. This will looks for a file inside the `./data` folder and any folders nested within it. 
+name of the file. This will looks for a file inside the `./data` folder and any folders nested within it.
 
 ::: tip Tip
 We can customize the data folder path using [setDataDirectory](/api/settings/setDataDirectory).
@@ -51,7 +52,7 @@ We can customize the data folder path using [setDataDirectory](/api/settings/set
 
 ## Examples
 
-#### Payload 
+#### Payload
 
 ```js
 const { spec } = require('pactum');
@@ -65,7 +66,26 @@ await spec()
   .expectStatus(201);
 ```
 
-#### File Path 
+#### Data Template
+
+```js
+const { spec, stash } = require('pactum');
+
+stash.addDataTemplate({
+  'USER_PAYLOAD': {
+    "name": "morpheus",
+    "job": "leader"
+  }
+});
+
+
+await spec()
+  .post('https://reqres.in/api/users')
+  .withJson('USER_PAYLOAD')
+  .expectStatus(201);
+```
+
+#### File Path
 
 ```js
 const { spec } = require('pactum');
@@ -76,7 +96,7 @@ await spec()
   .expectStatus(201);
 ```
 
-#### File Name 
+#### File Name
 
 ```js
 const { spec } = require('pactum');

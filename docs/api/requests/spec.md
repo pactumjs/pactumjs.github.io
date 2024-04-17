@@ -21,14 +21,14 @@ spec(handler-name, handler-options)
 ### ✅  Correct Usage
 
 ```js
-// always use 'await' statement 
+// always use 'await' statement
 await spec()
   .get('/api/users/1')
   .expectStatus(200);
 ```
 
 ```js
-// invoke the 'toss' method at the end to return a promise 
+// invoke the 'toss' method at the end to return a promise
 spec()
   .get('/api/users/1')
   .expectStatus(200)
@@ -63,8 +63,8 @@ spec().get('url').expectStatus(200);
 ```
 
 ```js
-// cannot make multiple requests with the same spec object. 
-// Instead use multiple 'spec()' methods.  
+// cannot make multiple requests with the same spec object.
+// Instead use multiple 'spec()' methods.
 await spec()
   .get('/api/users/1')
   .expectStatus(200)
@@ -79,15 +79,22 @@ await spec();
 
 ## Arguments
 
-#### > handler-name (string)
+#### > handler-name *(string)*
 
-Name of the spec handler to use. 
+Name of the spec handler to use.
 
 > Handlers should be defined before the usage. Else it will throw an error.
 
-#### > handler-options (any)
+#### > handler-data? *(any)*
 
-Handler options could be anything. With the help of this options, we can make the spec handlers dynamic.
+Handler data could be anything. With the help of this data, we can make the spec handlers dynamic.
+
+#### > handler-options? *(object)*
+
+Handler options to control the behavior of the spec handler.
+
+- `memo` *(any)* - Memoize the spec handler. If the spec handler is already memoized, it will not run the spec handler. The value of memo can be anything. Based on this value, it will decide if to run the spec handler or not.
+
 
 ## Yields
 
@@ -133,6 +140,42 @@ handler.addSpecHandler('get user', (ctx) => {
 
 await spec('get user').expectJson('data.first_name', 'George');
 await spec('get user', 2).expectJson('data.first_name', 'Janet');
+```
+
+### Using Handlers Memo
+
+`memo` as boolean
+
+```js
+const { spec, handler } = require('pactum');
+
+handler.addSpecHandler('get settings', (ctx) => {
+  const { spec } = ctx;
+  spec.get('https://example.com/settings');
+  spec.expectStatus(200);
+  spec.stores('SETTINGS', '.');
+});
+
+await spec('get settings', null, { memo: true }); // this will be executed
+await spec('get settings', null, { memo: true }); // this won't be executed
+```
+
+`memo` as string
+
+```js
+const { spec, handler } = require('pactum');
+
+handler.addSpecHandler('get settings', (ctx) => {
+  const { spec, data } = ctx;
+  spec.get(`https://example.com/settings/${data}`);
+  spec.expectStatus(200);
+  spec.stores(`SETTINGS:${data}`, '.');
+});
+
+await spec('get settings', 'user', { memo: 'user' }); // this will be executed
+await spec('get settings', 'org', { memo: 'org' }); // this will be executed
+await spec('get settings', 'user', { memo: 'user' }); // this won't be executed
+await spec('get settings', 'org', { memo: 'org' }); // this won't be executed
 ```
 
 ## See Also
