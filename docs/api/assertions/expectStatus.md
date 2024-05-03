@@ -13,6 +13,11 @@ Assert response status code
 expectStatus(status)
 ```
 
+```js
+expectStatus(status, message)
+```
+
+
 ## Usage
 
 ### ✅  Correct Usage
@@ -21,6 +26,12 @@ expectStatus(status)
 await spec()
   .get('/api/users')
   .expectStatus(200);
+```
+
+```js 
+await spec()
+  .get('/api/users')
+  .expectStatus(200, 'An error occurred in the API call because it did not return the statusCode 200');
 ```
 
 ```js
@@ -35,6 +46,11 @@ _spec.response().to.have.status(200);
 
 Response status code.
 
+#### > message (string)
+
+Custom message.
+
+
 ## Examples
 
 ```js 
@@ -43,6 +59,14 @@ const { spec } = require('pactum');
 await spec()
   .get('https://reqres.in/api/users')
   .expectStatus(200);
+```
+
+```js 
+const { spec } = require('pactum');
+
+await spec()
+  .get('https://reqres.in/api/users')
+  .expectStatus(200, 'An error occurred in the API call because it did not return the statusCode 200');
 ```
 
 ## See Also
