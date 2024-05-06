@@ -4,12 +4,13 @@ import Icon from "./Icon.vue";
 
 <template>
   <div class="ad-component">
-    <a target="_blank" href="https://forms.gle/Wfc9c89j78He3Zap9">
+    <a target="_blank" href="https://testbeats.com">
       <Icon class="icon" />
       <span
-        >Share Your Insights: Join Our Survey on Test Reporting Practices!</span
+        >Keep your tests in tune with</span
       >
-      <span class="cta">Participate now →</span>
+      <span class="cta">testbeats</span>
+       →
     </a>
   </div>
 </template>
@@ -17,26 +18,28 @@ import Icon from "./Icon.vue";
 <style scoped>
 @keyframes pulse {
   0% {
-    border: 2px solid var(--vp-c-divider);
+    border: 1px solid var(--vp-c-divider);
   }
   50% {
-    border: 2px solid var(--vp-c-brand);
+    border: 1px solid var(--vp-c-brand);
   }
   100% {
-    border: 2px solid var(--vp-c-divider);
+    border: 1px solid var(--vp-c-divider);
   }
 }
 
 .ad-component {
+  text-align: center;
   margin-bottom: 2rem;
   padding: 0.5rem 0.85rem;
-  border: 2px solid var(--vp-c-brand);
+  border: 1px solid var(--vp-c-brand);
   border-radius: 4px;
   text-decoration: none;
-  color: var(--vp-c-text-2);
+  color: white;
   transition: color 0.4s ease-in-out;
-  font-size: 0.8rem;
+  font-size: 1rem;
   animation: pulse 3s infinite;
+  background-image: linear-gradient(to top right, #000000, #000842);
 }
 
 .ad-component:hover {
