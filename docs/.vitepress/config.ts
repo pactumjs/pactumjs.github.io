@@ -180,6 +180,7 @@ const api_sidebar = [
       { text: 'setRequestDefaultRetryCount', link: '/api/settings/setRequestDefaultRetryCount', },
       { text: 'setRequestDefaultRetryDelay', link: '/api/settings/setRequestDefaultRetryDelay', },
       { text: 'setDataDirectory', link: '/api/settings/setDataDirectory', },    
+      { text: 'removeDefaultHeaders', link: '/api/settings/removeDefaultHeaders', },
     ]
   },
   {
