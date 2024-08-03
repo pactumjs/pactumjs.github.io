@@ -23,11 +23,11 @@ await sleep(1000); // sleeps for 1 second
 ```
 
 ```js
-// sleeps for 1 second after running a spec 
+// sleeps for 1 second after running a spec
 await spec()
   .get('/path')
   .expectStatus(200)
-  .sleep(1000); 
+  .sleep(1000);
 ```
 
 ```js
@@ -47,9 +47,9 @@ Number of milliseconds to sleep.
 ## Examples
 
 ```js
-const { sleep } = require('pactum');
+const { utils } = require('pactum');
 
-await sleep(100);
+await utils.sleep(100);
 ```
 
 ## Using Spec
@@ -60,13 +60,13 @@ const { spec } = require('pactum');
 await spec()
   .get('https://reqres.in/api/path')
   .expectStatus(200)
-  .sleep(1000); 
+  .sleep(1000);
 ```
 
 ## Using Handler
 
 ```js
-const { spec , handler} = require('pactum');
+const { spec , handler } = require('pactum');
 
 handler.addSpecHandler('get users', (ctx) => {
   const { spec } = ctx;
@@ -75,7 +75,7 @@ handler.addSpecHandler('get users', (ctx) => {
 
 await spec('get users')
     .expectStatus(200)
-    .sleep(1000); 
+    .sleep(1000);
 ```
 
 ## Yields

@@ -98,7 +98,7 @@ const api_sidebar = [
       { text: 'setDefaultExpectHandlers', link: '/api/responses/setDefaultExpectHandlers', },
       { text: 'removeDefaultExpectHeader', link: '/api/responses/removeDefaultExpectHeader', },
       { text: 'removeDefaultExpectHeaders', link: '/api/responses/removeDefaultExpectHeaders', },
-      { text: 'removeDefaultExpectHandlers', link: '/api/responses/removeDefaultExpectHandlers', }         
+      { text: 'removeDefaultExpectHandlers', link: '/api/responses/removeDefaultExpectHandlers', }
     ]
   },
   {
@@ -122,7 +122,7 @@ const api_sidebar = [
       { text: 'expectBodyContains', link: '/api/assertions/expectBodyContains', },
       { text: 'expectResponseTime', link: '/api/assertions/expectResponseTime', },
       { text: 'expectError', link: '/api/assertions/expectError', },
-      { text: 'expect', link: '/api/assertions/expect', }          
+      { text: 'expect', link: '/api/assertions/expect', }
     ]
   },
   {
@@ -131,7 +131,8 @@ const api_sidebar = [
     items: [
       { text: 'clone', link: '/api/utils/clone', },
       { text: 'parse', link: '/api/utils/parse', },
-      { text: 'sleep', link: '/api/utils/sleep' }
+      { text: 'sleep', link: '/api/utils/sleep' },
+      { text: 'findFile', link: '/api/utils/findFile' }
     ]
   },
   {
@@ -156,7 +157,7 @@ const api_sidebar = [
       { text: 'lte', link: '/api/matching/lte', },
       { text: 'notIncludes', link: '/api/matching/notIncludes', },
       { text: 'notNull', link: '/api/matching/notNull', },
-      { text: 'notEquals', link: '/api/matching/notEquals', }      
+      { text: 'notEquals', link: '/api/matching/notEquals', }
     ]
   },
   {
@@ -179,7 +180,7 @@ const api_sidebar = [
       { text: 'setReporterAutoRun', link: '/api/settings/setReporterAutoRun', },
       { text: 'setRequestDefaultRetryCount', link: '/api/settings/setRequestDefaultRetryCount', },
       { text: 'setRequestDefaultRetryDelay', link: '/api/settings/setRequestDefaultRetryDelay', },
-      { text: 'setDataDirectory', link: '/api/settings/setDataDirectory', },    
+      { text: 'setDataDirectory', link: '/api/settings/setDataDirectory', },
       { text: 'removeDefaultHeaders', link: '/api/settings/removeDefaultHeaders', },
     ]
   },
@@ -195,7 +196,7 @@ const api_sidebar = [
       { text: 'addRetryHandler', link: '/api/handlers/addRetryHandler', },
       { text: 'addSpecHandler', link: '/api/handlers/addSpecHandler', },
       { text: 'addStateHandler', link: '/api/handlers/addStateHandler', },
-      { text: 'addWaitHandler', link: '/api/handlers/addWaitHandler', }      
+      { text: 'addWaitHandler', link: '/api/handlers/addWaitHandler', }
     ]
   },
   {
@@ -211,7 +212,7 @@ const api_sidebar = [
       { text: 'clearInteractions', link: '/api/mock/clearInteractions', },
       { text: 'getInteraction', link: '/api/mock/getInteraction', },
       { text: 'removeInteraction', link: '/api/mock/removeInteraction', },
-      { text: 'useRemoteServer', link: '/api/mock/useRemoteServer', }      
+      { text: 'useRemoteServer', link: '/api/mock/useRemoteServer', }
     ]
   },
   {
@@ -222,7 +223,7 @@ const api_sidebar = [
       { text: 'getDataTemplate', link: '/api/stash/getDataTemplate', },
       { text: 'addDataMap', link: '/api/stash/addDataMap', },
       { text: 'getDataMap', link: '/api/stash/getDataMap', },
-      { text: 'loadData', link: '/api/stash/loadData', }      
+      { text: 'loadData', link: '/api/stash/loadData', }
     ]
   },
   {
@@ -231,7 +232,7 @@ const api_sidebar = [
     items: [
       { text: 'fuzz', link: '/api/fuzz/fuzz', },
       { text: 'onSwagger', link: '/api/fuzz/onSwagger', },
-      { text: 'withBatchSize', link: '/api/fuzz/withBatchSize', }      
+      { text: 'withBatchSize', link: '/api/fuzz/withBatchSize', }
     ]
   },
 ];

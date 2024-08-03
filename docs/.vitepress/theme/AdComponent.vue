@@ -7,9 +7,9 @@ import Icon from "./Icon.vue";
     <a target="_blank" href="https://testbeats.com">
       <Icon class="icon" />
       <span
-        >Keep your tests in tune with</span
+        >Revolutionize Your Test Reporting with AI-Powered Insights</span
       >
-      <span class="cta">testbeats</span>
+      <span class="cta">TestBeats</span>
        →
     </a>
   </div>
@@ -32,7 +32,7 @@ import Icon from "./Icon.vue";
   text-align: center;
   margin-bottom: 2rem;
   padding: 0.5rem 0.85rem;
-  border: 1px solid var(--vp-c-brand);
+  border: 2px solid var(--vp-c-brand);
   border-radius: 4px;
   text-decoration: none;
   color: white;
@@ -40,10 +40,6 @@ import Icon from "./Icon.vue";
   font-size: 1rem;
   animation: pulse 3s infinite;
   background-image: linear-gradient(to top right, #000000, #000842);
-}
-
-.ad-component:hover {
-  color: var(--vp-c-text-1);
 }
 
 .ad-component .icon {

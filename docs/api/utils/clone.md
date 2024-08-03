@@ -31,7 +31,7 @@ Input could by anything.
 ## Examples
 
 ```js
-const { spec, clone } = require('pactum');
+const { spec, utils } = require('pactum');
 
 const user = { name: "mom",  age: 50 };
 
@@ -40,7 +40,7 @@ await spec()
   .withJson(user)
   .expectStatus(200);
 
-const user_two = clone(user);
+const user_two = utils.clone(user);
 user_two.name = "dad";
 
 await spec()
