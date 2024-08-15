@@ -132,7 +132,8 @@ const api_sidebar = [
       { text: 'clone', link: '/api/utils/clone', },
       { text: 'parse', link: '/api/utils/parse', },
       { text: 'sleep', link: '/api/utils/sleep' },
-      { text: 'findFile', link: '/api/utils/findFile' }
+      { text: 'findFile', link: '/api/utils/findFile' },
+      { text: 'events', link: '/api/utils/events' },
     ]
   },
   {
