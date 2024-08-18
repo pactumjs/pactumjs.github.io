@@ -1,0 +1,1 @@
+import{_ as e,o as a,c as t,a as r}from"./app.fd602df0.js";const f=JSON.parse('{"title":"Videos","description":"","frontmatter":{},"headers":[],"relativePath":"media/videos.md","lastUpdated":1711650479000}'),o={name:"media/videos.md"},n=r("",2),i=[n];function s(l,c,u,h,d,m){return a(),t("div",null,i)}const p=e(o,[["render",s]]);export{f as __pageData,p as default};
