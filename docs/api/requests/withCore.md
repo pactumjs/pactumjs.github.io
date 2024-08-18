@@ -9,6 +9,10 @@ tags:
 
 To further customize the request, pactum allows us directly set the [core options](https://nodejs.org/api/http.html#httprequesturl-options-callback) of the request.
 
+::: warning WARNING 
+If `withCore` is used at the end in request chaining, all [http core options](https://nodejs.org/api/http.html#httprequesturl-options-callback) provided in `withCore` will take precedence and they will override any previously values.
+:::
+
 ## Syntax
 
 ```js
@@ -63,6 +67,50 @@ await spec()
   .expectStatus(200);
 ```
 
-::: warning WARNING 
-If `withCore` is used at the end in request chaining, all [http core options](https://nodejs.org/api/http.html#httprequesturl-options-callback) provided in `withCore` will take precedence and they will override any previously values.
-:::
+### Https Agent with SSL certificates
+
+```js
+// If you have the cert/key pair
+const { spec } = require('pactum');
+const https = require('https');
+const fs = require('fs');
+
+const key = fs.readFileSync("server.key")
+const cert = fs.readFileSync("server.crt")
+
+const agent = new https.Agent({
+  cert: cert,
+  key: key,
+});
+
+await spec()
+    .get('<https url>')
+    .withCore({agent: agent })
+    .expectStatus(200)
+```
+
+### Https Agent with self signed / private SSL certificates
+
+```js
+const { spec } = require('pactum');
+const https = require('https');
+const fs = require('fs');
+
+// If you have the cert/key pair
+const key = fs.readFileSync("server.key")
+const cert = fs.readFileSync("server.crt")
+
+const agent = new https.Agent({
+  cert: cert, // Optional - add if cert available 
+  key: key, // Optional - add if key is available 
+  rejectUnauthorized: false // Ignore  certificate errors
+});
+
+await spec()
+    .get('<https url>')
+    .withCore({agent: agent })
+    .expectStatus(200)
+```
+
+
+
