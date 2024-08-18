@@ -4,7 +4,7 @@
 
     <p class="header">Empower Your Test Results with AI-Powered Insights -></p>
     <!-- <p class="tagline">✨ TestBeats ✨</p> -->
-    <img class="logo"  src="https://testbeats.com/static/icons/logo-wordmark-white.svg" alt="">
+     <img class="logo"  src="https://testbeats.nyc3.cdn.digitaloceanspaces.com/assets/icons/logo-wordmark-white.svg" alt="">
   </a>
 </template>
 
