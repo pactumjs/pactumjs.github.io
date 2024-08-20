@@ -168,6 +168,7 @@ const api_sidebar = [
       { text: 'setBaseUrl', link: '/api/settings/setBaseUrl', },
       { text: 'setDefaultHeaders', link: '/api/settings/setDefaultHeaders', },
       { text: 'setDefaultTimeout', link: '/api/settings/setDefaultTimeout', },
+      { text: 'setDefaultFollowRedirects', link: '/api/settings/setDefaultFollowRedirects', },
       { text: 'setLogLevel', link: '/api/settings/setLogLevel', },
       { text: 'setLogger', link: '/api/settings/setLogger', },
       { text: 'setJsonLikeAdapter', link: '/api/settings/setJsonLikeAdapter', },
