@@ -18,10 +18,12 @@ Prints request & response details to the console.
 
 ```js
 inspect()
-inspect('path')
+inspect(path)
+inspect(enable)
 ```
 
 - `path` (**string**) - json path. *Visit [json-query](https://www.npmjs.com/package/json-query) for more usage details.*
+- `enable` (**boolean**) - enable request & response printing. *Default: `true`*
 
 ## Usage
 
@@ -38,4 +40,11 @@ await spec()
   .get('/api/users/1')
   .inspect('name')
   .inspect('age');
+```
+
+```js
+// disable inspection
+await spec()
+  .get('/api/users/1')
+  .inspect(false);
 ```

@@ -5,8 +5,9 @@
 ## Syntax
 
 ```js
-stores(name, path);
-stores(name, handler_name);
+stores(name, path, options);
+stores(name, handler_name, options);
+stores(callback_function);
 ```
 
 ## Usage
@@ -65,6 +66,13 @@ Name of the capture handler to use.
 
 A custom function which should return an object to store the response value for pactum.
 
+#### > options? (object)
+
+Options to pass to the handler.
+
+- `options.status?` - run the handler only on the given status. *Can be either 'PASSED' or 'FAILED'*
+- `options.append?` - appends the stored data in an array.
+
 ## Examples
 
 ### Store single value
@@ -120,6 +128,33 @@ await spec()
   .get(`http://jsonplaceholder.typicode.com/posts/{id}/comments`)
   .withPathParams('id', '$S{custom_func_id}')
   .expectStatus(200);
+```
+
+### Store value when request fails
+
+```js
+const { spec } = require('pactum');
+
+await spec()
+  .get('http://jsonplaceholder.typicode.com/posts')
+  .expectStatus(200)
+  .stores('FirstPostId', '[0].id', { status: 'FAILED' });
+```
+
+### Append value to the store
+
+```js
+const { spec } = require('pactum');
+
+await spec()
+  .get('http://jsonplaceholder.typicode.com/posts/1')
+  .expectStatus(200)
+  .stores('UserIds', 'id', { append: true });
+
+await spec()
+  .get('http://jsonplaceholder.typicode.com/posts/2')
+  .expectStatus(200)
+  .stores('UserIds', 'id', { append: true });
 ```
 
 ## See Also
