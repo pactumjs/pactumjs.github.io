@@ -48,6 +48,16 @@ const home_sidebar = [
   }
 ];
 
+const tools_sidebar = [
+  {
+    text: '🪄 Tools and Utilities',
+    collapsed: false,
+    items: [
+      { text: 'Curl-To-PactumJS', link: '/tools/converter', },
+    ]
+  }
+]
+
 const api_sidebar = [
   {
     text: '🪄 Requests',
@@ -286,6 +296,7 @@ const config = defineConfig({
     nav: [
       { text: '🏠 Home', link: '/introduction/welcome', activeMatch: '/guides/'},
       { text: '⇌ API', link: '/api/requests/spec',  activeMatch: '/api/' },
+      { text: '⚒️ Tools', link: '/tools/converter',  activeMatch: '/tools/' },
       { text: '📑 v3.x.x',
         items: [
           { text: 'Github Releases', link: releases },
@@ -298,7 +309,8 @@ const config = defineConfig({
         '/introduction': home_sidebar,
         '/guides': home_sidebar,
         '/media': home_sidebar,
-        '/api': api_sidebar
+        '/api': api_sidebar,
+        '/tools': tools_sidebar
     },
     footer: {
       message: 'Released under the MIT License.',
