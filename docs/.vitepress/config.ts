@@ -53,7 +53,7 @@ const tools_sidebar = [
     text: '🪄 Tools and Utilities',
     collapsed: false,
     items: [
-      { text: 'Curl-To-PactumJS', link: '/tools/converter', },
+      { text: 'cURL-To-PactumJS', link: '/tools/converter', },
     ]
   }
 ]
