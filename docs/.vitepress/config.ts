@@ -45,7 +45,14 @@ const home_sidebar = [
       { text: 'Videos', link: '/media/videos' },
       { text: 'Projects', link: '/media/projects' }
     ]
-  }
+  },
+  {
+    text: "💁 FAQs",
+    collapsed: false,
+    items: [
+      { text: 'Q&A', link: '/faq/qna' },
+    ]
+  },
 ];
 
 const tools_sidebar = [
@@ -309,6 +316,7 @@ const config = defineConfig({
         '/introduction': home_sidebar,
         '/guides': home_sidebar,
         '/media': home_sidebar,
+        '/faq': home_sidebar,
         '/api': api_sidebar,
         '/tools': tools_sidebar
     },
