@@ -21,7 +21,7 @@
       <button class="convert-button" @click="convertCurl">
         Convert
       </button>
-      <button class="convert-button clear" @click="clearOutput">
+      <button class="convert-button" @click="clearOutput">
         Clear
       </button>
     </div>
@@ -48,7 +48,7 @@ const generatedCode = ref('')
 const clearOutput = () => {
   generatedCode.value = ''
 }
-
+  
 const parseCurl = (curlCommand) => {
   if (!curlCommand) {
     clearOutput()
@@ -204,11 +204,12 @@ select {
 .convert-button {
   background-color: var(--vp-c-brand);
   color: white;
-  padding: 8px 16px;
+  padding: 2px 12px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
+  margin: 5px;
 }
 
 .convert-button:hover {
