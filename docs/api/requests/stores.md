@@ -72,6 +72,7 @@ Options to pass to the handler.
 
 - `options.status?` - run the handler only on the given status. *Can be either 'PASSED' or 'FAILED'*
 - `options.append?` - appends the stored data in an array.
+- `options.merge?` - merges the stored data in a single object.
 
 ## Examples
 
@@ -155,6 +156,22 @@ await spec()
   .get('http://jsonplaceholder.typicode.com/posts/2')
   .expectStatus(200)
   .stores('UserIds', 'id', { append: true });
+```
+
+### Merges value to the store
+
+```js
+const { spec } = require('pactum');
+
+await spec()
+  .get('http://jsonplaceholder.typicode.com/posts/1')
+  .expectStatus(200)
+  .stores('POSTS', '.', { merge: true });
+
+await spec()
+  .get('http://jsonplaceholder.typicode.com/posts/2')
+  .expectStatus(200)
+  .stores('POSTS', '.', { merge: true });
 ```
 
 ## See Also
